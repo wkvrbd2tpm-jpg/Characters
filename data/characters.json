@@ -122,14 +122,16 @@
       "id": "char9",
       "name": "柏木 樹",
       "reading": "かしわぎ いつき",
-      "age": "36",
+      "age": "36歳",
+      "height": "192cm",
+      "imageCv": "古川慎",
+      "birthday": "8月7日",
       "role": "",
       "summary": "",
-      "features": "",
-      "outfit": "",
       "notes": "",
       "mainPrompt": "",
       "outfitPrompt": "",
+      "bodyPrompt": "",
       "intro": "",
       "plotUrls": {
         "zeta": "https://zeta-ai.io/ja/plots/062d2a36-ffdc-49b6-89be-bea83f609ff3/profile?share_id=39mwobjop",
@@ -137,7 +139,9 @@
         "moox": ""
       },
       "tags": [
-        "プロット"
+        "プロット",
+        "おじさん",
+        "優しい"
       ],
       "images": [
         "images/char9-mwcgusuo0.webp"

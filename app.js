@@ -34,13 +34,6 @@
   const roleClass = (r) => (r === "攻め" ? "seme" : r === "受け" ? "uke" : "rev");
   const roleBadge = (r) => el("span", { class: "role " + roleClass(r) }, r);
   const nameWithRuby = (c) => (c.reading ? el("ruby", {}, c.name, el("rt", {}, c.reading)) : c.name);
-  const nameParts = (c) => {
-    const names = (c.name || "").split(/\s+/).filter(Boolean);
-    const reads = (c.reading || "").split(/\s+/).filter(Boolean);
-    const parts = [];
-    names.forEach((n, i) => { if (i) parts.push(" "); parts.push(reads[i] ? el("ruby", {}, n, el("rt", {}, reads[i])) : n); });
-    return parts.length ? parts : [c.name];
-  };
   const PLOT_APPS = [
     ["zeta", "Zeta", "zeta"],
     ["chacha", "チャチャ", "chacha"],
@@ -127,13 +120,22 @@
           el("div", { class: "thumb" },
             c.images?.[0] ? el("img", { src: c.images[0], alt: c.name, loading: "lazy" }) : null),
           el("div", { class: "meta" },
-            el("div", { class: "name" }, nameParts(c)),
+            el("div", { class: "name" }, nameWithRuby(c)),
             marks.length ? el("div", { class: "marks" }, marks) : null,
             el("div", { class: "sub" }, [c.age, c.height, subTag].filter(Boolean).join(" ・ "))
           )
         );
       })
     );
+    fitCardNames();
+  }
+
+  function fitCardNames() {
+    grid.querySelectorAll(".card .name").forEach((n) => {
+      n.style.fontSize = "";
+      let size = parseFloat(getComputedStyle(n).fontSize);
+      while (n.scrollWidth > n.clientWidth && size > 10) { size -= 1; n.style.fontSize = size + "px"; }
+    });
   }
 
   function open(id) {
@@ -186,5 +188,6 @@
   dlg.addEventListener("close", () => history.replaceState(null, "", location.pathname + location.search));
   q.addEventListener("input", render);
   window.addEventListener("hashchange", openFromHash);
+  window.addEventListener("resize", fitCardNames);
   load();
 })();

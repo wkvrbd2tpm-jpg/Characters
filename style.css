@@ -198,8 +198,8 @@ img { display: block; max-width: 100%; }
 .card:hover .thumb img { transform: scale(1.045); }
 .card .meta { padding: 12px 14px 16px; }
 .card .name {
-  font-family: var(--serif); font-weight: 700; font-size: 1.08rem; line-height: 1.35;
-  overflow-wrap: anywhere;
+  font-family: var(--serif); font-weight: 700; font-size: 1.15rem; line-height: 1.4;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .card .name:has(ruby) { line-height: 2.05; }
 .card .name rt { font-family: var(--sans); font-size: .5em; font-weight: 400; letter-spacing: .06em; color: var(--muted); }

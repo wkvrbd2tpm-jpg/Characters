@@ -363,7 +363,7 @@ footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--m
 .acard {
   background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
   overflow: hidden; text-align: center; cursor: pointer;
-  touch-action: pan-y; user-select: none; -webkit-user-select: none;
+  touch-action: pan-y; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
 }
 .acard img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: top; display: block; background: var(--line); }
 .acard .aimg-empty { width: 100%; aspect-ratio: 4 / 5; background: var(--line); }

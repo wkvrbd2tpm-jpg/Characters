@@ -224,6 +224,9 @@
     }));
   }
 
+  let dragActive = false;
+  document.addEventListener("touchmove", (e) => { if (dragActive) e.preventDefault(); }, { passive: false });
+
   function attachDrag(card, list) {
     let timer = null, dragging = false, startX = 0, startY = 0;
     card.addEventListener("pointerdown", (e) => {
@@ -231,6 +234,8 @@
       startX = e.clientX; startY = e.clientY;
       timer = setTimeout(() => {
         dragging = true;
+        dragActive = true;
+        card.style.touchAction = "none";
         card.classList.add("dragging");
         try { card.setPointerCapture(e.pointerId); } catch {}
         if (navigator.vibrate) navigator.vibrate(10);
@@ -250,6 +255,8 @@
       if (timer) { clearTimeout(timer); timer = null; }
       if (!dragging) return;
       dragging = false;
+      dragActive = false;
+      card.style.touchAction = "";
       card.classList.remove("dragging");
       card.dataset.suppress = "1";
       setTimeout(() => { delete card.dataset.suppress; }, 50);
@@ -260,6 +267,7 @@
         markOrderDirty();
       }
     };
+    card.addEventListener("contextmenu", (e) => e.preventDefault());
     card.addEventListener("pointerup", end);
     card.addEventListener("pointercancel", end);
   }

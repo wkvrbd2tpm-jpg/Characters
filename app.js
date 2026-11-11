@@ -59,6 +59,21 @@
       el("div", { class: "plot-link-buttons" }, links)) : null;
   };
 
+  const loaderShownAt = Date.now();
+  let loaderHidden = false;
+  function hideLoader() {
+    if (loaderHidden) return;
+    loaderHidden = true;
+    const l = $("#loader");
+    if (!l) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const wait = reduced ? 0 : Math.max(0, 1000 - (Date.now() - loaderShownAt));
+    setTimeout(() => {
+      l.classList.add("done");
+      setTimeout(() => l.remove(), reduced ? 60 : 550);
+    }, wait);
+  }
+
   async function load() {
     try {
       const res = await fetch("data/characters.json?t=" + Date.now());
@@ -70,12 +85,14 @@
       }
     } catch (e) {
       grid.replaceChildren(el("p", { class: "empty" }, "データを読み込めませんでした。"));
+      hideLoader();
       return;
     }
     buildChips();
     updateTabCounts();
     render();
     openFromHash();
+    hideLoader();
   }
 
   function buildChips() {
@@ -299,5 +316,6 @@
   q.addEventListener("input", () => { page = 0; render(); });
   window.addEventListener("hashchange", openFromHash);
   window.addEventListener("resize", () => { fullGridH = 0; render(); fitTitle(); });
+  setTimeout(hideLoader, 5000);
   load();
 })();

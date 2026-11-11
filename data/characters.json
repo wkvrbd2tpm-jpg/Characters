@@ -36,20 +36,6 @@
     {
       "age": "",
       "features": "",
-      "id": "char1",
-      "images": [
-        "images/char1-0.webp"
-      ],
-      "name": "キャラクター1",
-      "notes": "",
-      "outfit": "",
-      "role": "",
-      "summary": "",
-      "tags": []
-    },
-    {
-      "age": "",
-      "features": "",
       "id": "char2",
       "images": [
         "images/char2-0.webp"

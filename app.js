@@ -150,6 +150,56 @@
     if (id) open(id);
   }
 
+  /* ---------- roaming yorkie mascot ---------- */
+  const mascot = document.createElement("div");
+  mascot.className = "mascot";
+  mascot.setAttribute("aria-hidden", "true");
+  mascot.innerHTML = '<div class="bubble" hidden></div><span class="flipwrap"><svg class="dog"><use href="#yorkie-sit"/></svg></span>';
+  document.body.append(mascot);
+  const bubble = mascot.querySelector(".bubble");
+  const flipwrap = mascot.querySelector(".flipwrap");
+  const showBubble = (t, ms) => { bubble.textContent = t; bubble.hidden = false; setTimeout(() => (bubble.hidden = true), ms); };
+  function spawnPoop(x, dir) {
+    if (document.querySelector(".poop")) return;
+    const p = document.createElement("div");
+    p.className = "poop";
+    p.setAttribute("aria-hidden", "true");
+    p.innerHTML = '<svg><use href="#poop"/></svg>';
+    p.style.left = Math.max(2, x + (dir > 0 ? -16 : 46)) + "px";
+    document.body.append(p);
+    setTimeout(() => p.classList.add("bye"), 5200);
+    setTimeout(() => p.remove(), 6200);
+  }
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let mx = Math.max(0, Math.min(120, innerWidth - 90)), mdir = 1, mstate = "walk";
+  let until = performance.now() + 9000;
+  let poopAt = performance.now() + 22000 + Math.random() * 30000;
+  function mascotStep(now) {
+    const w = Math.max(0, innerWidth - 74);
+    if (mstate === "walk") {
+      mx += mdir * 0.45;
+      if (mx > w) { mx = w; mdir = -1; }
+      if (mx < 0) { mx = 0; mdir = 1; }
+      if (now >= poopAt) { spawnPoop(mx, mdir); poopAt = now + 45000 + Math.random() * 60000; }
+      if (now >= until) {
+        mstate = "rest"; mascot.classList.add("resting");
+        until = now + 2600 + Math.random() * 3200;
+        const r = Math.random();
+        if (r < 0.4) showBubble("💤", 2400);
+        else if (r < 0.7) showBubble("わん！", 1500);
+      }
+    } else if (now >= until) {
+      mstate = "walk"; mascot.classList.remove("resting");
+      if (Math.random() < 0.5) mdir = -mdir;
+      until = now + 7000 + Math.random() * 8000;
+    }
+    flipwrap.style.transform = mdir > 0 ? "" : "scaleX(-1)";
+    mascot.style.transform = `translateX(${mx}px)`;
+    requestAnimationFrame(mascotStep);
+  }
+  if (reducedMotion) mascot.style.transform = `translateX(${mx}px)`;
+  else requestAnimationFrame(mascotStep);
+
   $("#close").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
   dlg.addEventListener("close", () => history.replaceState(null, "", location.pathname + location.search));

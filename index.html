@@ -11,7 +11,58 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="yorkie-face" viewBox="0 0 120 120">
+      <path d="M28 34 C12 52 12 84 24 102 L38 96 C30 76 30 54 36 40 Z" fill="#9aa1ab"/>
+      <path d="M92 34 C108 52 108 84 96 102 L82 96 C90 76 90 54 84 40 Z" fill="#9aa1ab"/>
+      <ellipse cx="60" cy="62" rx="34" ry="32" fill="#dcb57f"/>
+      <path d="M26 58 C28 30 92 30 94 58 C80 44 40 44 26 58 Z" fill="#aeb4bc"/>
+      <path d="M52 27 C54 14 66 14 68 27 C62 21 58 21 52 27 Z" fill="#aeb4bc"/>
+      <g fill="#f27ba7"><path d="M60 22 L44 13 C37 19 37 29 44 33 Z"/><path d="M60 22 L76 13 C83 19 83 29 76 33 Z"/><circle cx="60" cy="23" r="5.5" fill="#e85f92"/></g>
+      <ellipse cx="60" cy="74" rx="15" ry="10" fill="#eed3a4"/>
+      <ellipse cx="60" cy="70" rx="6" ry="4.6" fill="#38302c"/>
+      <path d="M60 75 q0 5 -6 5 M60 75 q0 5 6 5" stroke="#38302c" fill="none" stroke-width="2" stroke-linecap="round"/>
+      <path d="M55 82 q5 8 10 0 q-1 8 -5 8 q-4 0 -5 -8 Z" fill="#f49abb"/>
+      <circle cx="44" cy="60" r="5" fill="#2c2320"/><circle cx="76" cy="60" r="5" fill="#2c2320"/>
+      <circle cx="45.8" cy="58.2" r="1.7" fill="#fff"/><circle cx="77.8" cy="58.2" r="1.7" fill="#fff"/>
+      <ellipse cx="35" cy="70" rx="5" ry="3" fill="#f6b8c6" opacity=".85"/>
+      <ellipse cx="85" cy="70" rx="5" ry="3" fill="#f6b8c6" opacity=".85"/>
+    </symbol>
+    <symbol id="yorkie-sit" viewBox="0 0 120 130">
+      <path d="M92 104 C108 100 112 86 104 78 C98 88 94 96 92 104 Z" fill="#9aa1ab"/>
+      <ellipse cx="58" cy="100" rx="30" ry="24" fill="#b9bec6"/>
+      <ellipse cx="58" cy="102" rx="17" ry="17" fill="#e9ebef"/>
+      <ellipse cx="30" cy="120" rx="10" ry="5" fill="#dcb57f"/>
+      <ellipse cx="86" cy="120" rx="10" ry="5" fill="#dcb57f"/>
+      <rect x="47" y="104" width="7" height="16" rx="3.5" fill="#dcb57f"/>
+      <rect x="62" y="104" width="7" height="16" rx="3.5" fill="#dcb57f"/>
+      <use href="#yorkie-face" x="18" y="0" width="84" height="84"/>
+    </symbol>
+    <symbol id="paw" viewBox="0 0 100 100">
+      <g fill="currentColor">
+        <ellipse cx="50" cy="67" rx="20" ry="16"/>
+        <circle cx="25" cy="43" r="9"/><circle cx="41" cy="32" r="9.5"/>
+        <circle cx="59" cy="32" r="9.5"/><circle cx="75" cy="43" r="9"/>
+      </g>
+    </symbol>
+    <symbol id="poop" viewBox="0 0 100 100">
+      <path d="M50 6 C57 18 69 22 75 33 C87 39 89 54 81 64 C89 74 83 90 68 93 L32 93 C17 90 11 74 19 64 C11 54 13 39 25 33 C31 22 43 18 50 6 Z" fill="#a9713d"/>
+      <ellipse cx="37" cy="30" rx="7" ry="4" fill="#c08b4e" opacity=".85"/>
+      <circle cx="41" cy="66" r="4" fill="#3a2a1a"/><circle cx="59" cy="66" r="4" fill="#3a2a1a"/>
+      <path d="M44 76 q6 5 12 0" stroke="#3a2a1a" fill="none" stroke-width="2.6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="heart" viewBox="0 0 100 100">
+      <path d="M50 88 C20 62 8 45 8 30 C8 16 18 8 30 8 C40 8 48 14 50 23 C52 14 60 8 70 8 C82 8 92 16 92 30 C92 45 80 62 50 88 Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
 <header class="hero">
+  <svg class="yorkie y-left" aria-hidden="true"><use href="#yorkie-face"/></svg>
+  <svg class="yorkie y-right" aria-hidden="true"><use href="#yorkie-sit"/></svg>
+  <svg class="paw-deco pd1" aria-hidden="true"><use href="#paw"/></svg>
+  <svg class="paw-deco pd2" aria-hidden="true"><use href="#heart"/></svg>
+  <svg class="paw-deco pd3" aria-hidden="true"><use href="#paw"/></svg>
   <div class="wrap">
     <p class="kicker">ORIGINAL CHARACTERS</p>
     <h1 id="site-title">キャラクター図鑑</h1>
@@ -34,7 +85,10 @@
 </main>
 
 <footer>
-  <div class="wrap">無断転載・無断使用はご遠慮ください。</div>
+  <div class="wrap foot-in">
+    <svg class="yorkie-foot" aria-hidden="true"><use href="#yorkie-sit"/></svg>
+    <div>無断転載・無断使用はご遠慮ください。</div>
+  </div>
 </footer>
 
 <dialog id="dlg" aria-label="キャラクター詳細">

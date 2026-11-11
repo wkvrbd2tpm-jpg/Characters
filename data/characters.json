@@ -48,18 +48,29 @@
       ]
     },
     {
-      "age": "",
-      "features": "",
       "id": "char4",
-      "images": [
-        "images/char4-0.webp"
-      ],
-      "name": "キャラクター4",
-      "notes": "",
-      "outfit": "",
-      "role": "",
+      "name": "犬山 犬太郎",
+      "reading": "いぬやま いぬたろう",
+      "age": "30",
+      "role": "攻め",
       "summary": "",
-      "tags": []
+      "features": "",
+      "outfit": "",
+      "notes": "",
+      "mainPrompt": "boy, mature male, 30 years old,Fluffy dog ears, Fluffy dog tail,long hair,black hair,wavy hair, ahoge ,v-shaped eyebrows ,tareme,bags under eyes,:3, Fang,2::large pectorals,::chest hair,Wrist hair,Body hair::half closed eyes,",
+      "outfitPrompt": "Tank top,Patterned trunks,",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "",
+        "chacha": "",
+        "moox": ""
+      },
+      "tags": [
+        "代理"
+      ],
+      "images": [
+        "images/char4-mwcgbiup0.webp"
+      ]
     },
     {
       "age": "",

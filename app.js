@@ -65,7 +65,7 @@
       const data = await res.json();
       chars = data.characters || [];
       if (data.site) {
-        if (data.site.title) { $("#site-title").textContent = data.site.title; document.title = data.site.title; }
+        if (data.site.title) { $("#site-title").textContent = data.site.title; document.title = data.site.title; fitTitle(); }
         $("#site-lead").textContent = data.site.lead || "";
       }
     } catch (e) {
@@ -178,6 +178,14 @@
     });
   }
 
+  function fitTitle() {
+    const t = $("#site-title");
+    if (!t) return;
+    t.style.fontSize = "";
+    let size = parseFloat(getComputedStyle(t).fontSize);
+    while (t.scrollWidth > t.clientWidth && size > 18) { size -= 1; t.style.fontSize = size + "px"; }
+  }
+
   function open(id) {
     const c = chars.find((x) => x.id === id);
     if (!c) return;
@@ -260,6 +268,6 @@
   dlg.addEventListener("close", () => history.replaceState(null, "", location.pathname + location.search));
   q.addEventListener("input", () => { page = 0; render(); });
   window.addEventListener("hashchange", openFromHash);
-  window.addEventListener("resize", fitCardNames);
+  window.addEventListener("resize", () => { fitCardNames(); fitTitle(); });
   load();
 })();

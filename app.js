@@ -3,7 +3,7 @@
   const grid = $("#grid"), chipsEl = $("#chips"), q = $("#q");
   const dlg = $("#dlg"), modal = $("#modal");
   let chars = [], activeTag = "", activeTab = "all";
-  let page = 0, lastTotal = 0, pageAnimating = false;
+  let page = 0, lastTotal = 0, pageAnimating = false, fullGridH = 0;
   const PAGE_SIZE = 12;
   const tabBtns = [...document.querySelectorAll(".tab")];
   tabBtns.forEach((b) => b.addEventListener("click", () => {
@@ -108,6 +108,7 @@
     lastTotal = list.length;
     updatePager();
     if (!list.length) {
+      grid.style.minHeight = "";
       grid.replaceChildren(el("p", { class: "empty" }, "該当するキャラクターがいません。"));
       return;
     }
@@ -136,6 +137,9 @@
       })
     );
     fitCardNames();
+    // ページごとにボタンの位置が動かないよう、満杯ページの高さを確保する
+    if (pageList.length === PAGE_SIZE) { fullGridH = grid.offsetHeight; grid.style.minHeight = ""; }
+    else if (fullGridH) { grid.style.minHeight = fullGridH + "px"; }
   }
 
   function updatePager() {
@@ -173,23 +177,26 @@
   $("#page-prev").addEventListener("click", () => gotoPage(-1));
   $("#page-next").addEventListener("click", () => gotoPage(1));
 
-  // スワイプでもページ切り替え（左へスワイプで次ページ、右へスワイプで前ページ）
+  // スワイプでもページ切り替え（画面のどこでも、大きくスワイプしたときだけ）
   let swipeX = null, swipeY = null, suppressClick = false;
-  grid.addEventListener("touchstart", (e) => {
-    if (e.touches.length === 1) { swipeX = e.touches[0].clientX; swipeY = e.touches[0].clientY; }
+  document.addEventListener("touchstart", (e) => {
+    if (e.touches.length !== 1) { swipeX = swipeY = null; return; }
+    if (e.target.closest("dialog, input, textarea, select")) { swipeX = swipeY = null; return; }
+    swipeX = e.touches[0].clientX; swipeY = e.touches[0].clientY;
   }, { passive: true });
-  grid.addEventListener("touchend", (e) => {
+  document.addEventListener("touchend", (e) => {
     if (swipeX == null) return;
     const dx = e.changedTouches[0].clientX - swipeX;
     const dy = e.changedTouches[0].clientY - swipeY;
     swipeX = swipeY = null;
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+    const threshold = Math.min(170, Math.max(110, window.innerWidth * 0.3));
+    if (Math.abs(dx) > threshold && Math.abs(dx) > Math.abs(dy) * 1.5) {
       suppressClick = true;
       setTimeout(() => { suppressClick = false; }, 350);
       gotoPage(dx < 0 ? 1 : -1);
     }
   }, { passive: true });
-  grid.addEventListener("click", (e) => {
+  document.addEventListener("click", (e) => {
     if (suppressClick) { e.stopPropagation(); e.preventDefault(); suppressClick = false; }
   }, true);
 
@@ -291,6 +298,6 @@
   dlg.addEventListener("close", () => history.replaceState(null, "", location.pathname + location.search));
   q.addEventListener("input", () => { page = 0; render(); });
   window.addEventListener("hashchange", openFromHash);
-  window.addEventListener("resize", () => { fitCardNames(); fitTitle(); });
+  window.addEventListener("resize", () => { fullGridH = 0; render(); fitTitle(); });
   load();
 })();

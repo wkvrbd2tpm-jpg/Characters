@@ -654,6 +654,34 @@
       "images": [
         "images/cmwcplaw1-mwcplaw10.webp"
       ]
+    },
+    {
+      "id": "cmwcpr45q",
+      "name": "ポチ",
+      "reading": "",
+      "age": "18歳",
+      "height": "",
+      "imageCv": "",
+      "birthday": "",
+      "role": "受け",
+      "summary": "",
+      "notes": "",
+      "mainPrompt": "boy, tall, 18 years old,Corgi ears,large upright triangular ears, pointed furry ears,orange short hair,2::Center parted bangs,::short eyebrows,white thick eyebrows,black round eyes,2::no human ears,::fluffy tail,",
+      "outfitPrompt": "",
+      "bodyPrompt": "",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "",
+        "chacha": "",
+        "moox": ""
+      },
+      "tags": [
+        "うちよそ",
+        "獣人"
+      ],
+      "images": [
+        "images/cmwcpr45q-mwcpr45q0.webp"
+      ]
     }
   ],
   "site": {

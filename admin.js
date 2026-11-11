@@ -14,7 +14,36 @@
   roleBtns.forEach((b) => b.addEventListener("click", () => setRole(roleValue === b.dataset.role ? "" : b.dataset.role)));
 
   /* ---------- tag suggestions ---------- */
-  const tagBtns = [...document.querySelectorAll(".tag-suggest-btn")];
+  const FIXED_TAGS = ["プロット", "代理", "うちよそ"];
+  const DEFAULT_TAGS = ["おじさん", "獣人", "メガネ", "無精ひげ", "長髪", "短髪", "スーツ", "タバコ", "獣耳", "強面", "優しい", "年上", "年下"];
+  let tagBtns = [];
+  function buildTagChips() {
+    const counts = new Map();
+    (data.characters || []).forEach((c) => (c.tags || []).forEach((t) => counts.set(t, (counts.get(t) || 0) + 1)));
+    const rest = [...counts.keys()].filter((t) => !FIXED_TAGS.includes(t));
+    rest.sort((a, b) => counts.get(b) - counts.get(a));
+    DEFAULT_TAGS.forEach((t) => { if (!rest.includes(t)) rest.push(t); });
+    const box = $("#tag-suggest");
+    box.replaceChildren();
+    tagBtns = [...FIXED_TAGS, ...rest].map((t) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "chip tag-suggest-btn" + (t === "プロット" ? " plot" : "") + (t === "うちよそ" ? " uchiyoso" : "");
+      b.dataset.tag = t;
+      b.setAttribute("aria-pressed", "false");
+      b.textContent = t;
+      b.addEventListener("click", () => {
+        const cur = tagList();
+        const i = cur.indexOf(t);
+        if (i >= 0) cur.splice(i, 1); else cur.push(t);
+        $("#f-tags").value = cur.join(", ");
+        syncTagChips();
+      });
+      box.append(b);
+      return b;
+    });
+    syncTagChips();
+  }
   const tagList = () => $("#f-tags").value.split(/[,、]/).map((t) => t.trim()).filter(Boolean);
   function syncTagChips() {
     const cur = tagList();
@@ -23,13 +52,7 @@
     $("#plot-url-field").hidden = !cur.includes("プロット");
     $("#prompt-fields").hidden = !(cur.includes("代理") || cur.includes("うちよそ"));
   }
-  tagBtns.forEach((b) => b.addEventListener("click", () => {
-    const cur = tagList();
-    const i = cur.indexOf(b.dataset.tag);
-    if (i >= 0) cur.splice(i, 1); else cur.push(b.dataset.tag);
-    $("#f-tags").value = cur.join(", ");
-    syncTagChips();
-  }));
+  buildTagChips();
 
   const el = (tag, props = {}, ...kids) => {
     const n = document.createElement(tag);
@@ -176,6 +199,7 @@
 
   let listQuery = "";
   function renderList() {
+    buildTagChips();
     const list = $("#list");
     if (!data.characters.length) { list.replaceChildren(el("p", { class: "note" }, "まだキャラクターがいません。")); return; }
     const items = data.characters.map((c, i) => [c, i])

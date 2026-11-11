@@ -214,7 +214,7 @@
       "age": "36歳",
       "height": "198cm",
       "imageCv": "",
-      "birthday": "",
+      "birthday": "12月24日",
       "role": "",
       "summary": "",
       "notes": "",
@@ -230,7 +230,9 @@
       "tags": [
         "プロット",
         "おじさん",
-        "優しい"
+        "無精ひげ",
+        "優しい",
+        "長髪"
       ],
       "images": [
         "images/cmwch8qn0-mwch9lm80.webp"

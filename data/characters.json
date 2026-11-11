@@ -268,6 +268,36 @@
       "images": [
         "images/cmwcits3x-mwcits3x0.webp"
       ]
+    },
+    {
+      "id": "cmwcjlict",
+      "name": "立原 道大",
+      "reading": "たちはら みちひろ",
+      "age": "43歳",
+      "height": "192cm",
+      "imageCv": "",
+      "birthday": "11月14日",
+      "role": "攻め",
+      "summary": "",
+      "notes": "",
+      "mainPrompt": "",
+      "outfitPrompt": "",
+      "bodyPrompt": "",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "https://zeta-ai.io/ja/plots/881538e2-d592-4f6e-b2c3-a8407aa9f4f8/profile?share_id=v49wum494",
+        "chacha": "",
+        "moox": ""
+      },
+      "tags": [
+        "プロット",
+        "おじさん",
+        "無精ひげ",
+        "上司"
+      ],
+      "images": [
+        "images/cmwcjlict-mwcjlict0.webp"
+      ]
     }
   ],
   "site": {

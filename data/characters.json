@@ -299,33 +299,34 @@
       ]
     },
     {
-      "id": "cmwcjlict",
-      "name": "立原 道大",
-      "reading": "たちはら みちひろ",
-      "age": "43歳",
-      "height": "192cm",
+      "id": "cmwcke9yt",
+      "name": "ゆうき",
+      "reading": "",
+      "age": "10歳",
+      "height": "100cm",
       "imageCv": "",
-      "birthday": "11月14日",
-      "role": "攻め",
+      "birthday": "",
+      "role": "受け",
       "summary": "",
       "notes": "",
-      "mainPrompt": "",
-      "outfitPrompt": "",
-      "bodyPrompt": "",
+      "mainPrompt": "boy,Shota,petite and slender,short dark brown hair,white streaks.Thick eyebrows,brown almond eyes, large pupils,2:Fluffy :chipmunk tail,2::Fluffy chipmunk ears,round teeth,",
+      "outfitPrompt": "Red hoodie, shorts, sneakers,",
+      "bodyPrompt": "Inverted nipples,small penis,",
       "intro": "",
       "plotUrls": {
-        "zeta": "https://zeta-ai.io/ja/plots/881538e2-d592-4f6e-b2c3-a8407aa9f4f8/profile?share_id=v49wum494",
+        "zeta": "https://zeta-ai.io/ja/plots/bf67e4b6-61e8-4f3c-b84d-4a530524a8f6/profile?share_id=uny3rp1es",
         "chacha": "",
         "moox": ""
       },
       "tags": [
         "プロット",
-        "おじさん",
-        "無精ひげ",
-        "上司"
+        "代理",
+        "うちよそ",
+        "獣人",
+        "ショタ"
       ],
       "images": [
-        "images/cmwcjlict-mwcjlict0.webp"
+        "images/cmwcke9yt-mwcke9yt0.webp"
       ]
     },
     {
@@ -390,34 +391,33 @@
       ]
     },
     {
-      "id": "cmwcke9yt",
-      "name": "ゆうき",
-      "reading": "",
-      "age": "10歳",
-      "height": "100cm",
+      "id": "cmwcjlict",
+      "name": "立原 道大",
+      "reading": "たちはら みちひろ",
+      "age": "43歳",
+      "height": "192cm",
       "imageCv": "",
-      "birthday": "",
-      "role": "受け",
+      "birthday": "11月14日",
+      "role": "攻め",
       "summary": "",
       "notes": "",
-      "mainPrompt": "boy,Shota,petite and slender,short dark brown hair,white streaks.Thick eyebrows,brown almond eyes, large pupils,2:Fluffy :chipmunk tail,2::Fluffy chipmunk ears,round teeth,",
-      "outfitPrompt": "Red hoodie, shorts, sneakers,",
-      "bodyPrompt": "Inverted nipples,small penis,",
+      "mainPrompt": "",
+      "outfitPrompt": "",
+      "bodyPrompt": "",
       "intro": "",
       "plotUrls": {
-        "zeta": "https://zeta-ai.io/ja/plots/bf67e4b6-61e8-4f3c-b84d-4a530524a8f6/profile?share_id=uny3rp1es",
+        "zeta": "https://zeta-ai.io/ja/plots/881538e2-d592-4f6e-b2c3-a8407aa9f4f8/profile?share_id=v49wum494",
         "chacha": "",
         "moox": ""
       },
       "tags": [
         "プロット",
-        "代理",
-        "うちよそ",
-        "獣人",
-        "ショタ"
+        "おじさん",
+        "無精ひげ",
+        "上司"
       ],
       "images": [
-        "images/cmwcke9yt-mwcke9yt0.webp"
+        "images/cmwcjlict-mwcjlict0.webp"
       ]
     }
   ],

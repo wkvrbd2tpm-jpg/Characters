@@ -419,6 +419,35 @@
       "images": [
         "images/cmwcjlict-mwcjlict0.webp"
       ]
+    },
+    {
+      "id": "cmwcnclq2",
+      "name": "馬口 健",
+      "reading": "まぐち けん",
+      "age": "44歳",
+      "height": "192cm",
+      "imageCv": "吉野裕行",
+      "birthday": "",
+      "role": "攻め",
+      "summary": "",
+      "notes": "",
+      "mainPrompt": "boy,40 years old,light brown skin,masculer,very tall,short hair,yellow hair,black roots hair,black Thick eyebrows,tareme,sannpaku,black eyes,fangs,Stubble,",
+      "outfitPrompt": "Silver necklace,Aloha shirt,shorts,",
+      "bodyPrompt": "",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "",
+        "chacha": "",
+        "moox": ""
+      },
+      "tags": [
+        "うちよそ",
+        "おじさん",
+        "無精ひげ"
+      ],
+      "images": [
+        "images/cmwcnclq2-mwcnclq30.webp"
+      ]
     }
   ],
   "site": {

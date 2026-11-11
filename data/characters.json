@@ -596,6 +596,35 @@
       "images": [
         "images/cmwcpg2cq-mwcpg2cq0.webp"
       ]
+    },
+    {
+      "id": "cmwcpiegc",
+      "name": "ミケ",
+      "reading": "",
+      "age": "7歳",
+      "height": "",
+      "imageCv": "",
+      "birthday": "",
+      "role": "受け",
+      "summary": "",
+      "notes": "",
+      "mainPrompt": "boy, 7years old, small,petite and slender,soft skin texture,short calico fur-like hair with white black and orange patches,fluffy hair,thick black eyebrows,large black eyes,double parted hair,fangs,2::fluffy calico cat tail with white black orange patches, 2::calico cat ears with white black orange patches,one notched cat ear::",
+      "outfitPrompt": "",
+      "bodyPrompt": "",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "",
+        "chacha": "",
+        "moox": ""
+      },
+      "tags": [
+        "うちよそ",
+        "ショタ",
+        "獣人"
+      ],
+      "images": [
+        "images/cmwcpiegc-mwcpiegc0.webp"
+      ]
     }
   ],
   "site": {

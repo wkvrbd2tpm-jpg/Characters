@@ -228,48 +228,63 @@
   document.addEventListener("touchmove", (e) => { if (dragActive) e.preventDefault(); }, { passive: false });
 
   function attachDrag(card, list) {
-    let timer = null, dragging = false, startX = 0, startY = 0;
-    card.addEventListener("pointerdown", (e) => {
-      if (e.target.closest("button")) return;
-      startX = e.clientX; startY = e.clientY;
-      timer = setTimeout(() => {
-        dragging = true;
-        dragActive = true;
-        card.style.touchAction = "none";
-        card.classList.add("dragging");
-        try { card.setPointerCapture(e.pointerId); } catch {}
-        if (navigator.vibrate) navigator.vibrate(10);
-      }, 260);
-    });
-    card.addEventListener("pointermove", (e) => {
-      if (timer && !dragging && Math.hypot(e.clientX - startX, e.clientY - startY) > 10) { clearTimeout(timer); timer = null; }
-      if (!dragging) return;
+    let timer = null, dragging = false, sx = 0, sy = 0, ph = null, grabDX = 0, grabDY = 0;
+    const clearTimer = () => { if (timer) { clearTimeout(timer); timer = null; } };
+    const move = (e) => {
+      if (!dragging) {
+        if (Math.hypot(e.clientX - sx, e.clientY - sy) > 10) clearTimer();
+        return;
+      }
       e.preventDefault();
-      const t = document.elementFromPoint(e.clientX, e.clientY)?.closest(".acard");
+      card.style.left = `${e.clientX - grabDX}px`;
+      card.style.top = `${e.clientY - grabDY}px`;
+      const below = document.elementFromPoint(e.clientX, e.clientY);
+      const t = below ? below.closest(".acard") : null;
       if (!t || t === card || !list.contains(t)) return;
       const r = t.getBoundingClientRect();
-      const rel = ((e.clientX - r.left) / r.width) * 0.5 + ((e.clientY - r.top) / r.height) * 0.5;
-      list.insertBefore(card, rel > 0.5 ? t.nextSibling : t);
-    });
+      const after = (e.clientY - r.top) / r.height + (e.clientX - r.left) / r.width > 1;
+      list.insertBefore(ph, after ? t.nextSibling : t);
+    };
     const end = () => {
-      if (timer) { clearTimeout(timer); timer = null; }
+      clearTimer();
+      card.removeEventListener("pointermove", move);
+      card.removeEventListener("pointerup", end);
+      card.removeEventListener("pointercancel", end);
       if (!dragging) return;
       dragging = false;
       dragActive = false;
-      card.style.touchAction = "";
+      if (ph && ph.parentNode) ph.parentNode.replaceChild(card, ph);
+      ph = null;
       card.classList.remove("dragging");
-      card.dataset.suppress = "1";
-      setTimeout(() => { delete card.dataset.suppress; }, 50);
-      const order = [...list.querySelectorAll(".acard")].map((n) => n.dataset.id);
-      const sorted = order.map((id) => data.characters.find((c) => c.id === id)).filter(Boolean);
-      if (sorted.length === data.characters.length && sorted.some((c, i) => c !== data.characters[i])) {
-        data.characters = sorted;
-        markOrderDirty();
-      }
+      card.style.cssText = "";
+      const ids = [...list.querySelectorAll(".acard")].map((n) => n.dataset.id);
+      data.characters.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
+      markOrderDirty();
     };
     card.addEventListener("contextmenu", (e) => e.preventDefault());
-    card.addEventListener("pointerup", end);
-    card.addEventListener("pointercancel", end);
+    card.addEventListener("pointerdown", (e) => {
+      if (listQuery) return;
+      if (e.target.closest("button")) return;
+      sx = e.clientX; sy = e.clientY;
+      timer = setTimeout(() => {
+        dragging = true;
+        dragActive = true;
+        const r = card.getBoundingClientRect();
+        grabDX = sx - r.left; grabDY = sy - r.top;
+        ph = document.createElement("div");
+        ph.className = "acard-ph";
+        ph.style.width = `${r.width}px`;
+        ph.style.height = `${r.height}px`;
+        card.parentNode.insertBefore(ph, card);
+        card.classList.add("dragging");
+        card.style.cssText = `position:fixed; left:${r.left}px; top:${r.top}px; width:${r.width}px; height:${r.height}px; margin:0; z-index:80; pointer-events:none; touch-action:none;`;
+        try { card.setPointerCapture(e.pointerId); } catch (_) {}
+        if (navigator.vibrate) navigator.vibrate(10);
+      }, 260);
+      card.addEventListener("pointermove", move);
+      card.addEventListener("pointerup", end);
+      card.addEventListener("pointercancel", end);
+    });
   }
 
   let orderDirty = false;

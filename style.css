@@ -371,9 +371,11 @@ footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--m
 .acard .afoot { display: flex; gap: 6px; justify-content: center; padding: 5px 6px 10px; }
 .acard .afoot .btn { min-height: 34px; padding: 5px 12px; font-size: .78rem; }
 .acard.dragging {
-  outline: 3px solid var(--accent); transform: scale(1.05);
-  box-shadow: 0 14px 30px rgba(90, 60, 20, .28); position: relative; z-index: 3;
+  outline: 3px solid var(--accent); transform: scale(1.03);
+  opacity: .94; box-shadow: 0 18px 40px rgba(31, 27, 23, .35);
 }
+.acard img { pointer-events: none; -webkit-user-drag: none; }
+.acard-ph { border: 2px dashed var(--line); border-radius: 14px; background: rgba(31, 27, 23, .06); }
 
 .pager {
   display: flex; align-items: center; justify-content: space-between; gap: 12px;

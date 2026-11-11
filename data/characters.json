@@ -73,18 +73,29 @@
       ]
     },
     {
-      "age": "",
-      "features": "",
       "id": "char5",
-      "images": [
-        "images/char5-0.webp"
-      ],
-      "name": "キャラクター5",
-      "notes": "",
-      "outfit": "",
+      "name": "久住 善人",
+      "reading": "くずみ よしひと",
+      "age": "44歳",
       "role": "",
       "summary": "",
-      "tags": []
+      "features": "",
+      "outfit": "",
+      "notes": "",
+      "mainPrompt": "",
+      "outfitPrompt": "",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "https://zeta-ai.io/ja/plots/fa407bb9-1218-4ac8-94e9-7152853c8af5/profile?share_id=9s3prnydf",
+        "chacha": "",
+        "moox": ""
+      },
+      "tags": [
+        "プロット"
+      ],
+      "images": [
+        "images/char5-0.webp"
+      ]
     },
     {
       "age": "",

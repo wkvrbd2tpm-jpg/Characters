@@ -31,15 +31,21 @@
       "id": "char7",
       "name": "尾地 桜士",
       "reading": "おじ おうじ",
-      "age": "36歳",
+      "age": "32歳",
+      "height": "172cm",
+      "imageCv": "東地宏樹",
+      "birthday": "",
       "role": "受け",
       "summary": "",
-      "features": "",
-      "outfit": "",
       "notes": "",
-      "mainPrompt": "",
-      "outfitPrompt": "",
+      "mainPrompt": "boy,36years old,short black hair,parted bangs,2::curtained hair,::white streaked hair,layered hair,oblong face,thick eyebrows,gray eyes,tareme,Stubble,",
+      "outfitPrompt": "Dress shirt, tie, slacks,leather shoes",
       "intro": "",
+      "plotUrls": {
+        "zeta": "",
+        "chacha": "",
+        "moox": ""
+      },
       "tags": [
         "代理",
         "おじさん"

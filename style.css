@@ -65,7 +65,7 @@ img { display: block; max-width: 100%; }
 .yorkie-foot { image-rendering: pixelated; }
 .y-left { left: max(10px, 4vw); bottom: 6px; width: 104px; animation: floaty 3.8s ease-in-out infinite; }
 .y-right { right: max(10px, 4vw); top: 14px; width: 84px; animation: floaty 4.6s ease-in-out infinite reverse; }
-.yorkie, .pet svg { shape-rendering: crispEdges; }
+.yorkie { shape-rendering: crispEdges; }
 .paw-deco { position: absolute; pointer-events: none; z-index: 0; animation: twinkle 3s ease-in-out infinite; }
 .pd1 { left: 16%; top: 22px; width: 22px; height: 22px; }
 .pd2 { right: 17%; bottom: 26px; width: 18px; height: 18px; animation-delay: .7s; }
@@ -75,12 +75,13 @@ img { display: block; max-width: 100%; }
 .foot-in { text-align: center; }
 .pet { position: fixed; left: 0; bottom: 4px; z-index: 60; pointer-events: none; will-change: transform; }
 .pet .flipwrap { display: block; }
-.pet svg { display: block; width: 66px; aspect-ratio: 30 / 16; filter: drop-shadow(0 3px 5px rgba(120, 70, 20, .2)); }
-.pet.short svg { width: 58px; }
-.pet.long.loafing svg { aspect-ratio: 30 / 9; }
-.pet.short.loafing svg { aspect-ratio: 30 / 11; }
-.pet.walking svg { animation: walk-bob .34s ease-in-out infinite alternate; transform-origin: bottom center; }
+.pet img { display: block; width: 100%; height: auto; image-rendering: pixelated; filter: drop-shadow(0 3px 5px rgba(120, 70, 20, .2)); }
+.pet.walking img { animation: walk-bob .34s ease-in-out infinite alternate; transform-origin: bottom center; }
+.pet.sleeping img { animation: pet-breathe 2.8s ease-in-out infinite; transform: rotate(-3deg); }
+.pet.barking img { animation: pet-hop .32s ease-in-out 3; }
 @keyframes walk-bob { from { transform: translateY(0) rotate(-2deg); } to { transform: translateY(-3.5px) rotate(2deg); } }
+@keyframes pet-breathe { 0%, 100% { scale: 1; } 50% { scale: 1.05; } }
+@keyframes pet-hop { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-5px); } }
 .pet .bubble {
   position: absolute; left: 50%; bottom: 97%; transform: translateX(-50%);
   background: var(--surface); border: 1px solid var(--line); color: var(--accent);
@@ -101,10 +102,15 @@ img { display: block; max-width: 100%; }
 .hero h1 {
   font-family: var(--serif);
   font-weight: 800;
-  font-size: clamp(2.2rem, 6vw, 3.6rem);
-  letter-spacing: .08em;
-  line-height: 1.25;
-  margin: 0 0 12px;
+  font-size: clamp(2.9rem, 9vw, 4.6rem);
+  letter-spacing: .1em;
+  line-height: 1.2;
+  margin: 0 0 14px;
+  background: linear-gradient(180deg, #b07f3f 10%, #7c4f21 55%, #9a6a2c 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 0 rgba(255, 251, 240, .95)) drop-shadow(0 6px 12px rgba(124, 79, 33, .30));
 }
 .hero p { margin: 0 auto; color: var(--muted); max-width: 40em; }
 .hero-rule { display: flex; justify-content: center; margin-top: 22px; }
@@ -174,9 +180,9 @@ img { display: block; max-width: 100%; }
 .role.seme { background: #b5452f; }
 .role.uke { background: #2f6fb5; }
 .role.rev { background: #6b4fa0; }
-.card .thumb .role { position: absolute; top: 10px; left: 10px; font-size: .85rem; padding: 6px 11px 6px 13px; }
-.modal .role-line { margin-bottom: 10px; }
-.card .marks { position: absolute; top: 10px; right: 10px; display: grid; gap: 6px; justify-items: end; }
+.modal .role-line { margin-bottom: 12px; }
+.modal .role-line .role { font-size: 1.12rem; padding: 10px 22px 10px 24px; box-shadow: 0 4px 14px rgba(0, 0, 0, .30); }
+.card .marks { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin: 6px 0 2px; }
 .card .mark {
   font-size: .72rem; font-weight: 700; letter-spacing: .1em; line-height: 1;
   padding: 6px 10px; border-radius: 999px; color: #fff;
@@ -271,7 +277,7 @@ footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--m
   .card { transition: none; } .card:hover { transform: none; }
   dialog[open], dialog[open]::backdrop { animation: none; }
   .yorkie, .paw-deco, .yorkie-foot { animation: none; }
-  .pet svg, .poop { animation: none; }
+  .pet img, .poop { animation: none; }
 }
 
 /* admin */

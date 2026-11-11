@@ -73,11 +73,11 @@
     {
       "age": "",
       "features": "",
-      "id": "char6",
+      "id": "char8",
       "images": [
-        "images/char6-0.webp"
+        "images/char8-0.webp"
       ],
-      "name": "キャラクター6",
+      "name": "キャラクター8",
       "notes": "",
       "outfit": "",
       "role": "",
@@ -87,11 +87,11 @@
     {
       "age": "",
       "features": "",
-      "id": "char8",
+      "id": "char6",
       "images": [
-        "images/char8-0.webp"
+        "images/char6-0.webp"
       ],
-      "name": "キャラクター8",
+      "name": "キャラクター6",
       "notes": "",
       "outfit": "",
       "role": "",

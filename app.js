@@ -170,6 +170,26 @@
   $("#page-prev").addEventListener("click", () => gotoPage(-1));
   $("#page-next").addEventListener("click", () => gotoPage(1));
 
+  // スワイプでもページ切り替え（左へスワイプで次ページ、右へスワイプで前ページ）
+  let swipeX = null, swipeY = null, suppressClick = false;
+  grid.addEventListener("touchstart", (e) => {
+    if (e.touches.length === 1) { swipeX = e.touches[0].clientX; swipeY = e.touches[0].clientY; }
+  }, { passive: true });
+  grid.addEventListener("touchend", (e) => {
+    if (swipeX == null) return;
+    const dx = e.changedTouches[0].clientX - swipeX;
+    const dy = e.changedTouches[0].clientY - swipeY;
+    swipeX = swipeY = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      suppressClick = true;
+      setTimeout(() => { suppressClick = false; }, 350);
+      gotoPage(dx < 0 ? 1 : -1);
+    }
+  }, { passive: true });
+  grid.addEventListener("click", (e) => {
+    if (suppressClick) { e.stopPropagation(); e.preventDefault(); suppressClick = false; }
+  }, true);
+
   function fitCardNames() {
     grid.querySelectorAll(".card .name").forEach((n) => {
       n.style.fontSize = "";

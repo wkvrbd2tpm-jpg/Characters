@@ -65,17 +65,25 @@
       return;
     }
     grid.replaceChildren(
-      ...list.map((c) =>
-        el("button", { class: "card", type: "button", onclick: () => open(c.id) },
+      ...list.map((c) => {
+        const tags = c.tags || [];
+        const marks = [];
+        if (tags.includes("プロット")) marks.push(el("span", { class: "mark plot" }, "プロット"));
+        if (tags.includes("代理")) marks.push(el("span", { class: "mark proxy" }, "代理"));
+        return el("button", {
+          class: "card" + (tags.includes("プロット") ? " has-plot" : "") + (tags.includes("代理") ? " has-proxy" : ""),
+          type: "button", onclick: () => open(c.id),
+        },
           el("div", { class: "thumb" },
             c.images?.[0] ? el("img", { src: c.images[0], alt: c.name, loading: "lazy" }) : null,
-            c.role ? roleBadge(c.role) : null),
+            c.role ? roleBadge(c.role) : null,
+            marks.length ? el("div", { class: "marks" }, marks) : null),
           el("div", { class: "meta" },
             el("div", { class: "name" }, c.name),
-            el("div", { class: "sub" }, [c.age, (c.tags || [])[0]].filter(Boolean).join(" ・ "))
+            el("div", { class: "sub" }, [c.age, tags[0]].filter(Boolean).join(" ・ "))
           )
-        )
-      )
+        );
+      })
     );
   }
 

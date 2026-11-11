@@ -56,8 +56,12 @@
       <div class="field"><label for="f-features">見た目の特徴</label><textarea id="f-features"></textarea></div>
       <div class="field"><label for="f-outfit">服装</label><input type="text" id="f-outfit"></div>
       <div class="field"><label for="f-notes">性格・設定など</label><textarea id="f-notes"></textarea></div>
+      <div class="field"><label for="f-main-prompt">メインプロンプト</label><textarea id="f-main-prompt"></textarea></div>
+      <div class="field"><label for="f-outfit-prompt">服装プロンプト</label><textarea id="f-outfit-prompt"></textarea></div>
+      <div class="field" id="intro-field" hidden><label for="f-intro">キャラクター紹介（「プロット」タグを付けたキャラクター用）</label><textarea id="f-intro" placeholder="プロット付きキャラクターの紹介文を書けます"></textarea></div>
       <div class="field"><label for="f-tags">タグ(カンマ区切り)</label><input type="text" id="f-tags" placeholder="メガネ, 無精ひげ">
         <div class="chips tag-suggest" id="tag-suggest" aria-label="よく使うタグ">
+          <button type="button" class="chip tag-suggest-btn plot" data-tag="プロット" aria-pressed="false">プロット</button>
           <button type="button" class="chip tag-suggest-btn" data-tag="メガネ" aria-pressed="false">メガネ</button>
           <button type="button" class="chip tag-suggest-btn" data-tag="無精ひげ" aria-pressed="false">無精ひげ</button>
           <button type="button" class="chip tag-suggest-btn" data-tag="長髪" aria-pressed="false">長髪</button>
@@ -70,6 +74,7 @@
           <button type="button" class="chip tag-suggest-btn" data-tag="年上" aria-pressed="false">年上</button>
           <button type="button" class="chip tag-suggest-btn" data-tag="年下" aria-pressed="false">年下</button>
         </div>
+        <p class="note">「プロット」を付けると、「キャラクター紹介」の入力欄が下に出てきます。</p>
       </div>
       <div class="field">
         <span class="lbl">いまの画像(チェックを外すと削除されます)</span>

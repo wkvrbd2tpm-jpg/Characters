@@ -100,6 +100,9 @@
     add("特徴", c.features);
     add("服装", c.outfit);
     add("設定", c.notes);
+    if ((c.tags || []).includes("プロット")) add("キャラクター紹介", c.intro);
+    add("メインプロンプト", c.mainPrompt);
+    add("服装プロンプト", c.outfitPrompt);
 
     modal.replaceChildren(
       el("div", { class: "gallery" }, el("div", { class: "main" }, imgs.length ? main : null), imgs.length > 1 ? thumbs : null),

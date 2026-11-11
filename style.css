@@ -217,6 +217,8 @@ footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--m
 .role-btn[data-role="受け"][aria-pressed="true"] { background: #2f6fb5; border-color: #2f6fb5; color: #fff; }
 .role-btn[data-role="リバ"][aria-pressed="true"] { background: #6b4fa0; border-color: #6b4fa0; color: #fff; }
 .tag-suggest { margin-top: 8px; }
+.tag-suggest-btn.plot { border: 1px solid var(--gold); color: var(--gold); font-weight: 700; }
+#intro-field { border-left: 3px solid var(--gold); padding-left: 12px; }
 .tag-suggest .chip { padding: 7px 14px; min-height: 38px; }
 .tag-suggest .chip[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: #fff; }
 .savebar {

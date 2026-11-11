@@ -19,6 +19,7 @@
   function syncTagChips() {
     const cur = tagList();
     tagBtns.forEach((b) => b.setAttribute("aria-pressed", String(cur.includes(b.dataset.tag))));
+    $("#intro-field").hidden = !cur.includes("プロット");
   }
   tagBtns.forEach((b) => b.addEventListener("click", () => {
     const cur = tagList();
@@ -225,6 +226,8 @@
     setRole(c.role || "");
     $("#f-summary").value = c.summary || ""; $("#f-features").value = c.features || "";
     $("#f-outfit").value = c.outfit || ""; $("#f-notes").value = c.notes || "";
+    $("#f-main-prompt").value = c.mainPrompt || ""; $("#f-outfit-prompt").value = c.outfitPrompt || "";
+    $("#f-intro").value = c.intro || "";
     $("#f-tags").value = (c.tags || []).join(", ");
     syncTagChips();
     $("#f-files").value = "";
@@ -269,6 +272,9 @@
         features: $("#f-features").value.trim(),
         outfit: $("#f-outfit").value.trim(),
         notes: $("#f-notes").value.trim(),
+        mainPrompt: $("#f-main-prompt").value.trim(),
+        outfitPrompt: $("#f-outfit-prompt").value.trim(),
+        intro: $("#f-intro").value.trim(),
         tags: $("#f-tags").value.split(/[,、]/).map((t) => t.trim()).filter(Boolean),
         images: [...kept, ...newPaths],
       };

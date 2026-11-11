@@ -32,6 +32,7 @@
 
   const roleClass = (r) => (r === "攻め" ? "seme" : r === "受け" ? "uke" : "rev");
   const roleBadge = (r) => el("span", { class: "role " + roleClass(r) }, r);
+  const nameWithRuby = (c) => (c.reading ? el("ruby", {}, c.name, el("rt", {}, c.reading)) : c.name);
 
   async function load() {
     try {
@@ -76,7 +77,7 @@
       if (activeTab === "plot" && !(c.tags || []).includes("プロット")) return false;
       if (activeTag && c.role !== activeTag && !(c.tags || []).includes(activeTag)) return false;
       if (!kw) return true;
-      return [c.name, c.role, c.summary, c.features, ...(c.tags || [])].join(" ").toLowerCase().includes(kw);
+      return [c.name, c.reading, c.role, c.summary, c.features, ...(c.tags || [])].join(" ").toLowerCase().includes(kw);
     });
     if (!list.length) {
       grid.replaceChildren(el("p", { class: "empty" }, "該当するキャラクターがいません。"));
@@ -97,7 +98,7 @@
             c.role ? roleBadge(c.role) : null,
             marks.length ? el("div", { class: "marks" }, marks) : null),
           el("div", { class: "meta" },
-            el("div", { class: "name" }, c.name),
+            el("div", { class: "name" }, nameWithRuby(c)),
             el("div", { class: "sub" }, [c.age, tags[0]].filter(Boolean).join(" ・ "))
           )
         );
@@ -134,7 +135,7 @@
       el("div", { class: "gallery" }, el("div", { class: "main" }, imgs.length ? main : null), imgs.length > 1 ? thumbs : null),
       el("div", { class: "info" },
         c.role ? el("div", { class: "role-line" }, roleBadge(c.role)) : null,
-        el("h2", {}, c.name),
+        el("h2", {}, nameWithRuby(c)),
         c.age ? el("div", { class: "age" }, c.age) : null,
         c.summary ? el("p", { class: "summary" }, c.summary) : null,
         dl,

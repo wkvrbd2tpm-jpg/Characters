@@ -177,12 +177,12 @@
     const list = $("#list");
     if (!data.characters.length) { list.replaceChildren(el("p", { class: "note" }, "まだキャラクターがいません。")); return; }
     const items = data.characters.map((c, i) => [c, i])
-      .filter(([c]) => !listQuery || (c.name || "").toLowerCase().includes(listQuery));
+      .filter(([c]) => !listQuery || ((c.name || "") + " " + (c.reading || "")).toLowerCase().includes(listQuery));
     if (!items.length) { list.replaceChildren(el("p", { class: "note" }, "その名前のキャラクターはいません。")); return; }
     list.replaceChildren(...items.map(([c, i]) =>
       el("div", { class: "item" },
         c.images?.[0] ? el("img", { src: c.images[0], alt: "" }) : el("div"),
-        el("div", { class: "t" }, c.name, el("small", {}, [c.role, c.age].filter(Boolean).join(" ・ "))),
+        el("div", { class: "t" }, c.name + (c.reading ? `（${c.reading}）` : ""), el("small", {}, [c.role, c.age].filter(Boolean).join(" ・ "))),
         el("button", { class: "btn ghost", type: "button", "aria-label": "一番上へ", onclick: () => moveTo(i, 0) }, "⤒"),
         el("button", { class: "btn ghost", type: "button", "aria-label": "上へ", onclick: () => move(i, -1) }, "↑"),
         el("button", { class: "btn ghost", type: "button", "aria-label": "下へ", onclick: () => move(i, 1) }, "↓"),
@@ -231,6 +231,7 @@
     editingId = id;
     keepImages = (c.images || []).map((p) => ({ path: p, keep: true }));
     $("#f-name").value = c.name || ""; $("#f-age").value = c.age || "";
+    $("#f-reading").value = c.reading || "";
     setRole(c.role || "");
     $("#f-summary").value = c.summary || ""; $("#f-features").value = c.features || "";
     $("#f-outfit").value = c.outfit || ""; $("#f-notes").value = c.notes || "";
@@ -274,6 +275,7 @@
       const entry = {
         id,
         name: $("#f-name").value.trim(),
+        reading: $("#f-reading").value.trim(),
         age: $("#f-age").value.trim(),
         role: roleValue,
         summary: $("#f-summary").value.trim(),

@@ -6,6 +6,7 @@
   --line: #e3ddd4;
   --accent: #b5452f;
   --accent-ink: #ffffff;
+  --gold: #a8894f;
   --shadow: 0 1px 2px rgba(30, 20, 10, .06), 0 8px 24px rgba(30, 20, 10, .08);
   --serif: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
   --sans: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
@@ -38,16 +39,37 @@ img { display: block; max-width: 100%; }
 .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
 
 /* header */
-.hero { padding: 56px 0 28px; }
+.hero {
+  padding: 72px 0 36px;
+  text-align: center;
+  background:
+    radial-gradient(560px 260px at 50% -60px, color-mix(in srgb, var(--gold) 16%, transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--gold) 7%, transparent), transparent 78%);
+}
+.hero .kicker {
+  margin: 0 0 14px;
+  font-size: .72rem;
+  letter-spacing: .42em;
+  text-indent: .42em;
+  color: var(--gold);
+  font-weight: 700;
+}
 .hero h1 {
   font-family: var(--serif);
   font-weight: 800;
-  font-size: clamp(2rem, 6vw, 3.4rem);
-  letter-spacing: .06em;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  letter-spacing: .08em;
   line-height: 1.25;
   margin: 0 0 12px;
 }
-.hero p { margin: 0; color: var(--muted); max-width: 40em; }
+.hero p { margin: 0 auto; color: var(--muted); max-width: 40em; }
+.hero-rule { display: flex; justify-content: center; margin-top: 22px; }
+.hero-rule span {
+  display: block; width: 180px; height: 5px;
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  opacity: .75;
+}
 
 .toolbar {
   display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
@@ -67,7 +89,7 @@ img { display: block; max-width: 100%; }
 .chips { display: flex; gap: 8px; flex-wrap: wrap; }
 .chip {
   font: inherit; font-size: .85rem; color: var(--muted);
-  background: transparent; border: 1px solid var(--line);
+  background: var(--surface); border: 1px solid var(--line);
   padding: 4px 12px; border-radius: 999px; cursor: pointer;
 }
 .chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
@@ -83,10 +105,10 @@ img { display: block; max-width: 100%; }
   display: flex; flex-direction: column;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 14px; overflow: hidden;
+  border-radius: 18px; overflow: hidden;
   transition: transform .2s ease, box-shadow .2s ease;
 }
-.card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .card .thumb { aspect-ratio: 3 / 4; overflow: hidden; background: var(--line); position: relative; }
 .role {
   display: inline-block; font-family: var(--serif); font-weight: 800; letter-spacing: .12em;
@@ -98,7 +120,8 @@ img { display: block; max-width: 100%; }
 .role.rev { background: #6b4fa0; }
 .card .thumb .role { position: absolute; top: 10px; left: 10px; font-size: .85rem; padding: 6px 11px 6px 13px; }
 .modal .role-line { margin-bottom: 10px; }
-.card .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.card .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform .45s ease; }
+.card:hover .thumb img { transform: scale(1.045); }
 .card .meta { padding: 12px 14px 16px; }
 .card .name { font-family: var(--serif); font-weight: 700; font-size: 1.15rem; line-height: 1.4; }
 .card .sub { color: var(--muted); font-size: .85rem; margin-top: 2px; }
@@ -159,9 +182,9 @@ footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--m
 .panel details > summary { cursor: pointer; font-family: var(--serif); font-size: 1.2rem; font-weight: 700; }
 .field { display: grid; gap: 4px; margin: 12px 0; }
 .field label, .field .lbl { font-size: .85rem; color: var(--muted); }
-.field input[type="text"], .field input[type="password"], .field textarea {
-  font: inherit; color: inherit; background: var(--bg);
-  border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; width: 100%;
+.field input[type="text"], .field input[type="password"], .field input[type="search"], .field textarea {
+  font: inherit; font-size: 16px; color: inherit; background: var(--bg);
+  border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; width: 100%;
 }
 .field textarea { min-height: 84px; resize: vertical; }
 .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -169,7 +192,7 @@ footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--m
 .btn {
   font: inherit; font-weight: 700; cursor: pointer;
   background: var(--accent); color: var(--accent-ink);
-  border: none; border-radius: 999px; padding: 10px 22px;
+  border: none; border-radius: 999px; padding: 10px 22px; min-height: 46px;
 }
 .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
 .btn.danger { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
@@ -180,10 +203,28 @@ footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--m
 .status.err { color: var(--accent); font-weight: 700; }
 .list { display: grid; gap: 8px; }
 .list .item { display: flex; gap: 12px; align-items: center; padding: 8px; border: 1px solid var(--line); border-radius: 10px; }
-.list .item img { width: 44px; height: 56px; object-fit: cover; object-position: top; border-radius: 6px; background: var(--line); }
+.list .item img { width: 56px; height: 72px; object-fit: cover; object-position: top; border-radius: 8px; background: var(--line); }
 .list .item .t { flex: 1; min-width: 0; }
 .list .item .t small { color: var(--muted); display: block; }
 .imgs { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
 .imgs figure { margin: 0; width: 84px; text-align: center; font-size: .75rem; color: var(--muted); }
 .imgs img { width: 84px; height: 108px; object-fit: cover; object-position: top; border-radius: 8px; background: var(--line); }
 .check { display: flex; gap: 8px; align-items: flex-start; font-size: .9rem; }
+
+/* admin usability */
+.role-btn { font-size: 1rem; font-weight: 700; padding: 10px 26px; min-height: 46px; }
+.role-btn[data-role="攻め"][aria-pressed="true"] { background: #b5452f; border-color: #b5452f; color: #fff; }
+.role-btn[data-role="受け"][aria-pressed="true"] { background: #2f6fb5; border-color: #2f6fb5; color: #fff; }
+.role-btn[data-role="リバ"][aria-pressed="true"] { background: #6b4fa0; border-color: #6b4fa0; color: #fff; }
+.tag-suggest { margin-top: 8px; }
+.tag-suggest .chip { padding: 7px 14px; min-height: 38px; }
+.tag-suggest .chip[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: #fff; }
+.savebar {
+  position: sticky; bottom: 0; z-index: 5;
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  padding: 12px 0 4px; margin-top: 20px;
+}
+.savebar .btn[type="submit"] { flex: 1 1 auto; }
+.list .item { padding: 10px; }
+.list .item .btn { min-height: 42px; padding: 8px 16px; }

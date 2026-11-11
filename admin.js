@@ -13,6 +13,21 @@
   }
   roleBtns.forEach((b) => b.addEventListener("click", () => setRole(roleValue === b.dataset.role ? "" : b.dataset.role)));
 
+  /* ---------- tag suggestions ---------- */
+  const tagBtns = [...document.querySelectorAll(".tag-suggest-btn")];
+  const tagList = () => $("#f-tags").value.split(/[,、]/).map((t) => t.trim()).filter(Boolean);
+  function syncTagChips() {
+    const cur = tagList();
+    tagBtns.forEach((b) => b.setAttribute("aria-pressed", String(cur.includes(b.dataset.tag))));
+  }
+  tagBtns.forEach((b) => b.addEventListener("click", () => {
+    const cur = tagList();
+    const i = cur.indexOf(b.dataset.tag);
+    if (i >= 0) cur.splice(i, 1); else cur.push(b.dataset.tag);
+    $("#f-tags").value = cur.join(", ");
+    syncTagChips();
+  }));
+
   const el = (tag, props = {}, ...kids) => {
     const n = document.createElement(tag);
     for (const [k, v] of Object.entries(props)) {
@@ -156,10 +171,14 @@
     }
   }
 
+  let listQuery = "";
   function renderList() {
     const list = $("#list");
     if (!data.characters.length) { list.replaceChildren(el("p", { class: "note" }, "まだキャラクターがいません。")); return; }
-    list.replaceChildren(...data.characters.map((c, i) =>
+    const items = data.characters.map((c, i) => [c, i])
+      .filter(([c]) => !listQuery || (c.name || "").toLowerCase().includes(listQuery));
+    if (!items.length) { list.replaceChildren(el("p", { class: "note" }, "その名前のキャラクターはいません。")); return; }
+    list.replaceChildren(...items.map(([c, i]) =>
       el("div", { class: "item" },
         c.images?.[0] ? el("img", { src: c.images[0], alt: "" }) : el("div"),
         el("div", { class: "t" }, c.name, el("small", {}, [c.role, c.age].filter(Boolean).join(" ・ "))),
@@ -182,7 +201,7 @@
   function resetForm() {
     editingId = null; keepImages = [];
     $("#form").reset();
-    setRole("");
+    setRole(""); syncTagChips();
     $("#form-title").textContent = "③ キャラクターを追加";
     renderCurImgs(); setStatus("#status", "");
   }
@@ -207,6 +226,7 @@
     $("#f-summary").value = c.summary || ""; $("#f-features").value = c.features || "";
     $("#f-outfit").value = c.outfit || ""; $("#f-notes").value = c.notes || "";
     $("#f-tags").value = (c.tags || []).join(", ");
+    syncTagChips();
     $("#f-files").value = "";
     $("#form-title").textContent = "③ 「" + c.name + "」を編集";
     renderCurImgs(); setStatus("#status", "");
@@ -266,6 +286,8 @@
   });
 
   $("#new-btn").addEventListener("click", resetForm);
+  $("#list-q").addEventListener("input", (e) => { listQuery = e.target.value.trim().toLowerCase(); renderList(); });
+  $("#f-tags").addEventListener("input", syncTagChips);
   $("#connect").addEventListener("click", () => connect(false));
   $("#forget").addEventListener("click", () => { store.clear(); $("#token").value = ""; setStatus("#conn-status", "保存した情報を消しました。"); });
 

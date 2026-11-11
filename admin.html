@@ -34,6 +34,7 @@
 
   <section class="panel" id="list-panel" hidden>
     <h2>② 登録済みのキャラクター</h2>
+    <div class="field"><input type="search" id="list-q" placeholder="名前で探す" aria-label="キャラクターを名前で探す"></div>
     <div class="list" id="list"></div>
   </section>
 
@@ -55,13 +56,27 @@
       <div class="field"><label for="f-features">見た目の特徴</label><textarea id="f-features"></textarea></div>
       <div class="field"><label for="f-outfit">服装</label><input type="text" id="f-outfit"></div>
       <div class="field"><label for="f-notes">性格・設定など</label><textarea id="f-notes"></textarea></div>
-      <div class="field"><label for="f-tags">タグ(カンマ区切り)</label><input type="text" id="f-tags" placeholder="メガネ, 無精ひげ"></div>
+      <div class="field"><label for="f-tags">タグ(カンマ区切り)</label><input type="text" id="f-tags" placeholder="メガネ, 無精ひげ">
+        <div class="chips tag-suggest" id="tag-suggest" aria-label="よく使うタグ">
+          <button type="button" class="chip tag-suggest-btn" data-tag="メガネ" aria-pressed="false">メガネ</button>
+          <button type="button" class="chip tag-suggest-btn" data-tag="無精ひげ" aria-pressed="false">無精ひげ</button>
+          <button type="button" class="chip tag-suggest-btn" data-tag="長髪" aria-pressed="false">長髪</button>
+          <button type="button" class="chip tag-suggest-btn" data-tag="短髪" aria-pressed="false">短髪</button>
+          <button type="button" class="chip tag-suggest-btn" data-tag="スーツ" aria-pressed="false">スーツ</button>
+          <button type="button" class="chip tag-suggest-btn" data-tag="タバコ" aria-pressed="false">タバコ</button>
+          <button type="button" class="chip tag-suggest-btn" data-tag="獣耳" aria-pressed="false">獣耳</button>
+          <button type="button" class="chip tag-suggest-btn" data-tag="強面" aria-pressed="false">強面</button>
+          <button type="button" class="chip tag-suggest-btn" data-tag="優しい" aria-pressed="false">優しい</button>
+          <button type="button" class="chip tag-suggest-btn" data-tag="年上" aria-pressed="false">年上</button>
+          <button type="button" class="chip tag-suggest-btn" data-tag="年下" aria-pressed="false">年下</button>
+        </div>
+      </div>
       <div class="field">
         <span class="lbl">いまの画像(チェックを外すと削除されます)</span>
         <div class="imgs" id="cur-imgs"></div>
       </div>
       <div class="field"><label for="f-files">画像を追加(複数可)</label><input type="file" id="f-files" accept="image/*" multiple></div>
-      <div class="actions">
+      <div class="actions savebar">
         <button class="btn" type="submit" id="save">保存して公開</button>
         <button class="btn ghost" type="button" id="new-btn">新規追加に戻す</button>
       </div>

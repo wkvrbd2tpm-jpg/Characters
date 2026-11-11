@@ -33,11 +33,11 @@
     {
       "age": "",
       "features": "",
-      "id": "char2",
+      "id": "char7",
       "images": [
-        "images/char2-0.webp"
+        "images/char7-0.webp"
       ],
-      "name": "キャラクター2",
+      "name": "キャラクター7",
       "notes": "",
       "outfit": "",
       "role": "",
@@ -47,11 +47,11 @@
     {
       "age": "",
       "features": "",
-      "id": "char7",
+      "id": "char2",
       "images": [
-        "images/char7-0.webp"
+        "images/char2-0.webp"
       ],
-      "name": "キャラクター7",
+      "name": "キャラクター2",
       "notes": "",
       "outfit": "",
       "role": "",

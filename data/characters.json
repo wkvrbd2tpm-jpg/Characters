@@ -192,12 +192,16 @@
       "outfitPrompt": "",
       "intro": "",
       "plotUrls": {
-        "zeta": "",
+        "zeta": "https://zeta-ai.io/ja/plots/1da179c1-aedd-4db4-add3-70a3d1d4ffbd/profile?share_id=01fzn6hgo",
         "chacha": "",
         "moox": ""
       },
-      "tags": [],
-      "images": []
+      "tags": [
+        "プロット"
+      ],
+      "images": [
+        "images/cmwch8qn0-mwch9lm80.webp"
+      ]
     }
   ],
   "site": {

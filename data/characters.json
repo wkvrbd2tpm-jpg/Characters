@@ -157,11 +157,15 @@
       "name": "家入 柔梧",
       "reading": "いえいり じゅうご",
       "age": "46歳",
+      "height": "193cm",
+      "imageCv": "櫻井孝宏",
+      "birthday": "",
       "role": "",
       "summary": "",
       "notes": "",
       "mainPrompt": "",
       "outfitPrompt": "",
+      "bodyPrompt": "",
       "intro": "",
       "plotUrls": {
         "zeta": "https://zeta-ai.io/ja/plots/2e2a1438-b2c6-4d09-97ab-258d201078de/profile?share_id=zabsx4gx6",
@@ -169,7 +173,10 @@
         "moox": ""
       },
       "tags": [
-        "プロット"
+        "プロット",
+        "おじさん",
+        "長髪",
+        "無精ひげ"
       ],
       "images": [
         "images/cmwch4b6s-mwchha8q0.webp"

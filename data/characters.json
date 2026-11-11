@@ -3,11 +3,11 @@
     {
       "age": "",
       "features": "",
-      "id": "char1",
+      "id": "char8",
       "images": [
-        "images/char1-0.webp"
+        "images/char8-0.webp"
       ],
-      "name": "キャラクター1",
+      "name": "キャラクター8",
       "notes": "",
       "outfit": "",
       "role": "",
@@ -17,11 +17,11 @@
     {
       "age": "",
       "features": "",
-      "id": "char8",
+      "id": "char1",
       "images": [
-        "images/char8-0.webp"
+        "images/char1-0.webp"
       ],
-      "name": "キャラクター8",
+      "name": "キャラクター1",
       "notes": "",
       "outfit": "",
       "role": "",

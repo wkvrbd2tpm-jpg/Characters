@@ -63,6 +63,12 @@
       <div class="field"><label for="f-main-prompt">メインプロンプト</label><textarea id="f-main-prompt"></textarea></div>
       <div class="field"><label for="f-outfit-prompt">服装プロンプト</label><textarea id="f-outfit-prompt"></textarea></div>
       <div class="field" id="intro-field" hidden><label for="f-intro">プロット紹介（「プロット」タグを付けたキャラクター用）</label><textarea id="f-intro" placeholder="プロット付きキャラクターの紹介文を書けます"></textarea></div>
+      <div class="field plot-url-field" id="plot-url-field" hidden>
+        <span class="lbl plot-url-title">プロットURL（公開ページの目立つ場所にボタンで表示されます）</span>
+        <label for="f-plot-zeta">Zeta</label><input type="url" id="f-plot-zeta" inputmode="url" placeholder="https://…">
+        <label for="f-plot-chacha">チャチャ</label><input type="url" id="f-plot-chacha" inputmode="url" placeholder="https://…">
+        <label for="f-plot-moox">MooX</label><input type="url" id="f-plot-moox" inputmode="url" placeholder="https://…">
+      </div>
       <div class="field"><label for="f-tags">タグ(カンマ区切り)</label><input type="text" id="f-tags" placeholder="メガネ, 無精ひげ">
         <div class="chips tag-suggest" id="tag-suggest" aria-label="よく使うタグ">
           <button type="button" class="chip tag-suggest-btn plot" data-tag="プロット" aria-pressed="false">プロット</button>
@@ -78,7 +84,7 @@
           <button type="button" class="chip tag-suggest-btn" data-tag="年上" aria-pressed="false">年上</button>
           <button type="button" class="chip tag-suggest-btn" data-tag="年下" aria-pressed="false">年下</button>
         </div>
-        <p class="note">「プロット」を付けると、「プロット紹介」の入力欄が下に出てきます。</p>
+        <p class="note">「プロット」を付けると、「プロット紹介」と「プロットURL」の入力欄が出てきます。</p>
       </div>
       <div class="field">
         <span class="lbl">いまの画像(チェックを外すと削除されます)</span>

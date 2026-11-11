@@ -33,6 +33,27 @@
   const roleClass = (r) => (r === "攻め" ? "seme" : r === "受け" ? "uke" : "rev");
   const roleBadge = (r) => el("span", { class: "role " + roleClass(r) }, r);
   const nameWithRuby = (c) => (c.reading ? el("ruby", {}, c.name, el("rt", {}, c.reading)) : c.name);
+  const PLOT_APPS = [
+    ["zeta", "Zeta", "zeta"],
+    ["chacha", "チャチャ", "chacha"],
+    ["moox", "MooX", "moox"],
+  ];
+  const safeUrl = (u) => {
+    try {
+      const x = new URL(u);
+      return ["http:", "https:"].includes(x.protocol) ? x.href : "";
+    } catch { return ""; }
+  };
+  const plotLinks = (c) => {
+    if (!(c.tags || []).includes("プロット")) return null;
+    const links = PLOT_APPS.map(([key, label, cls]) => {
+      const href = safeUrl(c.plotUrls?.[key]);
+      return href ? el("a", { class: "plot-link " + cls, href, target: "_blank", rel: "noopener noreferrer" }, label + "で開く") : null;
+    }).filter(Boolean);
+    return links.length ? el("div", { class: "plot-links" },
+      el("div", { class: "plot-links-title" }, "プロットを開く"),
+      el("div", { class: "plot-link-buttons" }, links)) : null;
+  };
 
   async function load() {
     try {
@@ -138,6 +159,7 @@
         el("h2", {}, nameWithRuby(c)),
         c.age ? el("div", { class: "age" }, c.age) : null,
         c.summary ? el("p", { class: "summary" }, c.summary) : null,
+        plotLinks(c),
         dl,
         (c.tags || []).length ? el("div", { class: "tags" }, c.tags.map((t) => el("span", {}, t))) : null
       )
@@ -155,7 +177,7 @@
   const mascot = document.createElement("div");
   mascot.className = "mascot";
   mascot.setAttribute("aria-hidden", "true");
-  mascot.innerHTML = '<div class="bubble" hidden></div><span class="flipwrap"><svg class="dog"><use href="#yorkie-sit"/></svg></span>';
+  mascot.innerHTML = '<div class="bubble" hidden></div><span class="flipwrap"><svg class="dog dogA"><use href="#yorkie-face"/></svg><svg class="dog dogB"><use href="#yorkie-sit"/></svg></span>';
   document.body.append(mascot);
   const bubble = mascot.querySelector(".bubble");
   const flipwrap = mascot.querySelector(".flipwrap");
@@ -166,17 +188,17 @@
     p.className = "poop";
     p.setAttribute("aria-hidden", "true");
     p.innerHTML = '<svg><use href="#poop"/></svg>';
-    p.style.left = Math.max(2, x + (dir > 0 ? -16 : 46)) + "px";
+    p.style.left = Math.max(2, x + (dir > 0 ? -18 : 104)) + "px";
     document.body.append(p);
     setTimeout(() => p.classList.add("bye"), 5200);
     setTimeout(() => p.remove(), 6200);
   }
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let mx = Math.max(0, Math.min(120, innerWidth - 90)), mdir = 1, mstate = "walk";
+  let mx = Math.max(0, Math.min(120, innerWidth - 140)), mdir = 1, mstate = "walk";
   let until = performance.now() + 9000;
   let poopAt = performance.now() + 22000 + Math.random() * 30000;
   function mascotStep(now) {
-    const w = Math.max(0, innerWidth - 74);
+    const w = Math.max(0, innerWidth - 136);
     if (mstate === "walk") {
       mx += mdir * 0.45;
       if (mx > w) { mx = w; mdir = -1; }

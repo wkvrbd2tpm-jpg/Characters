@@ -20,6 +20,7 @@
     const cur = tagList();
     tagBtns.forEach((b) => b.setAttribute("aria-pressed", String(cur.includes(b.dataset.tag))));
     $("#intro-field").hidden = !cur.includes("プロット");
+    $("#plot-url-field").hidden = !cur.includes("プロット");
   }
   tagBtns.forEach((b) => b.addEventListener("click", () => {
     const cur = tagList();
@@ -237,6 +238,10 @@
     $("#f-outfit").value = c.outfit || ""; $("#f-notes").value = c.notes || "";
     $("#f-main-prompt").value = c.mainPrompt || ""; $("#f-outfit-prompt").value = c.outfitPrompt || "";
     $("#f-intro").value = c.intro || "";
+    const plotUrls = c.plotUrls || {};
+    $("#f-plot-zeta").value = plotUrls.zeta || "";
+    $("#f-plot-chacha").value = plotUrls.chacha || "";
+    $("#f-plot-moox").value = plotUrls.moox || "";
     $("#f-tags").value = (c.tags || []).join(", ");
     syncTagChips();
     $("#f-files").value = "";
@@ -285,6 +290,11 @@
         mainPrompt: $("#f-main-prompt").value.trim(),
         outfitPrompt: $("#f-outfit-prompt").value.trim(),
         intro: $("#f-intro").value.trim(),
+        plotUrls: {
+          zeta: $("#f-plot-zeta").value.trim(),
+          chacha: $("#f-plot-chacha").value.trim(),
+          moox: $("#f-plot-moox").value.trim(),
+        },
         tags: $("#f-tags").value.split(/[,、]/).map((t) => t.trim()).filter(Boolean),
         images: [...kept, ...newPaths],
       };

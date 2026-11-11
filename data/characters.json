@@ -207,11 +207,13 @@
       "age": "10歳",
       "height": "100cm",
       "imageCv": "",
+      "birthday": "",
       "role": "受け",
       "summary": "",
       "notes": "",
       "mainPrompt": "boy,shota,10 years old, baby character design, 2 heads tall proportions, large head small torso,baby body, big sparkling eyes, soft skin texture,cute and pure expression,short White hair,center-parted hair.Thick eyebrows,black round eyes,large pupils,parted hair,2::Fluffy Japanese flying squirrel tail,2::Japanese flying squirrel ears,round teach,blush",
       "outfitPrompt": "White hoodie, sleeves covering the hands, shorts, sneakers",
+      "bodyPrompt": "inverted nipples,small penis,",
       "intro": "",
       "plotUrls": {
         "zeta": "https://zeta-ai.io/ja/plots/ae2848b9-9152-4528-9a19-0781e00f182a/profile?share_id=fi1fhoif",

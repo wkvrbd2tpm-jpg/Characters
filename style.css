@@ -162,6 +162,7 @@ img { display: block; max-width: 100%; }
   display: grid; gap: 20px;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   padding-bottom: 72px;
+  align-content: start;
 }
 .card {
   all: unset; box-sizing: border-box; cursor: pointer;

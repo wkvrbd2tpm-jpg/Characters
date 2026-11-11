@@ -158,6 +158,29 @@
       "images": [
         "images/cmwch2vvj-mwch2vvk0.webp"
       ]
+    },
+    {
+      "id": "cmwch4b6s",
+      "name": "家入 柔梧",
+      "reading": "いえいり じゅうご",
+      "age": "46歳",
+      "role": "",
+      "summary": "",
+      "notes": "",
+      "mainPrompt": "",
+      "outfitPrompt": "",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "https://zeta-ai.io/ja/plots/2e2a1438-b2c6-4d09-97ab-258d201078de/profile?share_id=zabsx4gx6",
+        "chacha": "",
+        "moox": ""
+      },
+      "tags": [
+        "プロット"
+      ],
+      "images": [
+        "images/cmwch4b6s-mwch4b6s0.webp"
+      ]
     }
   ],
   "site": {

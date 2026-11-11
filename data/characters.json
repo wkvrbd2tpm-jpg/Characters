@@ -30,12 +30,15 @@
       "features": "",
       "outfit": "",
       "notes": "",
+      "mainPrompt": "",
+      "outfitPrompt": "",
+      "intro": "",
       "tags": [
         "代理",
         "おじさん"
       ],
       "images": [
-        "images/char7-0.webp"
+        "images/char7-mwcff0be0.webp"
       ]
     },
     {

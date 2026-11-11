@@ -152,11 +152,15 @@
       "name": "家入 堅梧",
       "reading": "いえいり けんご",
       "age": "43歳",
+      "height": "182cm",
+      "imageCv": "諏訪部順一",
+      "birthday": "",
       "role": "",
       "summary": "",
       "notes": "",
       "mainPrompt": "",
       "outfitPrompt": "",
+      "bodyPrompt": "",
       "intro": "",
       "plotUrls": {
         "zeta": "https://zeta-ai.io/ja/plots/c45d6442-41c2-4114-8653-3a25a87e77a0/profile?share_id=sre67s3ib",
@@ -164,7 +168,10 @@
         "moox": ""
       },
       "tags": [
-        "プロット"
+        "プロット",
+        "おじさん",
+        "無精ひげ",
+        "長髪"
       ],
       "images": [
         "images/cmwch2vvj-mwch2vvk0.webp"

@@ -327,6 +327,36 @@
       "images": [
         "images/cmwcjlict-mwcjlict0.webp"
       ]
+    },
+    {
+      "id": "cmwcjz5u9",
+      "name": "尾塚 大地",
+      "reading": "おづか だいち",
+      "age": "46歳",
+      "height": "199cm",
+      "imageCv": "",
+      "birthday": "7月14日",
+      "role": "",
+      "summary": "",
+      "notes": "",
+      "mainPrompt": "",
+      "outfitPrompt": "",
+      "bodyPrompt": "",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "https://zeta-ai.io/ja/plots/3a1bbcc7-8850-4622-ab2f-6a9b28298b38/profile?share_id=qwi02a5ze",
+        "chacha": "",
+        "moox": ""
+      },
+      "tags": [
+        "プロット",
+        "おじさん",
+        "無精ひげ",
+        "獣人"
+      ],
+      "images": [
+        "images/cmwcjz5u9-mwcjz5u90.webp"
+      ]
     }
   ],
   "site": {

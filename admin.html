@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>キャラクター管理</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="admin">
+<div class="wrap">
+  <h1>キャラクター管理</h1>
+  <p class="note">ここからキャラクターの追加・編集・削除ができます。保存するとあなたの GitHub リポジトリに直接反映され、1〜2分ほどでサイトに表示されます。 <a href="index.html">サイトを見る</a></p>
+
+  <section class="panel">
+    <details id="conn">
+      <summary>① GitHub との接続</summary>
+      <div class="row">
+        <div class="field"><label for="owner">GitHub ユーザー名</label><input type="text" id="owner" autocomplete="off"></div>
+        <div class="field"><label for="repo">リポジトリ名</label><input type="text" id="repo" autocomplete="off"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="branch">ブランチ</label><input type="text" id="branch" value="main" autocomplete="off"></div>
+        <div class="field"><label for="token">アクセストークン</label><input type="password" id="token" autocomplete="off"></div>
+      </div>
+      <p class="note">トークンはこの端末のブラウザにだけ保存され、GitHub 以外には送信されません。トークンの作り方は README を見てください。</p>
+      <div class="actions"><button class="btn" id="connect" type="button">接続して読み込む</button><button class="btn ghost" id="forget" type="button">保存した情報を消す</button></div>
+      <div class="status" id="conn-status" role="status"></div>
+    </details>
+  </section>
+
+  <section class="panel" id="list-panel" hidden>
+    <h2>② 登録済みのキャラクター</h2>
+    <div class="list" id="list"></div>
+  </section>
+
+  <section class="panel" id="form-panel" hidden>
+    <h2 id="form-title">③ キャラクターを追加</h2>
+    <form id="form">
+      <div class="row">
+        <div class="field"><label for="f-name">名前(必須)</label><input type="text" id="f-name" required></div>
+        <div class="field"><label for="f-age">年齢(任意・例: 25歳)</label><input type="text" id="f-age"></div>
+      </div>
+      <div class="field"><label for="f-role">受け・攻め</label>
+        <select id="f-role" style="font:inherit;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;">
+          <option value="">未設定</option><option value="攻め">攻め</option><option value="受け">受け</option><option value="リバ">リバ</option>
+        </select>
+      </div>
+      <div class="field"><label for="f-summary">ひとこと紹介</label><input type="text" id="f-summary"></div>
+      <div class="field"><label for="f-features">見た目の特徴</label><textarea id="f-features"></textarea></div>
+      <div class="field"><label for="f-outfit">服装</label><input type="text" id="f-outfit"></div>
+      <div class="field"><label for="f-notes">性格・設定など</label><textarea id="f-notes"></textarea></div>
+      <div class="field"><label for="f-tags">タグ(カンマ区切り)</label><input type="text" id="f-tags" placeholder="メガネ, 無精ひげ"></div>
+      <div class="field">
+        <span class="lbl">いまの画像(チェックを外すと削除されます)</span>
+        <div class="imgs" id="cur-imgs"></div>
+      </div>
+      <div class="field"><label for="f-files">画像を追加(複数可)</label><input type="file" id="f-files" accept="image/*" multiple></div>
+      <label class="check"><input type="checkbox" id="f-adult" required> <span>このキャラクターは成人(18歳以上)の設定です。子どもの設定のキャラクターは掲載しません。</span></label>
+      <div class="actions">
+        <button class="btn" type="submit" id="save">保存して公開</button>
+        <button class="btn ghost" type="button" id="new-btn">新規追加に戻す</button>
+      </div>
+      <div class="status" id="status" role="status"></div>
+    </form>
+  </section>
+
+  <section class="panel" id="site-panel" hidden>
+    <details>
+      <summary>サイトのタイトルと紹介文を変える</summary>
+      <div class="field"><label for="s-title">タイトル</label><input type="text" id="s-title"></div>
+      <div class="field"><label for="s-lead">紹介文</label><textarea id="s-lead"></textarea></div>
+      <div class="actions"><button class="btn" id="s-save" type="button">保存</button></div>
+      <div class="status" id="s-status" role="status"></div>
+    </details>
+  </section>
+</div>
+<script src="admin.js"></script>
+</body>
+</html>

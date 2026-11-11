@@ -13,11 +13,17 @@
       "mainPrompt": "",
       "outfitPrompt": "",
       "intro": "",
+      "plotUrls": {
+        "zeta": "https://zeta-ai.io/ja/plots/68187104-a704-44f1-8356-d03c23c0e6cf/profile?share_id=w7f9ma3zv",
+        "chacha": "",
+        "moox": ""
+      },
       "tags": [
-        "代理"
+        "代理",
+        "プロット"
       ],
       "images": [
-        "images/char8-mwcfcrl70.webp"
+        "images/char8-mwcfz6uw0.webp"
       ]
     },
     {

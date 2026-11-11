@@ -157,10 +157,13 @@
     const dl = el("dl");
     const add = (label, text) => { if (text) { dl.append(el("dt", {}, label), el("dd", {}, text)); } };
     add("イメージCV", c.imageCv);
+    add("誕生日", c.birthday);
     if ((c.tags || []).includes("プロット")) add("プロット紹介", c.intro);
     add("設定", c.notes);
-    add("メインプロンプト", c.mainPrompt);
-    add("服装プロンプト", c.outfitPrompt);
+    if ((c.tags || []).includes("代理") || (c.tags || []).includes("うちよそ")) {
+      add("メインプロンプト", c.mainPrompt);
+      add("服装プロンプト", c.outfitPrompt);
+    }
 
     modal.replaceChildren(
       el("div", { class: "gallery" }, el("div", { class: "main" }, imgs.length ? main : null), imgs.length > 1 ? thumbs : null),

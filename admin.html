@@ -50,6 +50,7 @@
         <div class="field"><label for="f-height">身長（任意・数字だけでもOK、自動で「cm」が付きます）</label><input type="text" id="f-height"></div>
       </div>
       <div class="field"><label for="f-cv">イメージCV</label><input type="text" id="f-cv" placeholder="声のイメージの声優さん名"></div>
+      <div class="field"><label for="f-birthday">誕生日</label><input type="text" id="f-birthday" placeholder="例： 3月14日"></div>
       <div class="field"><label for="f-reading">読み仮名(名前の上にルビで表示されます)</label><input type="text" id="f-reading" placeholder="いぬい ゆうき"></div>
       <div class="field"><span class="lbl">受け・攻め（ボタンで選択。もう一度押すと未設定に戻ります）</span>
         <div class="chips" id="f-role" role="group" aria-label="受け・攻め">
@@ -60,8 +61,11 @@
       </div>
       <div class="field"><label for="f-summary">ひとこと紹介</label><input type="text" id="f-summary"></div>
       <div class="field"><label for="f-notes">性格・設定など</label><textarea id="f-notes"></textarea></div>
-      <div class="field"><label for="f-main-prompt">メインプロンプト</label><textarea id="f-main-prompt"></textarea></div>
-      <div class="field"><label for="f-outfit-prompt">服装プロンプト</label><textarea id="f-outfit-prompt"></textarea></div>
+      <div id="prompt-fields" hidden>
+        <p class="note">プロンプト関連の項目は「代理」か「うちよそ」タグを付けたキャラクターだけに表示されます。</p>
+        <div class="field"><label for="f-main-prompt">メインプロンプト</label><textarea id="f-main-prompt"></textarea></div>
+        <div class="field"><label for="f-outfit-prompt">服装プロンプト</label><textarea id="f-outfit-prompt"></textarea></div>
+      </div>
       <div class="field" id="intro-field" hidden><label for="f-intro">プロット紹介（「プロット」タグを付けたキャラクター用）</label><textarea id="f-intro" placeholder="プロット付きキャラクターの紹介文を書けます"></textarea></div>
       <div class="field plot-url-field" id="plot-url-field" hidden>
         <span class="lbl plot-url-title">プロットURL（公開ページの目立つ場所にボタンで表示されます）</span>

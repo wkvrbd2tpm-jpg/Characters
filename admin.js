@@ -21,6 +21,7 @@
     tagBtns.forEach((b) => b.setAttribute("aria-pressed", String(cur.includes(b.dataset.tag))));
     $("#intro-field").hidden = !cur.includes("プロット");
     $("#plot-url-field").hidden = !cur.includes("プロット");
+    $("#prompt-fields").hidden = !(cur.includes("代理") || cur.includes("うちよそ"));
   }
   tagBtns.forEach((b) => b.addEventListener("click", () => {
     const cur = tagList();
@@ -231,7 +232,7 @@
     const c = data.characters.find((x) => x.id === id); if (!c) return;
     editingId = id;
     keepImages = (c.images || []).map((p) => ({ path: p, keep: true }));
-    $("#f-name").value = c.name || ""; $("#f-age").value = c.age || ""; $("#f-height").value = c.height || ""; $("#f-cv").value = c.imageCv || "";
+    $("#f-name").value = c.name || ""; $("#f-age").value = c.age || ""; $("#f-height").value = c.height || ""; $("#f-cv").value = c.imageCv || ""; $("#f-birthday").value = c.birthday || "";
     $("#f-reading").value = c.reading || "";
     setRole(c.role || "");
     $("#f-summary").value = c.summary || "";
@@ -292,6 +293,7 @@
           return v;
         })(),
         imageCv: $("#f-cv").value.trim(),
+        birthday: $("#f-birthday").value.trim(),
         role: roleValue,
         summary: $("#f-summary").value.trim(),
         notes: $("#f-notes").value.trim(),

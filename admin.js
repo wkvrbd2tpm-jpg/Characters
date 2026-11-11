@@ -234,8 +234,8 @@
     $("#f-name").value = c.name || ""; $("#f-age").value = c.age || "";
     $("#f-reading").value = c.reading || "";
     setRole(c.role || "");
-    $("#f-summary").value = c.summary || ""; $("#f-features").value = c.features || "";
-    $("#f-outfit").value = c.outfit || ""; $("#f-notes").value = c.notes || "";
+    $("#f-summary").value = c.summary || "";
+    $("#f-notes").value = c.notes || "";
     $("#f-main-prompt").value = c.mainPrompt || ""; $("#f-outfit-prompt").value = c.outfitPrompt || "";
     $("#f-intro").value = c.intro || "";
     const plotUrls = c.plotUrls || {};
@@ -284,8 +284,6 @@
         age: $("#f-age").value.trim(),
         role: roleValue,
         summary: $("#f-summary").value.trim(),
-        features: $("#f-features").value.trim(),
-        outfit: $("#f-outfit").value.trim(),
         notes: $("#f-notes").value.trim(),
         mainPrompt: $("#f-main-prompt").value.trim(),
         outfitPrompt: $("#f-outfit-prompt").value.trim(),

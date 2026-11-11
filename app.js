@@ -98,7 +98,7 @@
       if (activeTab === "plot" && !(c.tags || []).includes("プロット")) return false;
       if (activeTag && c.role !== activeTag && !(c.tags || []).includes(activeTag)) return false;
       if (!kw) return true;
-      return [c.name, c.reading, c.role, c.summary, c.features, ...(c.tags || [])].join(" ").toLowerCase().includes(kw);
+      return [c.name, c.reading, c.role, c.summary, ...(c.tags || [])].join(" ").toLowerCase().includes(kw);
     });
     if (!list.length) {
       grid.replaceChildren(el("p", { class: "empty" }, "該当するキャラクターがいません。"));
@@ -145,9 +145,7 @@
     }
     const dl = el("dl");
     const add = (label, text) => { if (text) { dl.append(el("dt", {}, label), el("dd", {}, text)); } };
-    add("特徴", c.features);
     if ((c.tags || []).includes("プロット")) add("プロット紹介", c.intro);
-    add("服装", c.outfit);
     add("設定", c.notes);
     add("メインプロンプト", c.mainPrompt);
     add("服装プロンプト", c.outfitPrompt);

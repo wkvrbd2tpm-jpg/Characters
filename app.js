@@ -161,6 +161,15 @@
     if ((c.tags || []).includes("代理") || (c.tags || []).includes("うちよそ")) {
       add("メインプロンプト", c.mainPrompt);
       add("服装プロンプト", c.outfitPrompt);
+      if (c.bodyPrompt) {
+        const secret = el("span", { class: "secret", title: "タップで表示／隠す" }, c.bodyPrompt);
+        secret.addEventListener("click", () => {
+          secret.classList.toggle("revealed");
+          hint.textContent = secret.classList.contains("revealed") ? "タップで隠す" : "タップで表示";
+        });
+        const hint = el("span", { class: "secret-hint" }, "タップで表示");
+        dl.append(el("dt", {}, "身体的特徴プロンプト"), el("dd", {}, secret, hint));
+      }
     }
 
     modal.replaceChildren(

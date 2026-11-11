@@ -237,7 +237,7 @@
     setRole(c.role || "");
     $("#f-summary").value = c.summary || "";
     $("#f-notes").value = c.notes || "";
-    $("#f-main-prompt").value = c.mainPrompt || ""; $("#f-outfit-prompt").value = c.outfitPrompt || "";
+    $("#f-main-prompt").value = c.mainPrompt || ""; $("#f-outfit-prompt").value = c.outfitPrompt || ""; $("#f-body-prompt").value = c.bodyPrompt || "";
     $("#f-intro").value = c.intro || "";
     const plotUrls = c.plotUrls || {};
     $("#f-plot-zeta").value = plotUrls.zeta || "";
@@ -299,6 +299,7 @@
         notes: $("#f-notes").value.trim(),
         mainPrompt: $("#f-main-prompt").value.trim(),
         outfitPrompt: $("#f-outfit-prompt").value.trim(),
+        bodyPrompt: $("#f-body-prompt").value.trim(),
         intro: $("#f-intro").value.trim(),
         plotUrls: {
           zeta: $("#f-plot-zeta").value.trim(),

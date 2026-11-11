@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261112b">
+<link rel="stylesheet" href="style.css?v=20261112c">
 </head>
 <body class="admin">
 <div class="wrap">
@@ -65,6 +65,7 @@
         <p class="note">プロンプト関連の項目は「代理」か「うちよそ」タグを付けたキャラクターだけに表示されます。</p>
         <div class="field"><label for="f-main-prompt">メインプロンプト</label><textarea id="f-main-prompt"></textarea></div>
         <div class="field"><label for="f-outfit-prompt">服装プロンプト</label><textarea id="f-outfit-prompt"></textarea></div>
+        <div class="field"><label for="f-body-prompt">身体的特徴プロンプト</label><textarea id="f-body-prompt"></textarea><p class="note">公開ページではモザイクがかかり、タップすると内容が見える形で表示されます。</p></div>
       </div>
       <div class="field" id="intro-field" hidden><label for="f-intro">プロット紹介（「プロット」タグを付けたキャラクター用）</label><textarea id="f-intro" placeholder="プロット付きキャラクターの紹介文を書けます"></textarea></div>
       <div class="field plot-url-field" id="plot-url-field" hidden>
@@ -114,6 +115,6 @@
     </details>
   </section>
 </div>
-<script src="admin.js"></script>
+<script src="admin.js?v=20261112c"></script>
 </body>
 </html>

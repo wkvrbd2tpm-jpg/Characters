@@ -342,3 +342,10 @@ footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--m
 .savebar .btn[type="submit"] { flex: 1 1 auto; }
 .list .item { padding: 10px; }
 .list .item .btn { min-height: 42px; padding: 8px 16px; }
+
+.modal .secret {
+  filter: blur(7px); cursor: pointer; user-select: none; -webkit-user-select: none;
+  transition: filter .25s ease;
+}
+.modal .secret.revealed { filter: none; user-select: text; -webkit-user-select: text; }
+.modal .secret-hint { display: block; margin-top: 5px; font-size: .74rem; color: var(--muted); }

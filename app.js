@@ -196,7 +196,7 @@
     setTimeout(() => p.classList.add("bye"), 40000);
     setTimeout(() => p.remove(), 46000);
   }
-  const WALK_HREF = { long: "#yorkie-face", short: "#yorkie-sit" };
+  const WALK_HREF = { long: "#yorkie-long-walk", short: "#yorkie-short-walk" };
   const LOAF_HREF = { long: "#yorkie-long-loaf", short: "#yorkie-short-loaf" };
   function makePet(kind, startX, speed) {
     const root = el("div", { class: "pet " + kind + " walking" },

@@ -182,11 +182,13 @@
       "age": "36歳",
       "height": "198cm",
       "imageCv": "",
+      "birthday": "",
       "role": "",
       "summary": "",
       "notes": "",
       "mainPrompt": "",
       "outfitPrompt": "",
+      "bodyPrompt": "",
       "intro": "",
       "plotUrls": {
         "zeta": "https://zeta-ai.io/ja/plots/1da179c1-aedd-4db4-add3-70a3d1d4ffbd/profile?share_id=01fzn6hgo",
@@ -194,7 +196,9 @@
         "moox": ""
       },
       "tags": [
-        "プロット"
+        "プロット",
+        "おじさん",
+        "優しい"
       ],
       "images": [
         "images/cmwch8qn0-mwch9lm80.webp"

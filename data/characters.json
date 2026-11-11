@@ -357,6 +357,37 @@
       "images": [
         "images/cmwcjz5u9-mwcjz5u90.webp"
       ]
+    },
+    {
+      "id": "cmwck5izf",
+      "name": "Sean·T·Connor",
+      "reading": "ショーン·ティー·コナー",
+      "age": "46歳",
+      "height": "190cm",
+      "imageCv": "速水奨",
+      "birthday": "11月20日",
+      "role": "攻め",
+      "summary": "",
+      "notes": "",
+      "mainPrompt": "",
+      "outfitPrompt": "",
+      "bodyPrompt": "",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "https://zeta-ai.io/ja/plots/83c2182f-ff8a-4161-8b0c-1f526363f2ae/profile?share_id=e3ryknkdd",
+        "chacha": "",
+        "moox": ""
+      },
+      "tags": [
+        "プロット",
+        "うちよそ",
+        "おじさん",
+        "無精ひげ",
+        "長髪"
+      ],
+      "images": [
+        "images/cmwck5izf-mwck5izf0.webp"
+      ]
     }
   ],
   "site": {

@@ -112,7 +112,6 @@
         if (tags.includes("代理")) marks.push(el("span", { class: "mark proxy" }, "代理"));
         if (tags.includes("プロット")) marks.push(el("span", { class: "mark plot" }, "プロット"));
         if (tags.includes("うちよそ")) marks.push(el("span", { class: "mark uchiyoso" }, "うちよそ"));
-        const subTag = tags.find((t) => t !== "代理" && t !== "プロット");
         return el("button", {
           class: "card" + (tags.includes("プロット") ? " has-plot" : "") + (tags.includes("代理") ? " has-proxy" : "") + (tags.includes("うちよそ") ? " has-uchiyoso" : ""),
           type: "button", onclick: () => open(c.id),
@@ -121,8 +120,7 @@
             c.images?.[0] ? el("img", { src: c.images[0], alt: c.name, loading: "lazy" }) : null),
           el("div", { class: "meta" },
             el("div", { class: "name" }, nameWithRuby(c)),
-            marks.length ? el("div", { class: "marks" }, marks) : null,
-            el("div", { class: "sub" }, [c.age, c.height, subTag].filter(Boolean).join(" ・ "))
+            marks.length ? el("div", { class: "marks" }, marks) : null
           )
         );
       })

@@ -14,8 +14,9 @@
       all: chars.length,
       proxy: chars.filter((c) => (c.tags || []).includes("代理")).length,
       plot: chars.filter((c) => (c.tags || []).includes("プロット")).length,
+      uchiyoso: chars.filter((c) => (c.tags || []).includes("うちよそ")).length,
     };
-    const labels = { all: "すべて", proxy: "代理", plot: "プロット" };
+    const labels = { all: "すべて", proxy: "代理", plot: "プロット", uchiyoso: "うちよそ" };
     tabBtns.forEach((b) => (b.textContent = `${labels[b.dataset.tab]}（${counts[b.dataset.tab]}）`));
   }
 
@@ -33,6 +34,13 @@
   const roleClass = (r) => (r === "攻め" ? "seme" : r === "受け" ? "uke" : "rev");
   const roleBadge = (r) => el("span", { class: "role " + roleClass(r) }, r);
   const nameWithRuby = (c) => (c.reading ? el("ruby", {}, c.name, el("rt", {}, c.reading)) : c.name);
+  const nameParts = (c) => {
+    const names = (c.name || "").split(/\s+/).filter(Boolean);
+    const reads = (c.reading || "").split(/\s+/).filter(Boolean);
+    const parts = [];
+    names.forEach((n, i) => { if (i) parts.push(" "); parts.push(reads[i] ? el("ruby", {}, n, el("rt", {}, reads[i])) : n); });
+    return parts.length ? parts : [c.name];
+  };
   const PLOT_APPS = [
     ["zeta", "Zeta", "zeta"],
     ["chacha", "チャチャ", "chacha"],
@@ -75,8 +83,7 @@
   }
 
   function buildChips() {
-    const roles = ["攻め", "受け", "リバ"].filter((r) => chars.some((c) => c.role === r));
-    const tags = [...roles, ...new Set(chars.flatMap((c) => c.tags || []))];
+    const tags = ["代理", "プロット", "うちよそ"].filter((t) => chars.some((c) => (c.tags || []).includes(t)));
     chipsEl.replaceChildren(
       ...tags.map((t) =>
         el("button", {
@@ -96,6 +103,7 @@
     const list = chars.filter((c) => {
       if (activeTab === "proxy" && !(c.tags || []).includes("代理")) return false;
       if (activeTab === "plot" && !(c.tags || []).includes("プロット")) return false;
+      if (activeTab === "uchiyoso" && !(c.tags || []).includes("うちよそ")) return false;
       if (activeTag && c.role !== activeTag && !(c.tags || []).includes(activeTag)) return false;
       if (!kw) return true;
       return [c.name, c.reading, c.role, c.summary, ...(c.tags || [])].join(" ").toLowerCase().includes(kw);
@@ -110,15 +118,16 @@
         const marks = [];
         if (tags.includes("代理")) marks.push(el("span", { class: "mark proxy" }, "代理"));
         if (tags.includes("プロット")) marks.push(el("span", { class: "mark plot" }, "プロット"));
+        if (tags.includes("うちよそ")) marks.push(el("span", { class: "mark uchiyoso" }, "うちよそ"));
         const subTag = tags.find((t) => t !== "代理" && t !== "プロット");
         return el("button", {
-          class: "card" + (tags.includes("プロット") ? " has-plot" : "") + (tags.includes("代理") ? " has-proxy" : ""),
+          class: "card" + (tags.includes("プロット") ? " has-plot" : "") + (tags.includes("代理") ? " has-proxy" : "") + (tags.includes("うちよそ") ? " has-uchiyoso" : ""),
           type: "button", onclick: () => open(c.id),
         },
           el("div", { class: "thumb" },
             c.images?.[0] ? el("img", { src: c.images[0], alt: c.name, loading: "lazy" }) : null),
           el("div", { class: "meta" },
-            el("div", { class: "name" }, nameWithRuby(c)),
+            el("div", { class: "name" }, nameParts(c)),
             marks.length ? el("div", { class: "marks" }, marks) : null,
             el("div", { class: "sub" }, [c.age, c.height, subTag].filter(Boolean).join(" ・ "))
           )

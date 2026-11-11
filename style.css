@@ -192,12 +192,14 @@ img { display: block; max-width: 100%; }
 .card .mark.proxy { background: #243447; }
 .card.has-plot { border-color: var(--gold); box-shadow: 0 6px 20px rgba(168, 137, 79, .22); }
 .card.has-proxy { border-color: #243447; }
+.card .mark.uchiyoso { background: #2e8b72; }
+.card.has-uchiyoso { border-color: #2e8b72; }
 .card .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform .45s ease; }
 .card:hover .thumb img { transform: scale(1.045); }
 .card .meta { padding: 12px 14px 16px; }
 .card .name {
-  font-family: var(--serif); font-weight: 700; font-size: 1.15rem; line-height: 1.4;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-family: var(--serif); font-weight: 700; font-size: 1.08rem; line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 .card .name:has(ruby) { line-height: 2.05; }
 .card .name rt { font-family: var(--sans); font-size: .5em; font-weight: 400; letter-spacing: .06em; color: var(--muted); }
@@ -323,6 +325,7 @@ footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--m
 .role-btn[data-role="リバ"][aria-pressed="true"] { background: #6b4fa0; border-color: #6b4fa0; color: #fff; }
 .tag-suggest { margin-top: 8px; }
 .tag-suggest-btn.plot { border: 1px solid var(--gold); color: var(--gold); font-weight: 700; }
+.tag-suggest-btn.uchiyoso { border: 1px solid #2e8b72; color: #2e8b72; font-weight: 700; }
 #intro-field { border-left: 3px solid var(--gold); padding-left: 12px; }
 [hidden] { display: none !important; }
 .plot-url-field { border: 2px solid var(--gold); background: #fffaf0; border-radius: 14px; padding: 14px; }

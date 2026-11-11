@@ -374,3 +374,28 @@ footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--m
   outline: 3px solid var(--accent); transform: scale(1.05);
   box-shadow: 0 14px 30px rgba(90, 60, 20, .28); position: relative; z-index: 3;
 }
+
+.pager {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  max-width: 600px; margin: 28px auto 4px;
+}
+.pager[hidden] { display: none; }
+.pager-btn {
+  font: inherit; font-weight: 700; letter-spacing: .05em; cursor: pointer;
+  padding: 13px 24px; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--ink); color: var(--bg);
+}
+#page-prev { background: var(--surface); color: var(--ink); }
+.pager-btn:active { transform: scale(.97); }
+.pager-info { font-weight: 700; color: var(--muted); white-space: nowrap; }
+@keyframes pOutNext { to { transform: translateX(-42px); opacity: 0; } }
+@keyframes pInNext { from { transform: translateX(42px); opacity: 0; } }
+@keyframes pOutPrev { to { transform: translateX(42px); opacity: 0; } }
+@keyframes pInPrev { from { transform: translateX(-42px); opacity: 0; } }
+.page-out-next { animation: pOutNext .18s ease-in forwards; }
+.page-in-next { animation: pInNext .25s ease-out; }
+.page-out-prev { animation: pOutPrev .18s ease-in forwards; }
+.page-in-prev { animation: pInPrev .25s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .page-out-next, .page-in-next, .page-out-prev, .page-in-prev { animation: none; }
+}

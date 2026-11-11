@@ -3,9 +3,12 @@
   const grid = $("#grid"), chipsEl = $("#chips"), q = $("#q");
   const dlg = $("#dlg"), modal = $("#modal");
   let chars = [], activeTag = "", activeTab = "all";
+  let page = 0, lastTotal = 0, pageAnimating = false;
+  const PAGE_SIZE = 12;
   const tabBtns = [...document.querySelectorAll(".tab")];
   tabBtns.forEach((b) => b.addEventListener("click", () => {
     activeTab = b.dataset.tab;
+    page = 0;
     tabBtns.forEach((x) => x.setAttribute("aria-selected", String(x === b)));
     render();
   }));
@@ -83,6 +86,7 @@
           class: "chip", type: "button", "aria-pressed": "false",
           onclick: (e) => {
             activeTag = activeTag === t ? "" : t;
+            page = 0;
             chipsEl.querySelectorAll(".chip").forEach((b) => b.setAttribute("aria-pressed", String(b.textContent === activeTag)));
             render();
           },
@@ -101,12 +105,18 @@
       if (!kw) return true;
       return [c.name, c.reading, c.role, c.summary, ...(c.tags || [])].join(" ").toLowerCase().includes(kw);
     });
+    lastTotal = list.length;
+    updatePager();
     if (!list.length) {
       grid.replaceChildren(el("p", { class: "empty" }, "該当するキャラクターがいません。"));
       return;
     }
+    const pages = Math.max(1, Math.ceil(list.length / PAGE_SIZE));
+    if (page >= pages) page = pages - 1;
+    if (page < 0) page = 0;
+    const pageList = list.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
     grid.replaceChildren(
-      ...list.map((c) => {
+      ...pageList.map((c) => {
         const tags = c.tags || [];
         const marks = [];
         if (tags.includes("代理")) marks.push(el("span", { class: "mark proxy" }, "代理"));
@@ -127,6 +137,38 @@
     );
     fitCardNames();
   }
+
+  function updatePager() {
+    const pages = Math.ceil(lastTotal / PAGE_SIZE);
+    const pager = $("#pager");
+    if (pages <= 1) { pager.hidden = true; return; }
+    pager.hidden = false;
+    $("#page-info").textContent = `${page + 1} / ${pages}`;
+    $("#page-prev").style.visibility = page > 0 ? "visible" : "hidden";
+    $("#page-next").style.visibility = page < pages - 1 ? "visible" : "hidden";
+  }
+  function scrollToGrid() {
+    const y = grid.getBoundingClientRect().top + window.scrollY - 90;
+    window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+  }
+  function gotoPage(d) {
+    const pages = Math.ceil(lastTotal / PAGE_SIZE);
+    const next = Math.min(Math.max(page + d, 0), pages - 1);
+    if (next === page || pageAnimating) return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { page = next; render(); scrollToGrid(); return; }
+    pageAnimating = true;
+    grid.classList.add(d > 0 ? "page-out-next" : "page-out-prev");
+    setTimeout(() => {
+      grid.classList.remove("page-out-next", "page-out-prev");
+      page = next;
+      render();
+      grid.classList.add(d > 0 ? "page-in-next" : "page-in-prev");
+      scrollToGrid();
+      setTimeout(() => { grid.classList.remove("page-in-next", "page-in-prev"); pageAnimating = false; }, 250);
+    }, 180);
+  }
+  $("#page-prev").addEventListener("click", () => gotoPage(-1));
+  $("#page-next").addEventListener("click", () => gotoPage(1));
 
   function fitCardNames() {
     grid.querySelectorAll(".card .name").forEach((n) => {
@@ -216,7 +258,7 @@
   $("#close").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
   dlg.addEventListener("close", () => history.replaceState(null, "", location.pathname + location.search));
-  q.addEventListener("input", render);
+  q.addEventListener("input", () => { page = 0; render(); });
   window.addEventListener("hashchange", openFromHash);
   window.addEventListener("resize", fitCardNames);
   load();

@@ -511,6 +511,37 @@
       "images": [
         "images/cmwcnkol4-mwcnkol40.webp"
       ]
+    },
+    {
+      "id": "cmwco43vi",
+      "name": "八木",
+      "reading": "",
+      "age": "34歳",
+      "height": "192cm",
+      "imageCv": "",
+      "birthday": "",
+      "role": "攻め",
+      "summary": "",
+      "notes": "",
+      "mainPrompt": "",
+      "outfitPrompt": "",
+      "bodyPrompt": "",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "",
+        "chacha": "",
+        "moox": ""
+      },
+      "tags": [
+        "うちよそ",
+        "おじさん",
+        "無精ひげ",
+        "獣人",
+        "長髪"
+      ],
+      "images": [
+        "images/cmwco43vi-mwco43vi0.webp"
+      ]
     }
   ],
   "site": {

@@ -17,18 +17,21 @@
       ]
     },
     {
-      "age": "",
-      "features": "",
       "id": "char7",
+      "name": "尾地 桜士(おじ おうじ)",
+      "age": "36",
+      "role": "受け",
+      "summary": "",
+      "features": "",
+      "outfit": "",
+      "notes": "",
+      "tags": [
+        "代理",
+        "おじさん"
+      ],
       "images": [
         "images/char7-0.webp"
-      ],
-      "name": "キャラクター7",
-      "notes": "",
-      "outfit": "",
-      "role": "",
-      "summary": "",
-      "tags": []
+      ]
     },
     {
       "age": "",

@@ -569,6 +569,33 @@
       "images": [
         "images/cmwco43vi-mwco43vi0.webp"
       ]
+    },
+    {
+      "id": "cmwcpg2cq",
+      "name": "河合 祈",
+      "reading": "かわい いの",
+      "age": "20歳",
+      "height": "160cm",
+      "imageCv": "",
+      "birthday": "",
+      "role": "受け",
+      "summary": "",
+      "notes": "",
+      "mainPrompt": "boy,20years old,slender build,ahoge\n,brown hair, dark brown roots hair short hair,long bangs,choppy bangs,large brown eyes,round eyes,Black-rimmed glasses,blush,",
+      "outfitPrompt": "Red tracksuit,",
+      "bodyPrompt": "",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "",
+        "chacha": "",
+        "moox": ""
+      },
+      "tags": [
+        "うちよそ"
+      ],
+      "images": [
+        "images/cmwcpg2cq-mwcpg2cq0.webp"
+      ]
     }
   ],
   "site": {

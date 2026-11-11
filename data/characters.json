@@ -625,6 +625,35 @@
       "images": [
         "images/cmwcpiegc-mwcpiegc0.webp"
       ]
+    },
+    {
+      "id": "cmwcplaw1",
+      "name": "ラグ",
+      "reading": "",
+      "age": "7歳",
+      "height": "",
+      "imageCv": "",
+      "birthday": "",
+      "role": "受け",
+      "summary": "",
+      "notes": "",
+      "mainPrompt": "ラグドール\n\nboy, shota,7years old,small,petite and slender, soft skin texture, perl skin,pure white medium hair,fluffy white hair,long sidelocks,blue hair bow,low ponytail,gentle droopy eyes,light blue eyes,soft sleepy eyes,Long eyelashes,Thick eyebrows,white ragdoll cat ears, fluffy pure white cat tail,large magnificent fluffy tail, only cat ears and tail and hair are feline features,Thick thighs,",
+      "outfitPrompt": "",
+      "bodyPrompt": "",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "",
+        "chacha": "",
+        "moox": ""
+      },
+      "tags": [
+        "うちよそ",
+        "ショタ",
+        "獣人"
+      ],
+      "images": [
+        "images/cmwcplaw1-mwcplaw10.webp"
+      ]
     }
   ],
   "site": {

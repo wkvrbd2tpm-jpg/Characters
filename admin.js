@@ -202,21 +202,66 @@
     buildTagChips();
     const list = $("#list");
     if (!data.characters.length) { list.replaceChildren(el("p", { class: "note" }, "まだキャラクターがいません。")); return; }
-    const items = data.characters.map((c, i) => [c, i])
-      .filter(([c]) => !listQuery || ((c.name || "") + " " + (c.reading || "")).toLowerCase().includes(listQuery));
+    const items = data.characters
+      .filter((c) => !listQuery || ((c.name || "") + " " + (c.reading || "")).toLowerCase().includes(listQuery));
     if (!items.length) { list.replaceChildren(el("p", { class: "note" }, "その名前のキャラクターはいません。")); return; }
-    list.replaceChildren(...items.map(([c, i]) =>
-      el("div", { class: "item" },
-        c.images?.[0] ? el("img", { src: c.images[0], alt: "" }) : el("div"),
-        el("div", { class: "t" }, c.name + (c.reading ? `（${c.reading}）` : ""), el("small", {}, [c.role, c.age].filter(Boolean).join(" ・ "))),
-        el("button", { class: "btn ghost", type: "button", "aria-label": "一番上へ", onclick: () => moveTo(i, 0) }, "⤒"),
-        el("button", { class: "btn ghost", type: "button", "aria-label": "上へ", onclick: () => move(i, -1) }, "↑"),
-        el("button", { class: "btn ghost", type: "button", "aria-label": "下へ", onclick: () => move(i, 1) }, "↓"),
-        el("button", { class: "btn ghost", type: "button", "aria-label": "一番下へ", onclick: () => moveTo(i, data.characters.length - 1) }, "⤓"),
-        el("button", { class: "btn ghost", type: "button", onclick: () => edit(c.id) }, "編集"),
-        el("button", { class: "btn danger", type: "button", onclick: () => remove(c.id) }, "削除")
-      )
-    ));
+    list.replaceChildren(...items.map((c) => {
+      const card = el("div", { class: "acard" },
+        c.images?.[0] ? el("img", { src: c.images[0], alt: "", loading: "lazy", draggable: "false" }) : el("div", { class: "aimg-empty" }),
+        el("div", { class: "aname" }, c.name || "（名前なし）"),
+        el("div", { class: "afoot" },
+          el("button", { class: "btn ghost", type: "button", onclick: () => edit(c.id) }, "編集"),
+          el("button", { class: "btn danger", type: "button", onclick: () => remove(c.id) }, "削除")
+        )
+      );
+      card.dataset.id = c.id;
+      card.addEventListener("click", (e) => {
+        if (card.dataset.suppress) { delete card.dataset.suppress; return; }
+        if (!e.target.closest("button")) edit(c.id);
+      });
+      if (!listQuery) attachDrag(card, list);
+      return card;
+    }));
+  }
+
+  function attachDrag(card, list) {
+    let timer = null, dragging = false, startX = 0, startY = 0;
+    card.addEventListener("pointerdown", (e) => {
+      if (e.target.closest("button")) return;
+      startX = e.clientX; startY = e.clientY;
+      timer = setTimeout(() => {
+        dragging = true;
+        card.classList.add("dragging");
+        try { card.setPointerCapture(e.pointerId); } catch {}
+        if (navigator.vibrate) navigator.vibrate(10);
+      }, 260);
+    });
+    card.addEventListener("pointermove", (e) => {
+      if (timer && !dragging && Math.hypot(e.clientX - startX, e.clientY - startY) > 10) { clearTimeout(timer); timer = null; }
+      if (!dragging) return;
+      e.preventDefault();
+      const t = document.elementFromPoint(e.clientX, e.clientY)?.closest(".acard");
+      if (!t || t === card || !list.contains(t)) return;
+      const r = t.getBoundingClientRect();
+      const rel = ((e.clientX - r.left) / r.width) * 0.5 + ((e.clientY - r.top) / r.height) * 0.5;
+      list.insertBefore(card, rel > 0.5 ? t.nextSibling : t);
+    });
+    const end = () => {
+      if (timer) { clearTimeout(timer); timer = null; }
+      if (!dragging) return;
+      dragging = false;
+      card.classList.remove("dragging");
+      card.dataset.suppress = "1";
+      setTimeout(() => { delete card.dataset.suppress; }, 50);
+      const order = [...list.querySelectorAll(".acard")].map((n) => n.dataset.id);
+      const sorted = order.map((id) => data.characters.find((c) => c.id === id)).filter(Boolean);
+      if (sorted.length === data.characters.length && sorted.some((c, i) => c !== data.characters[i])) {
+        data.characters = sorted;
+        markOrderDirty();
+      }
+    };
+    card.addEventListener("pointerup", end);
+    card.addEventListener("pointercancel", end);
   }
 
   let orderDirty = false;
@@ -225,14 +270,6 @@
     $("#order-save").hidden = false;
     setStatus("#order-status", "並び順が変わっています。「並び順を保存する」を押すと反映されます。");
   }
-  function move(i, d) { moveTo(i, i + d); }
-  function moveTo(i, j) {
-    if (i === j || j < 0 || j >= data.characters.length) return;
-    const [c] = data.characters.splice(i, 1);
-    data.characters.splice(j, 0, c);
-    renderList(); markOrderDirty();
-  }
-
   function resetForm() {
     editingId = null; keepImages = [];
     $("#form").reset();

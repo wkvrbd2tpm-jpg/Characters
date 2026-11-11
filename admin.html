@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261112e">
+<link rel="stylesheet" href="style.css?v=20261112f">
 </head>
 <body class="admin">
 <div class="wrap">
@@ -36,6 +36,7 @@
     <h2>② 登録済みのキャラクター</h2>
     <div class="field"><input type="search" id="list-q" placeholder="名前で探す" aria-label="キャラクターを名前で探す"></div>
     <p class="note">順番は ⤒（一番上）↑ ↓ ⤓（一番下）のボタンで変えられます。押してもすぐには保存されないので、並べ終わったら下の「並び順を保存する」を押してください。</p>
+    <p class="note">タップで編集できます。並び替えは、カードを長押ししてから動かしてください。終わったら「並び順を保存する」を押してください。</p>
     <div class="list" id="list"></div>
     <div class="actions"><button class="btn" id="order-save" type="button" hidden>並び順を保存する</button></div>
     <div class="status" id="order-status" role="status"></div>
@@ -101,6 +102,6 @@
     </details>
   </section>
 </div>
-<script src="admin.js?v=20261112e"></script>
+<script src="admin.js?v=20261112f"></script>
 </body>
 </html>

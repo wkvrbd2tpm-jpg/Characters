@@ -357,3 +357,20 @@ footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--m
   background: var(--surface); color: var(--ink); cursor: pointer;
 }
 .modal .copy-btn:active { transform: scale(.96); }
+
+.list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.list .note { grid-column: 1 / -1; }
+.acard {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+  overflow: hidden; text-align: center; cursor: pointer;
+  touch-action: pan-y; user-select: none; -webkit-user-select: none;
+}
+.acard img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: top; display: block; background: var(--line); }
+.acard .aimg-empty { width: 100%; aspect-ratio: 4 / 5; background: var(--line); }
+.acard .aname { font-weight: 700; font-size: .84rem; padding: 7px 4px 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.acard .afoot { display: flex; gap: 6px; justify-content: center; padding: 5px 6px 10px; }
+.acard .afoot .btn { min-height: 34px; padding: 5px 12px; font-size: .78rem; }
+.acard.dragging {
+  outline: 3px solid var(--accent); transform: scale(1.05);
+  box-shadow: 0 14px 30px rgba(90, 60, 20, .28); position: relative; z-index: 3;
+}

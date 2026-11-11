@@ -98,18 +98,29 @@
       ]
     },
     {
-      "age": "",
-      "features": "",
       "id": "char9",
-      "images": [
-        "images/char9-0.webp"
-      ],
-      "name": "キャラクター9",
-      "notes": "",
-      "outfit": "",
+      "name": "柏木 樹",
+      "reading": "かしわぎ いつき",
+      "age": "36",
       "role": "",
       "summary": "",
-      "tags": []
+      "features": "",
+      "outfit": "",
+      "notes": "",
+      "mainPrompt": "",
+      "outfitPrompt": "",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "https://zeta-ai.io/ja/plots/062d2a36-ffdc-49b6-89be-bea83f609ff3/profile?share_id=39mwobjop",
+        "chacha": "",
+        "moox": ""
+      },
+      "tags": [
+        "プロット"
+      ],
+      "images": [
+        "images/char9-mwcgusuo0.webp"
+      ]
     },
     {
       "age": "",

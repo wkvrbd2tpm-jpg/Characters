@@ -94,13 +94,15 @@
       "name": "久住 善人",
       "reading": "くずみ よしひと",
       "age": "44歳",
+      "height": "192cm",
+      "imageCv": "",
+      "birthday": "9月2日",
       "role": "",
       "summary": "",
-      "features": "",
-      "outfit": "",
       "notes": "",
       "mainPrompt": "",
       "outfitPrompt": "",
+      "bodyPrompt": "",
       "intro": "",
       "plotUrls": {
         "zeta": "https://zeta-ai.io/ja/plots/fa407bb9-1218-4ac8-94e9-7152853c8af5/profile?share_id=9s3prnydf",
@@ -108,7 +110,9 @@
         "moox": ""
       },
       "tags": [
-        "プロット"
+        "プロット",
+        "おじさん",
+        "無精ひげ"
       ],
       "images": [
         "images/char5-0.webp"

@@ -403,3 +403,114 @@ footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--m
 @media (prefers-reduced-motion: reduce) {
   .page-out-next, .page-in-next, .page-out-prev, .page-in-prev { animation: none; }
 }
+
+/* ===== Classical refinement（上品クラシカル） ===== */
+:root { --gold-line: color-mix(in srgb, var(--gold) 42%, var(--line)); }
+
+/* ヒーロー：内側に額縁のような二重の枠 */
+.hero {
+  box-shadow:
+    inset 0 0 0 1px var(--gold-line),
+    inset 0 0 0 9px var(--bg),
+    inset 0 0 0 10px color-mix(in srgb, var(--gold) 30%, transparent);
+}
+/* キッカー：両側に金のライン */
+.hero .kicker { display: flex; align-items: center; justify-content: center; gap: 16px; text-indent: 0; }
+.hero .kicker::before, .hero .kicker::after {
+  content: ""; height: 1px; width: min(76px, 16vw);
+}
+.hero .kicker::before { background: linear-gradient(90deg, transparent, var(--gold)); }
+.hero .kicker::after { background: linear-gradient(90deg, var(--gold), transparent); }
+
+.hero p { letter-spacing: .04em; }
+
+/* タブ・チップ：金の差し色と深み */
+.tabs { border-color: var(--gold-line); box-shadow: 0 2px 10px rgba(30, 20, 10, .05), inset 0 0 0 3px var(--bg); }
+.tab[aria-selected="true"] {
+  background: linear-gradient(180deg, #3b332a, var(--ink));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .10), 0 3px 8px rgba(30, 20, 10, .22);
+}
+.chip { border-color: var(--gold-line); }
+.chip[aria-pressed="true"] { background: linear-gradient(180deg, #3b332a, var(--ink)); border-color: var(--ink); }
+.toolbar input[type="search"] { border-color: var(--gold-line); box-shadow: inset 0 1px 4px rgba(30, 20, 10, .05); }
+
+/* カード：金の縁取りと深い影、写真にマットの内枠 */
+.card {
+  border-color: var(--gold-line);
+  box-shadow: 0 1px 2px rgba(30, 20, 10, .05), 0 12px 28px rgba(30, 20, 10, .08);
+}
+.card:hover { box-shadow: 0 2px 3px rgba(30, 20, 10, .06), 0 18px 38px rgba(124, 79, 33, .18); }
+.card .thumb::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .30), inset 0 0 0 5px rgba(29, 27, 25, .05);
+}
+.card .meta {
+  border-top: 1px solid var(--gold-line);
+  background: color-mix(in srgb, var(--gold) 5%, var(--surface));
+}
+.card .name { letter-spacing: .03em; }
+
+/* 詳細モーダル：外枠と内枠の額縁 */
+dialog {
+  border: 1px solid var(--gold-line);
+  border-radius: 12px;
+  box-shadow: 0 30px 70px rgba(20, 12, 4, .38), 0 4px 18px rgba(20, 12, 4, .22);
+}
+.modal { position: relative; }
+.modal::after {
+  content: ""; position: absolute; inset: 7px; z-index: 4; pointer-events: none;
+  border: 1px solid color-mix(in srgb, var(--gold) 38%, transparent);
+  border-radius: 6px;
+}
+/* ギャラリー：マット（余白）＋額縁 */
+.modal .gallery {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--gold) 16%, var(--line)), var(--line));
+  padding: 16px;
+}
+.modal .gallery .main {
+  background: color-mix(in srgb, var(--gold) 8%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
+  box-shadow: 0 12px 30px rgba(30, 20, 10, .22), inset 0 0 0 4px color-mix(in srgb, var(--gold) 10%, var(--surface));
+}
+.modal .thumbs { padding: 12px 2px 2px; }
+.modal .thumbs button { border-radius: 4px; box-shadow: 0 2px 6px rgba(30, 20, 10, .18); }
+
+/* 情報側：見出しの飾り線、引用風サマリー、仕様書風の罫 */
+.modal h2 { padding-bottom: 12px; }
+.modal h2::after {
+  content: ""; display: block; width: 68px; height: 3px; margin-top: 10px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--gold), color-mix(in srgb, var(--gold) 15%, transparent));
+}
+.modal .age { letter-spacing: .1em; }
+.modal .summary {
+  border-left: 3px solid color-mix(in srgb, var(--gold) 70%, transparent);
+  padding: 4px 0 4px 14px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--gold) 8%, transparent), transparent 72%);
+}
+.modal dt { color: color-mix(in srgb, var(--gold) 78%, var(--ink)); font-weight: 700; }
+.modal dd { border-bottom: 1px dotted var(--gold-line); padding-bottom: 10px; }
+.modal .prompt-text {
+  background: color-mix(in srgb, var(--gold) 6%, var(--bg));
+  border: 1px solid var(--gold-line); border-radius: 8px;
+  padding: 10px 12px; font-size: .94rem;
+}
+.modal .copy-btn { border-color: var(--gold-line); }
+.modal .copy-btn:hover { border-color: var(--gold); }
+.modal .tags span {
+  border-color: var(--gold-line); color: color-mix(in srgb, var(--gold) 72%, var(--ink));
+  background: color-mix(in srgb, var(--gold) 6%, var(--surface)); letter-spacing: .05em;
+}
+.plot-links { box-shadow: inset 0 0 0 3px #fffdf4, inset 0 0 0 4px color-mix(in srgb, var(--gold) 35%, transparent), 0 6px 16px rgba(90, 60, 0, .10); }
+.close { border: 1px solid var(--gold-line); }
+
+/* フッター：二重線 */
+footer { border-top: 3px double var(--gold-line); }
+
+/* ページャーボタン：影で浮かせる */
+.pager-btn { box-shadow: 0 5px 14px rgba(30, 20, 10, .16); }
+#page-prev { border-color: var(--gold-line); }
+
+@media (max-width: 720px) {
+  .modal .gallery { padding: 10px; }
+  .modal::after { inset: 5px; }
+}

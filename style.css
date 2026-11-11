@@ -391,14 +391,14 @@ footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--m
 #page-prev { background: var(--surface); color: var(--ink); }
 .pager-btn:active { transform: scale(.97); }
 .pager-info { font-weight: 700; color: var(--muted); white-space: nowrap; }
-@keyframes pOutNext { to { transform: translateX(-42px); opacity: 0; } }
-@keyframes pInNext { from { transform: translateX(42px); opacity: 0; } }
-@keyframes pOutPrev { to { transform: translateX(42px); opacity: 0; } }
-@keyframes pInPrev { from { transform: translateX(-42px); opacity: 0; } }
-.page-out-next { animation: pOutNext .18s ease-in forwards; }
-.page-in-next { animation: pInNext .25s ease-out; }
-.page-out-prev { animation: pOutPrev .18s ease-in forwards; }
-.page-in-prev { animation: pInPrev .25s ease-out; }
+@keyframes pOutNext { to { transform: translateX(-72px); opacity: 0; } }
+@keyframes pInNext { from { transform: translateX(72px); opacity: 0; } }
+@keyframes pOutPrev { to { transform: translateX(72px); opacity: 0; } }
+@keyframes pInPrev { from { transform: translateX(-72px); opacity: 0; } }
+.page-out-next { animation: pOutNext .22s cubic-bezier(.5, 0, .75, 0) forwards; will-change: transform, opacity; }
+.page-in-next { animation: pInNext .34s cubic-bezier(.22, .61, .21, 1); will-change: transform, opacity; }
+.page-out-prev { animation: pOutPrev .22s cubic-bezier(.5, 0, .75, 0) forwards; will-change: transform, opacity; }
+.page-in-prev { animation: pInPrev .34s cubic-bezier(.22, .61, .21, 1); will-change: transform, opacity; }
 @media (prefers-reduced-motion: reduce) {
   .page-out-next, .page-in-next, .page-out-prev, .page-in-prev { animation: none; }
 }

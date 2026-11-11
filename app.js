@@ -148,14 +148,18 @@
     $("#page-next").style.visibility = page < pages - 1 ? "visible" : "hidden";
   }
   function scrollToGrid() {
-    const y = grid.getBoundingClientRect().top + window.scrollY - 90;
-    window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+    // 画面外にいるときだけ、切り替えの最初に一瞬で合わせる（アニメーション中のスクロールをなくして滑らかに）
+    const r = grid.getBoundingClientRect();
+    if (r.top < 90 && r.top > -80) return;
+    const y = r.top + window.scrollY - 90;
+    window.scrollTo({ top: Math.max(0, y), behavior: "auto" });
   }
   function gotoPage(d) {
     const pages = Math.ceil(lastTotal / PAGE_SIZE);
     const next = Math.min(Math.max(page + d, 0), pages - 1);
     if (next === page || pageAnimating) return;
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { page = next; render(); scrollToGrid(); return; }
+    scrollToGrid();
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { page = next; render(); return; }
     pageAnimating = true;
     grid.classList.add(d > 0 ? "page-out-next" : "page-out-prev");
     setTimeout(() => {
@@ -163,9 +167,8 @@
       page = next;
       render();
       grid.classList.add(d > 0 ? "page-in-next" : "page-in-prev");
-      scrollToGrid();
-      setTimeout(() => { grid.classList.remove("page-in-next", "page-in-prev"); pageAnimating = false; }, 250);
-    }, 180);
+      setTimeout(() => { grid.classList.remove("page-in-next", "page-in-prev"); pageAnimating = false; }, 340);
+    }, 220);
   }
   $("#page-prev").addEventListener("click", () => gotoPage(-1));
   $("#page-next").addEventListener("click", () => gotoPage(1));

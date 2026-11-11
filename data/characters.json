@@ -179,6 +179,25 @@
       "images": [
         "images/cmwch4b6s-mwch4b6s0.webp"
       ]
+    },
+    {
+      "id": "cmwch8qn0",
+      "name": "馬見塚 縁",
+      "reading": "まみづか ゆかり",
+      "age": "36歳",
+      "role": "",
+      "summary": "",
+      "notes": "",
+      "mainPrompt": "",
+      "outfitPrompt": "",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "",
+        "chacha": "",
+        "moox": ""
+      },
+      "tags": [],
+      "images": []
     }
   ],
   "site": {

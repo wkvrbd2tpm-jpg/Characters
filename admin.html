@@ -44,10 +44,12 @@
         <div class="field"><label for="f-name">名前(必須)</label><input type="text" id="f-name" required></div>
         <div class="field"><label for="f-age">年齢(任意・例: 25歳)</label><input type="text" id="f-age"></div>
       </div>
-      <div class="field"><label for="f-role">受け・攻め</label>
-        <select id="f-role" style="font:inherit;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;">
-          <option value="">未設定</option><option value="攻め">攻め</option><option value="受け">受け</option><option value="リバ">リバ</option>
-        </select>
+      <div class="field"><span class="lbl">受け・攻め（ボタンで選択。もう一度押すと未設定に戻ります）</span>
+        <div class="chips" id="f-role" role="group" aria-label="受け・攻め">
+          <button type="button" class="chip role-btn" data-role="攻め" aria-pressed="false">攻め</button>
+          <button type="button" class="chip role-btn" data-role="受け" aria-pressed="false">受け</button>
+          <button type="button" class="chip role-btn" data-role="リバ" aria-pressed="false">リバ</button>
+        </div>
       </div>
       <div class="field"><label for="f-summary">ひとこと紹介</label><input type="text" id="f-summary"></div>
       <div class="field"><label for="f-features">見た目の特徴</label><textarea id="f-features"></textarea></div>
@@ -59,7 +61,6 @@
         <div class="imgs" id="cur-imgs"></div>
       </div>
       <div class="field"><label for="f-files">画像を追加(複数可)</label><input type="file" id="f-files" accept="image/*" multiple></div>
-      <label class="check"><input type="checkbox" id="f-adult" required> <span>このキャラクターは成人(18歳以上)の設定です。子どもの設定のキャラクターは掲載しません。</span></label>
       <div class="actions">
         <button class="btn" type="submit" id="save">保存して公開</button>
         <button class="btn ghost" type="button" id="new-btn">新規追加に戻す</button>

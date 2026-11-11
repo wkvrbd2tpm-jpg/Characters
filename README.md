@@ -34,4 +34,3 @@
 - `admin.html` / `admin.js` … 追加・編集・削除用ページ
 - `data/characters.json` … キャラクターのデータ
 - `images/` … 画像(追加すると自動で軽量化されて入ります)
-

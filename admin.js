@@ -5,6 +5,13 @@
   let data = { site: {}, characters: [] };
   let editingId = null;
   let keepImages = [];
+  let roleValue = "";
+  const roleBtns = [...document.querySelectorAll(".role-btn")];
+  function setRole(v) {
+    roleValue = v || "";
+    roleBtns.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.role === roleValue)));
+  }
+  roleBtns.forEach((b) => b.addEventListener("click", () => setRole(roleValue === b.dataset.role ? "" : b.dataset.role)));
 
   const el = (tag, props = {}, ...kids) => {
     const n = document.createElement(tag);
@@ -175,6 +182,7 @@
   function resetForm() {
     editingId = null; keepImages = [];
     $("#form").reset();
+    setRole("");
     $("#form-title").textContent = "③ キャラクターを追加";
     renderCurImgs(); setStatus("#status", "");
   }
@@ -195,11 +203,11 @@
     editingId = id;
     keepImages = (c.images || []).map((p) => ({ path: p, keep: true }));
     $("#f-name").value = c.name || ""; $("#f-age").value = c.age || "";
-    $("#f-role").value = c.role || "";
+    setRole(c.role || "");
     $("#f-summary").value = c.summary || ""; $("#f-features").value = c.features || "";
     $("#f-outfit").value = c.outfit || ""; $("#f-notes").value = c.notes || "";
     $("#f-tags").value = (c.tags || []).join(", ");
-    $("#f-adult").checked = true; $("#f-files").value = "";
+    $("#f-files").value = "";
     $("#form-title").textContent = "③ 「" + c.name + "」を編集";
     renderCurImgs(); setStatus("#status", "");
     $("#form-panel").scrollIntoView({ behavior: "smooth" });
@@ -219,7 +227,6 @@
 
   $("#form").addEventListener("submit", async (ev) => {
     ev.preventDefault();
-    if (!$("#f-adult").checked) return;
     const btn = $("#save"); btn.disabled = true;
     try {
       const id = editingId || "c" + Date.now().toString(36);
@@ -237,7 +244,7 @@
         id,
         name: $("#f-name").value.trim(),
         age: $("#f-age").value.trim(),
-        role: $("#f-role").value,
+        role: roleValue,
         summary: $("#f-summary").value.trim(),
         features: $("#f-features").value.trim(),
         outfit: $("#f-outfit").value.trim(),

@@ -224,6 +224,33 @@
       "images": [
         "images/cmwcib08a-mwcib08b0.webp"
       ]
+    },
+    {
+      "id": "cmwcits3x",
+      "name": "こたろう",
+      "reading": "",
+      "age": "10歳",
+      "height": "100cm",
+      "imageCv": "",
+      "birthday": "",
+      "role": "受け",
+      "summary": "",
+      "notes": "",
+      "mainPrompt": "",
+      "outfitPrompt": "",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "https://zeta-ai.io/ja/plots/f9fe6e51-0c60-4d94-9fc5-ccdddd42e6d9/profile?share_id=8f3xapw6k",
+        "chacha": "",
+        "moox": ""
+      },
+      "tags": [
+        "プロット",
+        "獣耳"
+      ],
+      "images": [
+        "images/cmwcits3x-mwcits3x0.webp"
+      ]
     }
   ],
   "site": {

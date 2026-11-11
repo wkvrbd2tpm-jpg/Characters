@@ -10,11 +10,14 @@
       "features": "",
       "outfit": "",
       "notes": "",
+      "mainPrompt": "",
+      "outfitPrompt": "",
+      "intro": "",
       "tags": [
         "代理"
       ],
       "images": [
-        "images/char8-0.webp"
+        "images/char8-mwcfcrl70.webp"
       ]
     },
     {
@@ -38,20 +41,6 @@
     {
       "age": "",
       "features": "",
-      "id": "char5",
-      "images": [
-        "images/char5-0.webp"
-      ],
-      "name": "キャラクター5",
-      "notes": "",
-      "outfit": "",
-      "role": "",
-      "summary": "",
-      "tags": []
-    },
-    {
-      "age": "",
-      "features": "",
       "id": "char4",
       "images": [
         "images/char4-0.webp"
@@ -66,11 +55,11 @@
     {
       "age": "",
       "features": "",
-      "id": "char6",
+      "id": "char5",
       "images": [
-        "images/char6-0.webp"
+        "images/char5-0.webp"
       ],
-      "name": "キャラクター6",
+      "name": "キャラクター5",
       "notes": "",
       "outfit": "",
       "role": "",
@@ -85,6 +74,20 @@
         "images/char9-0.webp"
       ],
       "name": "キャラクター9",
+      "notes": "",
+      "outfit": "",
+      "role": "",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "age": "",
+      "features": "",
+      "id": "char6",
+      "images": [
+        "images/char6-0.webp"
+      ],
+      "name": "キャラクター6",
       "notes": "",
       "outfit": "",
       "role": "",

@@ -7,11 +7,9 @@
       "age": "18歳",
       "role": "受け",
       "summary": "",
-      "features": "",
-      "outfit": "",
       "notes": "",
-      "mainPrompt": "",
-      "outfitPrompt": "",
+      "mainPrompt": "boy,18- year old,tall,slender athletic build,short dark brown hair,center-parted hair,white streaks,Thick eyebrows,brown almond eyes,fang,handsome,male focus,broad shoulders,",
+      "outfitPrompt": "Red hoodie, cargo pants, sneakers",
       "intro": "",
       "plotUrls": {
         "zeta": "https://zeta-ai.io/ja/plots/68187104-a704-44f1-8356-d03c23c0e6cf/profile?share_id=w7f9ma3zv",

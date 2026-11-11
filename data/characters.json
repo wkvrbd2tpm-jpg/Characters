@@ -1,6 +1,20 @@
 {
   "characters": [
     {
+      "age": "",
+      "features": "",
+      "id": "char7",
+      "images": [
+        "images/char7-0.webp"
+      ],
+      "name": "キャラクター7",
+      "notes": "",
+      "outfit": "",
+      "role": "",
+      "summary": "",
+      "tags": []
+    },
+    {
       "id": "char8",
       "name": "戌亥 優希(いぬい ゆうき)",
       "age": "18歳",
@@ -15,20 +29,6 @@
       "images": [
         "images/char8-0.webp"
       ]
-    },
-    {
-      "age": "",
-      "features": "",
-      "id": "char7",
-      "images": [
-        "images/char7-0.webp"
-      ],
-      "name": "キャラクター7",
-      "notes": "",
-      "outfit": "",
-      "role": "",
-      "summary": "",
-      "tags": []
     },
     {
       "age": "",

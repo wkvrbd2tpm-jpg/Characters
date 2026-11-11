@@ -50,20 +50,6 @@
     {
       "age": "",
       "features": "",
-      "id": "char2",
-      "images": [
-        "images/char2-0.webp"
-      ],
-      "name": "キャラクター2",
-      "notes": "",
-      "outfit": "",
-      "role": "",
-      "summary": "",
-      "tags": []
-    },
-    {
-      "age": "",
-      "features": "",
       "id": "char3",
       "images": [
         "images/char3-0.webp"

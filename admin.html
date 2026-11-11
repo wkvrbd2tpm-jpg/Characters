@@ -35,7 +35,10 @@
   <section class="panel" id="list-panel" hidden>
     <h2>② 登録済みのキャラクター</h2>
     <div class="field"><input type="search" id="list-q" placeholder="名前で探す" aria-label="キャラクターを名前で探す"></div>
+    <p class="note">順番は ⤒（一番上）↑ ↓ ⤓（一番下）のボタンで変えられます。押してもすぐには保存されないので、並べ終わったら下の「並び順を保存する」を押してください。</p>
     <div class="list" id="list"></div>
+    <div class="actions"><button class="btn" id="order-save" type="button" hidden>並び順を保存する</button></div>
+    <div class="status" id="order-status" role="status"></div>
   </section>
 
   <section class="panel" id="form-panel" hidden>
@@ -58,7 +61,7 @@
       <div class="field"><label for="f-notes">性格・設定など</label><textarea id="f-notes"></textarea></div>
       <div class="field"><label for="f-main-prompt">メインプロンプト</label><textarea id="f-main-prompt"></textarea></div>
       <div class="field"><label for="f-outfit-prompt">服装プロンプト</label><textarea id="f-outfit-prompt"></textarea></div>
-      <div class="field" id="intro-field" hidden><label for="f-intro">キャラクター紹介（「プロット」タグを付けたキャラクター用）</label><textarea id="f-intro" placeholder="プロット付きキャラクターの紹介文を書けます"></textarea></div>
+      <div class="field" id="intro-field" hidden><label for="f-intro">プロット紹介（「プロット」タグを付けたキャラクター用）</label><textarea id="f-intro" placeholder="プロット付きキャラクターの紹介文を書けます"></textarea></div>
       <div class="field"><label for="f-tags">タグ(カンマ区切り)</label><input type="text" id="f-tags" placeholder="メガネ, 無精ひげ">
         <div class="chips tag-suggest" id="tag-suggest" aria-label="よく使うタグ">
           <button type="button" class="chip tag-suggest-btn plot" data-tag="プロット" aria-pressed="false">プロット</button>
@@ -74,7 +77,7 @@
           <button type="button" class="chip tag-suggest-btn" data-tag="年上" aria-pressed="false">年上</button>
           <button type="button" class="chip tag-suggest-btn" data-tag="年下" aria-pressed="false">年下</button>
         </div>
-        <p class="note">「プロット」を付けると、「キャラクター紹介」の入力欄が下に出てきます。</p>
+        <p class="note">「プロット」を付けると、「プロット紹介」の入力欄が下に出てきます。</p>
       </div>
       <div class="field">
         <span class="lbl">いまの画像(チェックを外すと削除されます)</span>

@@ -98,9 +98,9 @@
     const dl = el("dl");
     const add = (label, text) => { if (text) { dl.append(el("dt", {}, label), el("dd", {}, text)); } };
     add("特徴", c.features);
+    if ((c.tags || []).includes("プロット")) add("プロット紹介", c.intro);
     add("服装", c.outfit);
     add("設定", c.notes);
-    if ((c.tags || []).includes("プロット")) add("キャラクター紹介", c.intro);
     add("メインプロンプト", c.mainPrompt);
     add("服装プロンプト", c.outfitPrompt);
 

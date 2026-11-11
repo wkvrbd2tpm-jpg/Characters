@@ -183,20 +183,28 @@
       el("div", { class: "item" },
         c.images?.[0] ? el("img", { src: c.images[0], alt: "" }) : el("div"),
         el("div", { class: "t" }, c.name, el("small", {}, [c.role, c.age].filter(Boolean).join(" ・ "))),
+        el("button", { class: "btn ghost", type: "button", "aria-label": "一番上へ", onclick: () => moveTo(i, 0) }, "⤒"),
         el("button", { class: "btn ghost", type: "button", "aria-label": "上へ", onclick: () => move(i, -1) }, "↑"),
         el("button", { class: "btn ghost", type: "button", "aria-label": "下へ", onclick: () => move(i, 1) }, "↓"),
+        el("button", { class: "btn ghost", type: "button", "aria-label": "一番下へ", onclick: () => moveTo(i, data.characters.length - 1) }, "⤓"),
         el("button", { class: "btn ghost", type: "button", onclick: () => edit(c.id) }, "編集"),
         el("button", { class: "btn danger", type: "button", onclick: () => remove(c.id) }, "削除")
       )
     ));
   }
 
-  async function move(i, d) {
-    const j = i + d;
-    if (j < 0 || j >= data.characters.length) return;
-    const next = structuredClone(data);
-    [next.characters[i], next.characters[j]] = [next.characters[j], next.characters[i]];
-    try { await putData(next, "並び順を変更"); renderList(); } catch (e) { alert(explain(e)); }
+  let orderDirty = false;
+  function markOrderDirty() {
+    orderDirty = true;
+    $("#order-save").hidden = false;
+    setStatus("#order-status", "並び順が変わっています。「並び順を保存する」を押すと反映されます。");
+  }
+  function move(i, d) { moveTo(i, i + d); }
+  function moveTo(i, j) {
+    if (i === j || j < 0 || j >= data.characters.length) return;
+    const [c] = data.characters.splice(i, 1);
+    data.characters.splice(j, 0, c);
+    renderList(); markOrderDirty();
   }
 
   function resetForm() {
@@ -293,6 +301,16 @@
 
   $("#new-btn").addEventListener("click", resetForm);
   $("#list-q").addEventListener("input", (e) => { listQuery = e.target.value.trim().toLowerCase(); renderList(); });
+  $("#order-save").addEventListener("click", async () => {
+    const btn = $("#order-save"); btn.disabled = true;
+    try {
+      setStatus("#order-status", "保存中…");
+      await putData(structuredClone(data), "並び順を変更");
+      orderDirty = false; btn.hidden = true;
+      setStatus("#order-status", "保存しました。サイトに反映されるまで1〜2分かかります。");
+    } catch (e) { setStatus("#order-status", explain(e), true); }
+    finally { btn.disabled = false; }
+  });
   $("#f-tags").addEventListener("input", syncTagChips);
   $("#connect").addEventListener("click", () => connect(false));
   $("#forget").addEventListener("click", () => { store.clear(); $("#token").value = ""; setStatus("#conn-status", "保存した情報を消しました。"); });

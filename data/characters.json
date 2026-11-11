@@ -542,6 +542,33 @@
       "images": [
         "images/cmwco43vi-mwco43vi0.webp"
       ]
+    },
+    {
+      "id": "cmwco8zrv",
+      "name": "津彼 夏",
+      "reading": "",
+      "age": "26歳",
+      "height": "192cm",
+      "imageCv": "",
+      "birthday": "",
+      "role": "攻め",
+      "summary": "",
+      "notes": "",
+      "mainPrompt": "boy,26 years old,slender build,tall,long legs, huge ahoge\n,dark green hair,medium hair,very long bangs,choppy bangs,sidelocks,tareme,bags under eyes,sanpaku,black eyes,freckles,Hunched back,unnatural smile",
+      "outfitPrompt": "",
+      "bodyPrompt": "",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "",
+        "chacha": "",
+        "moox": ""
+      },
+      "tags": [
+        "うちよそ"
+      ],
+      "images": [
+        "images/cmwco8zrv-mwco8zrv0.webp"
+      ]
     }
   ],
   "site": {

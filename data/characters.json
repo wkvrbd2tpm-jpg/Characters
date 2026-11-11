@@ -2,7 +2,8 @@
   "characters": [
     {
       "id": "char8",
-      "name": "戌亥 優希(いぬい ゆうき)",
+      "name": "戌亥 優希",
+      "reading": "いぬい ゆうき",
       "age": "18歳",
       "role": "受け",
       "summary": "",
@@ -18,7 +19,8 @@
     },
     {
       "id": "char7",
-      "name": "尾地 桜士(おじ おうじ)",
+      "name": "尾地 桜士",
+      "reading": "おじ おうじ",
       "age": "36歳",
       "role": "受け",
       "summary": "",

@@ -154,13 +154,33 @@
     }
     const dl = el("dl");
     const add = (label, text) => { if (text) { dl.append(el("dt", {}, label), el("dd", {}, text)); } };
+    const copyBtn = (text) => {
+      const b = el("button", { type: "button", class: "copy-btn" }, "コピー");
+      b.addEventListener("click", async () => {
+        let ok = false;
+        try { await navigator.clipboard.writeText(text); ok = true; }
+        catch {
+          const ta = document.createElement("textarea");
+          ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+          document.body.append(ta); ta.select();
+          try { ok = document.execCommand("copy"); } catch { ok = false; }
+          ta.remove();
+        }
+        b.textContent = ok ? "コピーした！" : "コピーできなかった";
+        setTimeout(() => { b.textContent = "コピー"; }, 1600);
+      });
+      return b;
+    };
+    const addPrompt = (label, text) => {
+      if (text) dl.append(el("dt", {}, label), el("dd", {}, el("div", { class: "prompt-text" }, text), copyBtn(text)));
+    };
     add("イメージCV", c.imageCv);
     add("誕生日", c.birthday);
     if ((c.tags || []).includes("プロット")) add("プロット紹介", c.intro);
     add("設定", c.notes);
     if ((c.tags || []).includes("代理") || (c.tags || []).includes("うちよそ")) {
-      add("メインプロンプト", c.mainPrompt);
-      add("服装プロンプト", c.outfitPrompt);
+      addPrompt("メインプロンプト", c.mainPrompt);
+      addPrompt("服装プロンプト", c.outfitPrompt);
       if (c.bodyPrompt) {
         const secret = el("span", { class: "secret", title: "タップで表示／隠す" }, c.bodyPrompt);
         secret.addEventListener("click", () => {
@@ -168,7 +188,7 @@
           hint.textContent = secret.classList.contains("revealed") ? "タップで隠す" : "タップで表示";
         });
         const hint = el("span", { class: "secret-hint" }, "タップで表示");
-        dl.append(el("dt", {}, "身体的特徴プロンプト"), el("dd", {}, secret, hint));
+        dl.append(el("dt", {}, "身体的特徴プロンプト"), el("dd", {}, secret, hint, copyBtn(c.bodyPrompt)));
       }
     }
 

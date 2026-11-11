@@ -349,3 +349,11 @@ footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--m
 }
 .modal .secret.revealed { filter: none; user-select: text; -webkit-user-select: text; }
 .modal .secret-hint { display: block; margin-top: 5px; font-size: .74rem; color: var(--muted); }
+
+.modal .prompt-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+.modal .copy-btn {
+  display: block; margin-top: 7px; font: inherit; font-size: .78rem; font-weight: 700;
+  padding: 6px 16px; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); cursor: pointer;
+}
+.modal .copy-btn:active { transform: scale(.96); }

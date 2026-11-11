@@ -188,6 +188,33 @@
       "images": [
         "images/cmwch8qn0-mwch9lm80.webp"
       ]
+    },
+    {
+      "id": "cmwcib08a",
+      "name": "モモ",
+      "reading": "もも",
+      "age": "10歳",
+      "height": "100cm",
+      "imageCv": "",
+      "role": "受け",
+      "summary": "",
+      "notes": "",
+      "mainPrompt": "boy,shota,10 years old, baby character design, 2 heads tall proportions, large head small torso,baby body, big sparkling eyes, soft skin texture,cute and pure expression,short White hair,center-parted hair.Thick eyebrows,black round eyes,large pupils,parted hair,2::Fluffy Japanese flying squirrel tail,2::Japanese flying squirrel ears,round teach,blush",
+      "outfitPrompt": "White hoodie, sleeves covering the hands, shorts, sneakers",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "https://zeta-ai.io/ja/plots/ae2848b9-9152-4528-9a19-0781e00f182a/profile?share_id=fi1fhoif",
+        "chacha": "",
+        "moox": ""
+      },
+      "tags": [
+        "プロット",
+        "うちよそ",
+        "獣耳"
+      ],
+      "images": [
+        "images/cmwcib08a-mwcib08b0.webp"
+      ]
     }
   ],
   "site": {

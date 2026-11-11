@@ -21,6 +21,11 @@
 </header>
 
 <main class="wrap">
+  <div class="tabs" role="tablist" aria-label="表示切り替え">
+    <button type="button" class="tab" data-tab="all" aria-selected="true">すべて</button>
+    <button type="button" class="tab" data-tab="proxy" aria-selected="false">代理</button>
+    <button type="button" class="tab" data-tab="plot" aria-selected="false">プロット</button>
+  </div>
   <div class="toolbar">
     <input type="search" id="q" placeholder="名前やタグで探す" aria-label="キャラクターを検索">
     <div class="chips" id="chips" aria-label="タグで絞り込み"></div>

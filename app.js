@@ -2,7 +2,22 @@
   const $ = (s) => document.querySelector(s);
   const grid = $("#grid"), chipsEl = $("#chips"), q = $("#q");
   const dlg = $("#dlg"), modal = $("#modal");
-  let chars = [], activeTag = "";
+  let chars = [], activeTag = "", activeTab = "all";
+  const tabBtns = [...document.querySelectorAll(".tab")];
+  tabBtns.forEach((b) => b.addEventListener("click", () => {
+    activeTab = b.dataset.tab;
+    tabBtns.forEach((x) => x.setAttribute("aria-selected", String(x === b)));
+    render();
+  }));
+  function updateTabCounts() {
+    const counts = {
+      all: chars.length,
+      proxy: chars.filter((c) => (c.tags || []).includes("代理")).length,
+      plot: chars.filter((c) => (c.tags || []).includes("プロット")).length,
+    };
+    const labels = { all: "すべて", proxy: "代理", plot: "プロット" };
+    tabBtns.forEach((b) => (b.textContent = `${labels[b.dataset.tab]}（${counts[b.dataset.tab]}）`));
+  }
 
   const el = (tag, props = {}, ...kids) => {
     const n = document.createElement(tag);
@@ -32,6 +47,7 @@
       return;
     }
     buildChips();
+    updateTabCounts();
     render();
     openFromHash();
   }
@@ -56,6 +72,8 @@
   function render() {
     const kw = q.value.trim().toLowerCase();
     const list = chars.filter((c) => {
+      if (activeTab === "proxy" && !(c.tags || []).includes("代理")) return false;
+      if (activeTab === "plot" && !(c.tags || []).includes("プロット")) return false;
       if (activeTag && c.role !== activeTag && !(c.tags || []).includes(activeTag)) return false;
       if (!kw) return true;
       return [c.name, c.role, c.summary, c.features, ...(c.tags || [])].join(" ").toLowerCase().includes(kw);

@@ -231,7 +231,7 @@
     const c = data.characters.find((x) => x.id === id); if (!c) return;
     editingId = id;
     keepImages = (c.images || []).map((p) => ({ path: p, keep: true }));
-    $("#f-name").value = c.name || ""; $("#f-age").value = c.age || "";
+    $("#f-name").value = c.name || ""; $("#f-age").value = c.age || ""; $("#f-height").value = c.height || ""; $("#f-cv").value = c.imageCv || "";
     $("#f-reading").value = c.reading || "";
     setRole(c.role || "");
     $("#f-summary").value = c.summary || "";
@@ -281,7 +281,17 @@
         id,
         name: $("#f-name").value.trim(),
         reading: $("#f-reading").value.trim(),
-        age: $("#f-age").value.trim(),
+        age: (() => {
+          let v = $("#f-age").value.trim().replace(/[０-９]/g, (s) => String.fromCharCode(s.charCodeAt(0) - 0xfee0));
+          if (/^\d+$/.test(v)) v += "歳";
+          return v;
+        })(),
+        height: (() => {
+          let v = $("#f-height").value.trim().replace(/[０-９]/g, (s) => String.fromCharCode(s.charCodeAt(0) - 0xfee0));
+          if (/^\d+$/.test(v)) v += "cm";
+          return v;
+        })(),
+        imageCv: $("#f-cv").value.trim(),
         role: roleValue,
         summary: $("#f-summary").value.trim(),
         notes: $("#f-notes").value.trim(),

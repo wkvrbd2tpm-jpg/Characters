@@ -120,7 +120,7 @@
           el("div", { class: "meta" },
             el("div", { class: "name" }, nameWithRuby(c)),
             marks.length ? el("div", { class: "marks" }, marks) : null,
-            el("div", { class: "sub" }, [c.age, subTag].filter(Boolean).join(" ・ "))
+            el("div", { class: "sub" }, [c.age, c.height, subTag].filter(Boolean).join(" ・ "))
           )
         );
       })
@@ -145,6 +145,7 @@
     }
     const dl = el("dl");
     const add = (label, text) => { if (text) { dl.append(el("dt", {}, label), el("dd", {}, text)); } };
+    add("イメージCV", c.imageCv);
     if ((c.tags || []).includes("プロット")) add("プロット紹介", c.intro);
     add("設定", c.notes);
     add("メインプロンプト", c.mainPrompt);
@@ -155,7 +156,7 @@
       el("div", { class: "info" },
         c.role ? el("div", { class: "role-line" }, roleBadge(c.role)) : null,
         el("h2", {}, nameWithRuby(c)),
-        c.age ? el("div", { class: "age" }, c.age) : null,
+        [c.age, c.height].filter(Boolean).length ? el("div", { class: "age" }, [c.age, c.height].filter(Boolean).join(" ・ ")) : null,
         c.summary ? el("p", { class: "summary" }, c.summary) : null,
         plotLinks(c),
         dl,
@@ -170,89 +171,6 @@
     const id = decodeURIComponent(location.hash.slice(1));
     if (id) open(id);
   }
-
-  /* ---------- desktop-pet yorkies ---------- */
-  let poopCount = 0;
-  const counter = el("div", { class: "poop-counter", hidden: "" }, "うんぴ回収 🧺 0");
-  document.body.append(counter);
-  function spawnPoop(x) {
-    if (document.querySelectorAll(".poop").length >= 3) return;
-    const p = document.createElement("div");
-    p.className = "poop";
-    p.innerHTML = '<svg><use href="#poop"/></svg>';
-    p.style.left = Math.max(2, Math.min(innerWidth - 30, x)) + "px";
-    p.title = "うんぴをひろう";
-    p.addEventListener("pointerdown", () => {
-      poopCount++;
-      counter.textContent = "うんぴ回収 🧺 " + poopCount;
-      counter.hidden = false;
-      p.classList.add("picked");
-      setTimeout(() => p.remove(), 180);
-    });
-    document.body.append(p);
-    setTimeout(() => p.classList.add("bye"), 40000);
-    setTimeout(() => p.remove(), 46000);
-  }
-  const PET_IMGS = [
-    { src: "images/yorkie-tare.png", width: 42 },
-    { src: "images/yorkie-puupu.png", width: 38 },
-    { src: "images/yorkie-tare.png", width: 35 },
-    { src: "images/yorkie-puupu.png", width: 45 },
-  ];
-  function makePet(def, startX, speed) {
-    const root = el("div", { class: "pet mini walking" },
-      el("div", { class: "bubble", hidden: "" }),
-      el("span", { class: "flipwrap" }));
-    root.setAttribute("aria-hidden", "true");
-    root.style.width = def.width + "px";
-    root.querySelector(".flipwrap").append(el("img", { src: def.src, alt: "" }));
-    document.body.append(root);
-    return { root, bubble: root.querySelector(".bubble"), flip: root.querySelector(".flipwrap"),
-      x: startX, dir: Math.random() < 0.5 ? -1 : 1, state: "walk", speed,
-      until: performance.now() + 5000 + Math.random() * 6000,
-      poopAt: performance.now() + 20000 + Math.random() * 40000,
-      width: def.width };
-  }
-  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const pets = PET_IMGS.map((def, i) =>
-    makePet(def, Math.max(4, Math.floor((innerWidth - 60) * (i + 0.5) / PET_IMGS.length)), 0.28 + Math.random() * 0.3));
-  function showBubble(pet, t, ms) { pet.bubble.textContent = t; pet.bubble.hidden = false; setTimeout(() => (pet.bubble.hidden = true), ms); }
-  function petStep(pet, now) {
-    const maxX = Math.max(0, innerWidth - pet.width - 6);
-    if (pet.state === "walk") {
-      pet.x += pet.dir * pet.speed;
-      if (pet.x > maxX) { pet.x = maxX; pet.dir = -1; }
-      if (pet.x < 0) { pet.x = 0; pet.dir = 1; }
-      if (now >= pet.poopAt) { spawnPoop(pet.x + pet.width / 2 - 12); pet.poopAt = now + 45000 + Math.random() * 50000; }
-      if (now >= pet.until) {
-        const r = Math.random();
-        pet.root.classList.remove("walking");
-        if (r < 0.42) {
-          pet.state = "sleep"; pet.root.classList.add("sleeping");
-          pet.until = now + 4200 + Math.random() * 4600;
-          showBubble(pet, "💤", 3000);
-        } else if (r < 0.62) {
-          pet.state = "bark"; pet.root.classList.add("barking");
-          pet.until = now + 1300;
-          showBubble(pet, "わん！", 1250);
-        } else {
-          pet.state = "walk"; pet.root.classList.add("walking");
-          if (Math.random() < 0.55) pet.dir = -pet.dir;
-          pet.until = now + 5000 + Math.random() * 7000;
-        }
-      }
-    } else if (now >= pet.until) {
-      pet.state = "walk";
-      pet.root.classList.remove("sleeping", "barking");
-      pet.root.classList.add("walking");
-      if (Math.random() < 0.5) pet.dir = -pet.dir;
-      pet.until = now + 5000 + Math.random() * 7000;
-    }
-    pet.flip.style.transform = pet.dir > 0 ? "" : "scaleX(-1)";
-    pet.root.style.transform = `translateX(${pet.x}px)`;
-  }
-  if (reducedMotion) pets.forEach((p) => { p.root.style.transform = `translateX(${p.x}px)`; });
-  else { const loop = (now) => { pets.forEach((p) => petStep(p, now)); requestAnimationFrame(loop); }; requestAnimationFrame(loop); }
 
   $("#close").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });

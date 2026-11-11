@@ -44,10 +44,12 @@
   <section class="panel" id="form-panel" hidden>
     <h2 id="form-title">③ キャラクターを追加</h2>
     <form id="form">
+      <div class="field"><label for="f-name">名前(必須)</label><input type="text" id="f-name" required></div>
       <div class="row">
-        <div class="field"><label for="f-name">名前(必須)</label><input type="text" id="f-name" required></div>
-        <div class="field"><label for="f-age">年齢(任意・例: 25歳)</label><input type="text" id="f-age"></div>
+        <div class="field"><label for="f-age">年齢（任意・数字だけでもOK、自動で「歳」が付きます）</label><input type="text" id="f-age"></div>
+        <div class="field"><label for="f-height">身長（任意・数字だけでもOK、自動で「cm」が付きます）</label><input type="text" id="f-height"></div>
       </div>
+      <div class="field"><label for="f-cv">イメージCV</label><input type="text" id="f-cv" placeholder="声のイメージの声優さん名"></div>
       <div class="field"><label for="f-reading">読み仮名(名前の上にルビで表示されます)</label><input type="text" id="f-reading" placeholder="いぬい ゆうき"></div>
       <div class="field"><span class="lbl">受け・攻め（ボタンで選択。もう一度押すと未設定に戻ります）</span>
         <div class="chips" id="f-role" role="group" aria-label="受け・攻め">

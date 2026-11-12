@@ -48,15 +48,50 @@
       return ["http:", "https:"].includes(x.protocol) ? x.href : "";
     } catch { return ""; }
   };
+  const plotMetaCache = new Map();
+  async function fetchPlotMeta(href) {
+    if (plotMetaCache.has(href)) return plotMetaCache.get(href);
+    let meta = null;
+    try {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 6000);
+      const res = await fetch("https://api.microlink.io?url=" + encodeURIComponent(href), { signal: ctrl.signal });
+      clearTimeout(timer);
+      const json = await res.json();
+      if (json && json.data) meta = { title: json.data.title || "", image: (json.data.image && json.data.image.url) || "" };
+    } catch { meta = null; }
+    plotMetaCache.set(href, meta);
+    return meta;
+  }
   const plotLinks = (c) => {
     if (!(c.tags || []).includes("プロット")) return null;
-    const links = PLOT_APPS.map(([key, label, cls]) => {
+    const cards = PLOT_APPS.map(([key, label, cls]) => {
       const href = safeUrl(c.plotUrls?.[key]);
-      return href ? el("a", { class: "plot-link " + cls, href, target: "_blank", rel: "noopener noreferrer" }, label + "で開く") : null;
+      if (!href) return null;
+      const shot = el("img", { src: "https://s0.wordpress.com/mshots/v1/" + encodeURIComponent(href) + "?w=400", alt: "", loading: "lazy" });
+      shot.addEventListener("error", () => shot.remove());
+      const titleEl = el("div", { class: "plot-rich-title" }, label + "のプロット");
+      const card = el("a", { class: "plot-rich-card " + cls, href, target: "_blank", rel: "noopener noreferrer" },
+        el("div", { class: "plot-rich-thumb" },
+          el("div", { class: "plot-thumb-fallback" }, label),
+          shot),
+        el("div", { class: "plot-rich-meta" },
+          titleEl,
+          el("div", { class: "plot-rich-svc" }, label + "で開く →")));
+      fetchPlotMeta(href).then((meta) => {
+        if (!meta) return;
+        if (meta.title) titleEl.textContent = meta.title;
+        if (meta.image) {
+          const og = el("img", { src: meta.image, alt: "", loading: "lazy" });
+          og.addEventListener("error", () => og.remove());
+          shot.replaceWith(og);
+        }
+      });
+      return card;
     }).filter(Boolean);
-    return links.length ? el("div", { class: "plot-links" },
+    return cards.length ? el("div", { class: "plot-links" },
       el("div", { class: "plot-links-title" }, "プロットを開く"),
-      el("div", { class: "plot-link-buttons" }, links)) : null;
+      el("div", { class: "plot-rich" }, cards)) : null;
   };
 
   const loaderShownAt = Date.now();

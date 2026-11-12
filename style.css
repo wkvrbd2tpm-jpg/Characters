@@ -557,14 +557,10 @@ footer { border-top: 3px double var(--gold-line); }
 .loader-runner {
   position: absolute;
   left: 0%;
-  bottom: calc(100% + 3px);
-  width: 54px; height: 40px;
-  object-fit: cover; object-position: center 30%;
-  border-radius: 9px;
-  border: 1px solid var(--gold-line);
-  box-shadow: 0 6px 14px rgba(30, 20, 10, .18);
-  background: #f7efe3;
+  bottom: calc(100% + 1px);
+  width: 74px; height: auto;
   transform: translateX(-50%);
+  filter: drop-shadow(0 3px 3px rgba(30, 20, 10, .22));
   animation: runner-bob .3s ease-in-out infinite alternate;
   z-index: 1;
 }

@@ -485,7 +485,7 @@
     box.replaceChildren(...plots.map((p) =>
       el("div", { class: "prow" },
         p.thumb ? el("img", { src: p.thumb, alt: "", loading: "lazy" }) : el("div", { class: "pthumb-empty" }, "自動表示"),
-        el("div", { class: "ptitle" }, p.title || "（タイトルなし）"),
+        el("div", { class: "ptitle" }, (p.title || "（タイトルなし）") + (p.author ? "（作者：" + p.author + "）" : "")),
         el("button", { class: "btn ghost", type: "button", onclick: () => editPlot(p.id) }, "編集"),
         el("button", { class: "btn danger", type: "button", onclick: () => removePlot(p.id) }, "削除")
       )
@@ -513,6 +513,7 @@
     const p = (data.plots || []).find((x) => x.id === id); if (!p) return;
     editingPlotId = id; plotThumb = p.thumb || ""; plotThumbRemoved = false;
     $("#p-title").value = p.title || "";
+    $("#p-author").value = p.author || "";
     $("#p-url").value = p.url || "";
     $("#p-service").value = p.service || "";
     $("#p-comment").value = p.comment || "";
@@ -553,6 +554,7 @@
       const entry = {
         id,
         title: $("#p-title").value.trim(),
+        author: $("#p-author").value.trim(),
         url: $("#p-url").value.trim(),
         service: $("#p-service").value,
         comment: $("#p-comment").value.trim(),

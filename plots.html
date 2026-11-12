@@ -8,15 +8,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=DotGothic16&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261112y">
+<link rel="stylesheet" href="style.css?v=20261112z3">
 </head>
 <body>
 <header class="hero hero-sub">
   <div class="wrap">
-    <p class="back-line"><a class="back-link" href="index.html">← キャラクター一覧に戻る</a></p>
     <h1>推しプロット紹介</h1>
     <p>自分のプロットと、おすすめの素敵な作品のリンク集です。</p>
     <div class="hero-rule" aria-hidden="true"><span></span></div>
+    <p class="back-line"><a class="back-link" href="index.html">← キャラクター一覧に戻る</a></p>
   </div>
 </header>
 
@@ -26,11 +26,11 @@
     <button class="ptab" type="button" data-ptab="mine" aria-selected="false">自プロット</button>
   </div>
   <section id="panel-works">
-    <div class="plot-grid" id="plot-grid" aria-live="polite"></div>
+    <div class="plot-grid exhibit-grid" id="plot-grid" aria-live="polite"></div>
     <p class="empty" id="plot-empty" hidden></p>
   </section>
   <section id="panel-mine" hidden>
-    <div class="own-grid" id="own-grid"></div>
+    <div class="own-grid exhibit-grid" id="own-grid"></div>
     <p class="empty" id="own-empty" hidden>プロットタグの付いたキャラクターがまだいません。</p>
   </section>
 </main>
@@ -42,6 +42,7 @@
   </div>
 </footer>
 
-<script src="plots.js?v=20261112d"></script>
+<script src="plots.js?v=20261112f"></script>
+<button id="to-top" type="button" aria-label="一番上に戻る">↑</button>
 </body>
 </html>

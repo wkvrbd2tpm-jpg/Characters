@@ -40,24 +40,26 @@
     return "https://s0.wordpress.com/mshots/v1/" + encodeURIComponent(p.url) + "?w=800";
   };
 
-  function card(p) {
+  const exhibitNo = (i) => "No. " + String(i + 1).padStart(2, "0");
+
+  function worksCard(p, idx) {
     const href = safeUrl(p.url);
     if (!href) return null;
     const svc = serviceOf(p);
     const img = el("img", { src: thumbSrc(p), alt: "", loading: "lazy" });
     img.addEventListener("error", () => img.remove());
-    return el("a", { class: "plot-card", href, target: "_blank", rel: "noopener noreferrer" },
-      el("div", { class: "plot-thumb" },
-        el("div", { class: "plot-thumb-fallback" }, svc.label),
-        img,
-        el("span", { class: "plot-badge " + svc.key }, svc.label)
-      ),
-      el("div", { class: "plot-meta" },
-        el("h3", {}, p.title || "（タイトルなし）"),
-        p.comment ? el("p", { class: "plot-comment" }, p.comment) : null,
-        el("span", { class: "plot-open" }, "プロットを開く →")
-      )
-    );
+    return el("a", { class: "exhibit-card", href, target: "_blank", rel: "noopener noreferrer" },
+      el("div", { class: "exhibit-frame" },
+        el("span", { class: "exhibit-no" }, exhibitNo(idx)),
+        el("div", { class: "exhibit-img wide" },
+          el("div", { class: "plot-thumb-fallback" }, svc.label),
+          img,
+          el("span", { class: "plot-badge " + svc.key }, svc.label))),
+      el("div", { class: "exhibit-caption" },
+        el("h3", { class: "exhibit-title" }, p.title || "（タイトルなし）"),
+        p.author ? el("p", { class: "exhibit-meta" }, "作者：" + p.author) : null,
+        p.comment ? el("p", { class: "exhibit-desc" }, p.comment) : null,
+        el("span", { class: "exhibit-open" }, "プロットを開く →")));
   }
 
   const PLOT_APPS = [
@@ -82,40 +84,49 @@
   }
   const nameWithRuby = (c) => (c.reading ? el("ruby", {}, c.name, el("rt", {}, c.reading)) : c.name);
 
-  function richLink(c, key, label, cls) {
-    const href = safeUrl(c.plotUrls?.[key]);
-    if (!href) return null;
-    const shot = el("img", { src: "https://s0.wordpress.com/mshots/v1/" + encodeURIComponent(href) + "?w=400", alt: "", loading: "lazy" });
-    shot.addEventListener("error", () => shot.remove());
-    const manualTitle = (c.plotTitles && c.plotTitles[key] || "").trim();
-    const titleEl = el("div", { class: "plot-rich-title" }, manualTitle || label + "のプロット");
-    const a = el("a", { class: "plot-rich-card " + cls, href, target: "_blank", rel: "noopener noreferrer" },
-      el("div", { class: "plot-rich-thumb" },
-        el("div", { class: "plot-thumb-fallback" }, label),
-        shot),
-      el("div", { class: "plot-rich-meta" },
+  // 自プロットは「キャラ×サービス」のリンクごとに1展示にする（素敵な作品と表示を統一）
+  function mineExhibits(chars) {
+    const out = [];
+    for (const c of chars) {
+      const links = PLOT_APPS
+        .map(([key, label, cls]) => ({ key, label, cls, href: safeUrl(c.plotUrls?.[key]) }))
+        .filter((x) => x.href);
+      if (!links.length) out.push({ c, link: null });
+      else for (const link of links) out.push({ c, link });
+    }
+    return out;
+  }
+
+  function mineCard(item, idx) {
+    const { c, link } = item;
+    const frame = el("div", { class: "exhibit-frame" },
+      el("span", { class: "exhibit-no" }, exhibitNo(idx)),
+      el("div", { class: "exhibit-img tall" },
+        c.images?.[0] ? el("img", { src: c.images[0], alt: c.name, loading: "lazy" }) : el("div", { class: "plot-thumb-fallback" }, c.name || ""),
+        link ? el("span", { class: "plot-badge " + link.cls }, link.label) : null));
+    if (!link) {
+      return el("article", { class: "exhibit-card" }, frame,
+        el("div", { class: "exhibit-caption" },
+          el("h3", { class: "exhibit-title" }, c.name || "（名前なし）"),
+          c.intro ? el("p", { class: "exhibit-desc" }, c.intro) : null,
+          el("p", { class: "own-nolink" }, "リンクはまだ登録されていません")));
+    }
+    const manualTitle = (c.plotTitles && c.plotTitles[link.key] || "").trim();
+    const titleEl = el("h3", { class: "exhibit-title" }, manualTitle || link.label + "のプロット");
+    const a = el("a", { class: "exhibit-card", href: link.href, target: "_blank", rel: "noopener noreferrer" }, frame,
+      el("div", { class: "exhibit-caption" },
         titleEl,
-        el("div", { class: "plot-rich-svc" }, label + "で開く →")));
+        el("p", { class: "exhibit-meta" }, "キャラ：", nameWithRuby(c)),
+        c.intro ? el("p", { class: "exhibit-desc" }, c.intro) : null,
+        el("span", { class: "exhibit-open" }, link.label + "で開く →")));
     if (!manualTitle) {
-      fetchPlotMeta(href).then((meta) => {
+      fetchPlotMeta(link.href).then((meta) => {
         if (!meta || !meta.title) return;
         const t = meta.title.trim();
-        if (t && t.toLowerCase() !== label.toLowerCase() && t.length >= 4) titleEl.textContent = t;
+        if (t && t.toLowerCase() !== link.label.toLowerCase() && t.length >= 4) titleEl.textContent = t;
       });
     }
     return a;
-  }
-
-  function ownCard(c) {
-    const links = PLOT_APPS.map(([k, l, cls]) => richLink(c, k, l, cls)).filter(Boolean);
-    return el("article", { class: "own-card" },
-      el("div", { class: "own-thumb" }, c.images?.[0] ? el("img", { src: c.images[0], alt: c.name, loading: "lazy" }) : null),
-      el("div", { class: "own-body" },
-        el("div", { class: "own-name" }, nameWithRuby(c)),
-        c.intro ? el("p", { class: "own-intro" }, c.intro) : null,
-        links.length ? el("div", { class: "own-links" }, links) : el("p", { class: "own-nolink" }, "リンクはまだ登録されていません")
-      )
-    );
   }
 
   // タブ切り替え（最初に開くのは「素敵な作品」）
@@ -145,10 +156,12 @@
       if (ownEmpty) { ownEmpty.textContent = "データを読み込めませんでした。"; ownEmpty.hidden = false; }
       return;
     }
-    const cards = plots.map(card).filter(Boolean);
+    const cards = [];
+    plots.forEach((p) => { const cd = worksCard(p, cards.length); if (cd) cards.push(cd); });
+    const exhibits = mineExhibits(mine);
     tabBtns.forEach((b) => {
       const isWorks = b.dataset.ptab === "works";
-      b.textContent = (isWorks ? "素敵な作品" : "自プロット") + "（" + (isWorks ? cards.length : mine.length) + "）";
+      b.textContent = (isWorks ? "素敵な作品" : "自プロット") + "（" + (isWorks ? cards.length : exhibits.length) + "）";
     });
     if (!cards.length) {
       emptyEl.textContent = "まだ素敵な作品が登録されていません。";
@@ -157,8 +170,8 @@
       grid.replaceChildren(...cards);
     }
     if (ownGrid) {
-      if (!mine.length) { ownEmpty.hidden = false; }
-      else ownGrid.replaceChildren(...mine.map(ownCard));
+      if (!exhibits.length) { ownEmpty.hidden = false; }
+      else ownGrid.replaceChildren(...exhibits.map((it, i) => mineCard(it, i)));
     }
   }
 

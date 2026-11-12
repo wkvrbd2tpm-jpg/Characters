@@ -50,6 +50,7 @@
     tagBtns.forEach((b) => b.setAttribute("aria-pressed", String(cur.includes(b.dataset.tag))));
     $("#intro-field").hidden = !cur.includes("プロット");
     $("#plot-url-field").hidden = !cur.includes("プロット");
+    $("#index-flag-field").hidden = !cur.includes("プロット");
     $("#prompt-fields").hidden = !(cur.includes("代理") || cur.includes("うちよそ"));
   }
   buildTagChips();
@@ -331,6 +332,7 @@
     $("#f-ptitle-zeta").value = plotTitles.zeta || "";
     $("#f-ptitle-chacha").value = plotTitles.chacha || "";
     $("#f-ptitle-moox").value = plotTitles.moox || "";
+    $("#f-show-index").checked = !!c.showInIndex;
     $("#f-tags").value = (c.tags || []).join(", ");
     syncTagChips();
     $("#f-files").value = "";
@@ -399,6 +401,7 @@
           chacha: $("#f-ptitle-chacha").value.trim(),
           moox: $("#f-ptitle-moox").value.trim(),
         },
+        showInIndex: $("#f-show-index").checked,
         tags: $("#f-tags").value.split(/[,、]/).map((t) => t.trim()).filter(Boolean),
         images: [...kept, ...newPaths],
       };

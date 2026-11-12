@@ -61,13 +61,47 @@
 
   const loaderShownAt = Date.now();
   let loaderHidden = false;
+
+  // --- ローディング進捗バー（バー＋％＋上を走るキャラ） ---
+  const fillEl = $("#loader-fill");
+  const pctEl = $("#loader-pct");
+  const runnerEl = $("#loader-runner");
+  const mainLoaderImg = $("#loader-img");
+  if (runnerEl && mainLoaderImg) runnerEl.src = mainLoaderImg.src;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let loadProgress = 0;
+  let progressDone = false;
+  let progressTimer = null;
+  function setProgress(v) {
+    loadProgress = v;
+    const s = Math.floor(v) + "%";
+    if (fillEl) fillEl.style.width = s;
+    if (pctEl) pctEl.textContent = s;
+    if (runnerEl) runnerEl.style.left = s;
+  }
+  if (!reducedMotion) {
+    progressTimer = setInterval(() => {
+      if (progressDone) return;
+      let next = loadProgress + (90 - loadProgress) * 0.055 + Math.random() * 0.7;
+      if (next > 90) next = 90;
+      setProgress(next);
+    }, 100);
+  }
+  function finishProgress() {
+    if (progressDone) return;
+    progressDone = true;
+    if (progressTimer) clearInterval(progressTimer);
+    setProgress(100);
+  }
+
   function hideLoader() {
     if (loaderHidden) return;
     loaderHidden = true;
+    finishProgress();
     const l = $("#loader");
     if (!l) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const wait = reduced ? 0 : Math.max(0, 1000 - (Date.now() - loaderShownAt));
+    const reduced = reducedMotion;
+    const wait = reduced ? 0 : Math.max(0, 1000 - (Date.now() - loaderShownAt)) + 280;
     setTimeout(() => {
       l.classList.add("done");
       setTimeout(() => l.remove(), reduced ? 60 : 550);

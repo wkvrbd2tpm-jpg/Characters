@@ -327,6 +327,10 @@
     $("#f-plot-zeta").value = plotUrls.zeta || "";
     $("#f-plot-chacha").value = plotUrls.chacha || "";
     $("#f-plot-moox").value = plotUrls.moox || "";
+    const plotTitles = c.plotTitles || {};
+    $("#f-ptitle-zeta").value = plotTitles.zeta || "";
+    $("#f-ptitle-chacha").value = plotTitles.chacha || "";
+    $("#f-ptitle-moox").value = plotTitles.moox || "";
     $("#f-tags").value = (c.tags || []).join(", ");
     syncTagChips();
     $("#f-files").value = "";
@@ -389,6 +393,11 @@
           zeta: $("#f-plot-zeta").value.trim(),
           chacha: $("#f-plot-chacha").value.trim(),
           moox: $("#f-plot-moox").value.trim(),
+        },
+        plotTitles: {
+          zeta: $("#f-ptitle-zeta").value.trim(),
+          chacha: $("#f-ptitle-chacha").value.trim(),
+          moox: $("#f-ptitle-moox").value.trim(),
         },
         tags: $("#f-tags").value.split(/[,、]/).map((t) => t.trim()).filter(Boolean),
         images: [...kept, ...newPaths],

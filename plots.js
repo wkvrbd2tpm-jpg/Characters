@@ -134,10 +134,10 @@
       const res = await fetch("data/characters.json?t=" + Date.now());
       const data = await res.json();
       plots = data.plots || [];
-      // 自プロット: プロットタグあり・代理タグなしのキャラ（図鑑には出ない組）
+      // 自プロット: プロットタグあり・代理タグなし・図鑑表示チェックなしのキャラ（図鑑には出ない組）
       mine = (data.characters || []).filter((c) => {
         const t = c.tags || [];
-        return t.includes("プロット") && !t.includes("代理");
+        return t.includes("プロット") && !t.includes("代理") && !c.showInIndex;
       });
     } catch (e) {
       emptyEl.textContent = "データを読み込めませんでした。";

@@ -204,3 +204,9 @@ function fitPlotsTitle() {
 fitPlotsTitle();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitPlotsTitle);
 addEventListener("resize", fitPlotsTitle);
+
+const toTopBtnPlots = document.getElementById("to-top");
+if (toTopBtnPlots) {
+  addEventListener("scroll", () => { toTopBtnPlots.classList.toggle("show", scrollY > 400); }, { passive: true });
+  toTopBtnPlots.addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
+}

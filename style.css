@@ -685,3 +685,14 @@ footer { border-top: 3px double var(--gold-line); }
   border: 1px solid var(--line); border-radius: 10px;
   background: var(--surface); color: var(--ink);
 }
+
+/* ===== ドット文字（タイトル・見出し） ===== */
+:root { --dot: "DotGothic16", "Zen Kaku Gothic New", sans-serif; }
+.hero h1,
+.modal h2,
+.card .name,
+.plot-meta h3 {
+  font-family: var(--dot);
+  font-weight: 400;
+  letter-spacing: .04em;
+}

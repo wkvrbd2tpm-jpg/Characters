@@ -764,3 +764,9 @@ footer { border-top: 3px double var(--gold-line); }
 .own-intro { font-size: .92rem; line-height: 1.7; white-space: pre-wrap; margin: 0; }
 .own-links { display: flex; flex-direction: column; gap: 8px; }
 .own-nolink { font-size: .85rem; opacity: .75; margin: 0; }
+
+/* ===== 最終微調整：戻るリンク重なり解消・自プロット画像の見切れ対策 ===== */
+.hero-sub { padding: 34px 20px 46px; }
+.hero-sub .back-line { position: static; margin: 0 0 10px; }
+.own-thumb { aspect-ratio: 3 / 4; }
+.own-thumb img { object-position: top; }

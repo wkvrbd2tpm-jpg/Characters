@@ -144,10 +144,10 @@
     try {
       const res = await fetch("data/characters.json?t=" + Date.now());
       const data = await res.json();
-      // プロット専用キャラ（プロットタグあり・代理タグなし）は図鑑には出さず、プロット紹介ページの「自プロット」に表示する
+      // プロット専用キャラ（プロットタグあり・代理タグなし・図鑑表示チェックなし）は図鑑には出さず、プロット紹介ページの「自プロット」に表示する
       chars = (data.characters || []).filter((c) => {
         const t = c.tags || [];
-        return !(t.includes("プロット") && !t.includes("代理"));
+        return !(t.includes("プロット") && !t.includes("代理") && !c.showInIndex);
       });
       if (data.site) {
         if (data.site.title) { $("#site-title").textContent = data.site.title; document.title = data.site.title; fitTitle(); }

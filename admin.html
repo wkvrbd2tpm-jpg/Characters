@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261112v">
+<link rel="stylesheet" href="style.css?v=20261112w">
 </head>
 <body class="admin">
 <div class="wrap">
@@ -69,10 +69,13 @@
       </div>
       <div class="field" id="intro-field" hidden><label for="f-intro">プロット紹介（「プロット」タグを付けたキャラクター用）</label><textarea id="f-intro" placeholder="プロット付きキャラクターの紹介文を書けます"></textarea></div>
       <div class="field plot-url-field" id="plot-url-field" hidden>
-        <span class="lbl plot-url-title">プロットURL（公開ページの目立つ場所にボタンで表示されます）</span>
-        <label for="f-plot-zeta">Zeta</label><input type="url" id="f-plot-zeta" inputmode="url" placeholder="https://…">
-        <label for="f-plot-chacha">チャチャ</label><input type="url" id="f-plot-chacha" inputmode="url" placeholder="https://…">
-        <label for="f-plot-moox">MooX</label><input type="url" id="f-plot-moox" inputmode="url" placeholder="https://…">
+        <span class="lbl plot-url-title">プロットURLとタイトル（公開ページにサムネ付きで表示されます。タイトルは手打ち優先で、空なら自動表示です）</span>
+        <label for="f-plot-zeta">Zeta URL</label><input type="url" id="f-plot-zeta" inputmode="url" placeholder="https://…">
+        <label for="f-ptitle-zeta">Zeta タイトル（手打ち）</label><input type="text" id="f-ptitle-zeta" placeholder="例：○○のプロット">
+        <label for="f-plot-chacha">チャチャ URL</label><input type="url" id="f-plot-chacha" inputmode="url" placeholder="https://…">
+        <label for="f-ptitle-chacha">チャチャ タイトル（手打ち）</label><input type="text" id="f-ptitle-chacha" placeholder="例：○○のプロット">
+        <label for="f-plot-moox">MooX URL</label><input type="url" id="f-plot-moox" inputmode="url" placeholder="https://…">
+        <label for="f-ptitle-moox">MooX タイトル（手打ち）</label><input type="text" id="f-ptitle-moox" placeholder="例：○○のプロット">
       </div>
       <div class="field"><label for="f-tags">タグ(カンマ区切り)</label><input type="text" id="f-tags" placeholder="メガネ, 無精ひげ">
         <div class="chips tag-suggest" id="tag-suggest" aria-label="よく使うタグ"></div>
@@ -132,6 +135,6 @@
     </details>
   </section>
 </div>
-<script src="admin.js?v=20261112i"></script>
+<script src="admin.js?v=20261112j"></script>
 </body>
 </html>

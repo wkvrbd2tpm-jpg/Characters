@@ -70,7 +70,8 @@
       if (!href) return null;
       const shot = el("img", { src: "https://s0.wordpress.com/mshots/v1/" + encodeURIComponent(href) + "?w=400", alt: "", loading: "lazy" });
       shot.addEventListener("error", () => shot.remove());
-      const titleEl = el("div", { class: "plot-rich-title" }, label + "のプロット");
+      const manualTitle = (c.plotTitles && c.plotTitles[key] || "").trim();
+      const titleEl = el("div", { class: "plot-rich-title" }, manualTitle || label + "のプロット");
       const card = el("a", { class: "plot-rich-card " + cls, href, target: "_blank", rel: "noopener noreferrer" },
         el("div", { class: "plot-rich-thumb" },
           el("div", { class: "plot-thumb-fallback" }, label),
@@ -78,6 +79,7 @@
         el("div", { class: "plot-rich-meta" },
           titleEl,
           el("div", { class: "plot-rich-svc" }, label + "で開く →")));
+      if (manualTitle) return card;
       fetchPlotMeta(href).then((meta) => {
         if (!meta || !meta.title) return;
         const t = meta.title.trim();
@@ -142,7 +144,11 @@
     try {
       const res = await fetch("data/characters.json?t=" + Date.now());
       const data = await res.json();
-      chars = data.characters || [];
+      // プロット専用キャラ（プロットタグあり・代理タグなし）は図鑑には出さず、プロット紹介ページの「自プロット」に表示する
+      chars = (data.characters || []).filter((c) => {
+        const t = c.tags || [];
+        return !(t.includes("プロット") && !t.includes("代理"));
+      });
       if (data.site) {
         if (data.site.title) { $("#site-title").textContent = data.site.title; document.title = data.site.title; fitTitle(); }
         $("#site-lead").textContent = data.site.lead || "";
@@ -293,6 +299,19 @@
     const t = $("#site-title");
     if (!t) return;
     t.style.fontSize = "";
+    // 中央寄せで両側にはみ出す場合でも正しく測れるよう、Rangeで実際の文字幅を測って比率で縮める
+    try {
+      const range = document.createRange();
+      range.selectNodeContents(t);
+      const textW = range.getBoundingClientRect().width;
+      const boxW = t.clientWidth;
+      if (textW > boxW && textW > 0) {
+        const size = parseFloat(getComputedStyle(t).fontSize);
+        t.style.fontSize = Math.max(18, Math.floor(size * (boxW / textW) * 0.98)) + "px";
+        return;
+      }
+      if (textW > 0) return;
+    } catch { /* 測れない環境では下の方法に切り替える */ }
     let size = parseFloat(getComputedStyle(t).fontSize);
     while (t.scrollWidth > t.clientWidth && size > 18) { size -= 1; t.style.fontSize = size + "px"; }
   }

@@ -439,6 +439,11 @@
     const p = document.querySelector(b.dataset.jump);
     if (p) p.scrollIntoView({ behavior: "smooth" });
   }));
+  const toTopBtn = $("#to-top");
+  if (toTopBtn) {
+    addEventListener("scroll", () => { toTopBtn.classList.toggle("show", scrollY > 400); }, { passive: true });
+    toTopBtn.addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
+  }
   function editIntro(id) {
     edit(id);
     setTimeout(() => {

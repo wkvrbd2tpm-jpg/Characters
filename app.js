@@ -66,8 +66,6 @@
   const fillEl = $("#loader-fill");
   const pctEl = $("#loader-pct");
   const runnerEl = $("#loader-runner");
-  const mainLoaderImg = $("#loader-img");
-  if (runnerEl && mainLoaderImg) runnerEl.src = mainLoaderImg.src;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let loadProgress = 0;
   let progressDone = false;

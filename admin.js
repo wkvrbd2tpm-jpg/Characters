@@ -199,18 +199,28 @@
   }
 
   let listQuery = "";
+  let listGroup = "all";
+  const isMineChar = (c) => { const t = c.tags || []; return t.includes("プロット") && !t.includes("代理") && !c.showInIndex; };
   function renderList() {
     buildTagChips();
     const list = $("#list");
+    document.querySelectorAll(".gbtn").forEach((b) => {
+      const g = b.dataset.group;
+      const n = g === "all" ? data.characters.length : data.characters.filter((c) => (g === "mine") === isMineChar(c)).length;
+      b.textContent = (g === "all" ? "すべて" : g === "index" ? "図鑑のキャラ" : "自プロットのキャラ") + "（" + n + "）";
+      b.setAttribute("aria-pressed", String(listGroup === g));
+    });
     if (!data.characters.length) { list.replaceChildren(el("p", { class: "note" }, "まだキャラクターがいません。")); return; }
     const items = data.characters
+      .filter((c) => (listGroup === "all" || (listGroup === "mine") === isMineChar(c)))
       .filter((c) => !listQuery || ((c.name || "") + " " + (c.reading || "")).toLowerCase().includes(listQuery));
-    if (!items.length) { list.replaceChildren(el("p", { class: "note" }, "その名前のキャラクターはいません。")); return; }
+    if (!items.length) { list.replaceChildren(el("p", { class: "note" }, listQuery ? "その名前のキャラクターはいません。" : "このグループのキャラクターはいません。")); return; }
     list.replaceChildren(...items.map((c) => {
       const card = el("div", { class: "acard" },
         c.images?.[0] ? el("img", { src: c.images[0], alt: "", loading: "lazy", draggable: "false" }) : el("div", { class: "aimg-empty" }),
         el("div", { class: "aname" }, c.name || "（名前なし）"),
         el("div", { class: "afoot" },
+          (c.tags || []).includes("プロット") ? el("button", { class: "btn ghost", type: "button", onclick: () => editIntro(c.id) }, "プロット紹介") : null,
           el("button", { class: "btn ghost", type: "button", onclick: () => edit(c.id) }, "編集"),
           el("button", { class: "btn danger", type: "button", onclick: () => remove(c.id) }, "削除")
         )
@@ -259,7 +269,11 @@
       card.classList.remove("dragging");
       card.style.cssText = "";
       const ids = [...list.querySelectorAll(".acard")].map((n) => n.dataset.id);
-      data.characters.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
+      // 表示中のキャラ（グループ）だけを、その枠の中で並び替える
+      const visible = new Set(ids);
+      const byId = new Map(data.characters.map((c) => [c.id, c]));
+      let k = 0;
+      data.characters = data.characters.map((c) => (visible.has(c.id) ? byId.get(ids[k++]) : c));
       markOrderDirty();
     };
     card.addEventListener("contextmenu", (e) => e.preventDefault());
@@ -420,6 +434,21 @@
 
   $("#new-btn").addEventListener("click", resetForm);
   $("#list-q").addEventListener("input", (e) => { listQuery = e.target.value.trim().toLowerCase(); renderList(); });
+  document.querySelectorAll(".gbtn").forEach((b) => b.addEventListener("click", () => { listGroup = b.dataset.group; renderList(); }));
+  document.querySelectorAll("[data-jump]").forEach((b) => b.addEventListener("click", () => {
+    const p = document.querySelector(b.dataset.jump);
+    if (p) p.scrollIntoView({ behavior: "smooth" });
+  }));
+  function editIntro(id) {
+    edit(id);
+    setTimeout(() => {
+      const f = $("#f-intro");
+      if (f && !$("#intro-field").hidden) {
+        f.scrollIntoView({ behavior: "smooth", block: "center" });
+        f.focus({ preventScroll: true });
+      }
+    }, 500);
+  }
   $("#order-save").addEventListener("click", async () => {
     const btn = $("#order-save"); btn.disabled = true;
     try {

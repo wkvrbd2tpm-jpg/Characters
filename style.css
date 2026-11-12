@@ -820,3 +820,51 @@ a.exhibit-card:hover { transform: translateY(-3px); }
 .exhibit-meta { font-size: .84rem; font-weight: 700; color: #8a6d3b; margin: 0 0 6px; }
 .exhibit-desc { font-size: .9rem; line-height: 1.7; margin: 0 0 8px; white-space: pre-wrap; }
 .exhibit-open { font-size: .88rem; font-weight: 700; color: var(--gold); }
+
+/* ===== 管理画面：トップへ戻るボタン・詳細設定フォールド ===== */
+#to-top {
+  position: fixed; right: 14px; bottom: 84px; z-index: 90;
+  width: 52px; height: 52px; border-radius: 50%;
+  border: 1px solid var(--gold-line);
+  background: var(--ink); color: var(--bg);
+  font-size: 1.3rem; font-weight: 700; cursor: pointer;
+  box-shadow: var(--shadow);
+  opacity: 0; pointer-events: none; transition: opacity .2s ease;
+}
+#to-top.show { opacity: 1; pointer-events: auto; }
+.fold { border: 1px dashed var(--gold-line); border-radius: 10px; padding: 6px 12px; margin: 0 0 14px; }
+.fold summary { cursor: pointer; font-weight: 700; padding: 8px 0; }
+
+/* ===== UI統一：ナビボタン・ページャー・見出し ===== */
+.back-link {
+  display: inline-block;
+  padding: 10px 26px;
+  border: 1.5px solid var(--gold);
+  border-radius: 999px;
+  color: color-mix(in srgb, var(--gold) 82%, var(--ink));
+  background: color-mix(in srgb, var(--gold) 8%, transparent);
+  font-family: var(--serif);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-decoration: none;
+  transition: background .2s ease, color .2s ease;
+}
+.back-link:hover { background: var(--gold); color: #fff; text-decoration: none; }
+.hero-sub { padding: 68px 20px 46px; }
+.hero-sub .back-line { position: static; margin: 20px 0 0; text-align: center; }
+.pager-btn {
+  background: color-mix(in srgb, var(--gold) 8%, transparent);
+  color: color-mix(in srgb, var(--gold) 82%, var(--ink));
+  border: 1.5px solid var(--gold);
+  font-family: var(--serif);
+  letter-spacing: .12em;
+  box-shadow: none;
+  transition: background .2s ease, color .2s ease, transform .1s ease;
+}
+.pager-btn:hover { background: var(--gold); color: #fff; }
+#page-prev {
+  background: color-mix(in srgb, var(--gold) 8%, transparent);
+  color: color-mix(in srgb, var(--gold) 82%, var(--ink));
+  border-color: var(--gold);
+}
+body.admin h1, body.admin h2, body.admin h3 { font-family: var(--dot); font-weight: 400; letter-spacing: .04em; }

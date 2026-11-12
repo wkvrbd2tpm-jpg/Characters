@@ -283,6 +283,12 @@
         "chacha": "",
         "moox": ""
       },
+      "plotTitles": {
+        "zeta": "モモはモモンガ",
+        "chacha": "",
+        "moox": ""
+      },
+      "showInIndex": true,
       "tags": [
         "プロット",
         "うちよそ",

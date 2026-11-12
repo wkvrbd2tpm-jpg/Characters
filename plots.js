@@ -79,3 +79,18 @@
 
   load();
 })();
+
+// タイトルが見切れないよう、幅に合わせて自動縮小する
+const heroTitle = document.querySelector(".hero-sub h1");
+function fitPlotsTitle() {
+  if (!heroTitle) return;
+  heroTitle.style.fontSize = "";
+  let size = parseFloat(getComputedStyle(heroTitle).fontSize);
+  while (heroTitle.scrollWidth > heroTitle.clientWidth && size > 18) {
+    size -= 1;
+    heroTitle.style.fontSize = size + "px";
+  }
+}
+fitPlotsTitle();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitPlotsTitle);
+addEventListener("resize", fitPlotsTitle);

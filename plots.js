@@ -130,14 +130,48 @@
   }
 
   // タブ切り替え（最初に開くのは「素敵な作品」）
-  function selectTab(name) {
+  function selectTab(name, dir) {
     tabBtns.forEach((b) => b.setAttribute("aria-selected", String(b.dataset.ptab === name)));
     const works = document.getElementById("panel-works");
     const mine = document.getElementById("panel-mine");
     if (works) works.hidden = name !== "works";
     if (mine) mine.hidden = name !== "mine";
+    const shown = name === "works" ? works : mine;
+    if (dir && shown) {
+      shown.classList.remove("page-in-next", "page-in-prev");
+      void shown.offsetWidth;
+      shown.classList.add(dir > 0 ? "page-in-next" : "page-in-prev");
+      setTimeout(() => shown.classList.remove("page-in-next", "page-in-prev"), 360);
+    }
   }
   tabBtns.forEach((b) => b.addEventListener("click", () => selectTab(b.dataset.ptab)));
+
+  // スワイプでもタブ切り替え（キャラ紹介ページと同じ仕様：大きく横に振ったときだけ）
+  let pSwipeX = null, pSwipeY = null, pSuppressClick = false;
+  document.addEventListener("touchstart", (e) => {
+    if (e.touches.length !== 1) { pSwipeX = pSwipeY = null; return; }
+    if (e.target.closest("dialog, input, textarea, select")) { pSwipeX = pSwipeY = null; return; }
+    pSwipeX = e.touches[0].clientX; pSwipeY = e.touches[0].clientY;
+  }, { passive: true });
+  document.addEventListener("touchend", (e) => {
+    if (pSwipeX == null) return;
+    const dx = e.changedTouches[0].clientX - pSwipeX;
+    const dy = e.changedTouches[0].clientY - pSwipeY;
+    pSwipeX = pSwipeY = null;
+    const threshold = Math.min(170, Math.max(110, window.innerWidth * 0.3));
+    if (Math.abs(dx) > threshold && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      const current = (tabBtns.find((b) => b.getAttribute("aria-selected") === "true") || {}).dataset?.ptab || "works";
+      const next = dx < 0 ? (current === "works" ? "mine" : null) : (current === "mine" ? "works" : null);
+      if (next) {
+        pSuppressClick = true;
+        setTimeout(() => { pSuppressClick = false; }, 350);
+        selectTab(next, dx < 0 ? 1 : -1);
+      }
+    }
+  }, { passive: true });
+  document.addEventListener("click", (e) => {
+    if (pSuppressClick) { e.stopPropagation(); e.preventDefault(); pSuppressClick = false; }
+  }, true);
 
   async function load() {
     let plots = [], mine = [];

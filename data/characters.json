@@ -264,69 +264,32 @@
       ]
     },
     {
-      "id": "cmwcib08a",
-      "name": "モモ",
-      "reading": "もも",
-      "age": "10歳",
-      "height": "100cm",
-      "imageCv": "",
+      "id": "cmwcnclq2",
+      "name": "馬口 健",
+      "reading": "まぐち けん",
+      "age": "44歳",
+      "height": "192cm",
+      "imageCv": "吉野裕行",
       "birthday": "",
-      "role": "受け",
+      "role": "攻め",
       "summary": "",
       "notes": "",
-      "mainPrompt": "boy,shota,10 years old, baby character design, 2 heads tall proportions, large head small torso,baby body, big sparkling eyes, soft skin texture,cute and pure expression,short White hair,center-parted hair.Thick eyebrows,black round eyes,large pupils,parted hair,2::Fluffy Japanese flying squirrel tail,2::Japanese flying squirrel ears,round teach,blush",
-      "outfitPrompt": "White hoodie, sleeves covering the hands, shorts, sneakers",
-      "bodyPrompt": "inverted nipples,small penis,",
+      "mainPrompt": "boy,40 years old,light brown skin,masculer,very tall,short hair,yellow hair,black roots hair,black Thick eyebrows,tareme,sannpaku,black eyes,fangs,Stubble,",
+      "outfitPrompt": "Silver necklace,Aloha shirt,shorts,",
+      "bodyPrompt": "",
       "intro": "",
       "plotUrls": {
-        "zeta": "https://zeta-ai.io/ja/plots/ae2848b9-9152-4528-9a19-0781e00f182a/profile?share_id=fi1fhoif",
+        "zeta": "",
         "chacha": "",
         "moox": ""
       },
-      "plotTitles": {
-        "zeta": "モモはモモンガ",
-        "chacha": "",
-        "moox": ""
-      },
-      "showInIndex": true,
       "tags": [
-        "プロット",
         "うちよそ",
-        "獣人",
-        "ショタ"
+        "おじさん",
+        "無精ひげ"
       ],
       "images": [
-        "images/cmwcib08a-mwcib08b0.webp"
-      ]
-    },
-    {
-      "id": "cmwcits3x",
-      "name": "こたろう",
-      "reading": "",
-      "age": "10歳",
-      "height": "100cm",
-      "imageCv": "",
-      "birthday": "",
-      "role": "受け",
-      "summary": "",
-      "notes": "",
-      "mainPrompt": "1 boy,Shota,petite and chubby,with short hair,(short bangs:1.5)(short eyebrows:1.5),(tareme:1.8),long eyelashes,black eyes,dark brown short hair,half-closed eyes,fangs、(fluffy Raccoon ears:1.5)(fluffy Raccoon tail:1.5),bandaid on nose,",
-      "outfitPrompt": "Hoodies,shorts,sneakers,",
-      "bodyPrompt": "inverted nipples,small penis,",
-      "intro": "",
-      "plotUrls": {
-        "zeta": "https://zeta-ai.io/ja/plots/f9fe6e51-0c60-4d94-9fc5-ccdddd42e6d9/profile?share_id=8f3xapw6k",
-        "chacha": "",
-        "moox": ""
-      },
-      "tags": [
-        "代理",
-        "プロット",
-        "獣人",
-        "ショタ"
-      ],
-      "images": [
-        "images/cmwcits3x-mwcits3x0.webp"
+        "images/cmwcnclq2-mwcnclq30.webp"
       ]
     },
     {
@@ -363,6 +326,42 @@
       ],
       "images": [
         "images/cmwcke9yt-mwcke9yt0.webp"
+      ]
+    },
+    {
+      "id": "cmwcib08a",
+      "name": "モモ",
+      "reading": "もも",
+      "age": "10歳",
+      "height": "100cm",
+      "imageCv": "",
+      "birthday": "",
+      "role": "受け",
+      "summary": "",
+      "notes": "",
+      "mainPrompt": "boy,shota,10 years old, baby character design, 2 heads tall proportions, large head small torso,baby body, big sparkling eyes, soft skin texture,cute and pure expression,short White hair,center-parted hair.Thick eyebrows,black round eyes,large pupils,parted hair,2::Fluffy Japanese flying squirrel tail,2::Japanese flying squirrel ears,round teach,blush",
+      "outfitPrompt": "White hoodie, sleeves covering the hands, shorts, sneakers",
+      "bodyPrompt": "inverted nipples,small penis,",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "https://zeta-ai.io/ja/plots/ae2848b9-9152-4528-9a19-0781e00f182a/profile?share_id=fi1fhoif",
+        "chacha": "",
+        "moox": ""
+      },
+      "plotTitles": {
+        "zeta": "モモはモモンガ",
+        "chacha": "",
+        "moox": ""
+      },
+      "showInIndex": true,
+      "tags": [
+        "プロット",
+        "うちよそ",
+        "獣人",
+        "ショタ"
+      ],
+      "images": [
+        "images/cmwcib08a-mwcib08b0.webp"
       ]
     },
     {
@@ -457,32 +456,33 @@
       ]
     },
     {
-      "id": "cmwcnclq2",
-      "name": "馬口 健",
-      "reading": "まぐち けん",
-      "age": "44歳",
-      "height": "192cm",
-      "imageCv": "吉野裕行",
+      "id": "cmwcits3x",
+      "name": "こたろう",
+      "reading": "",
+      "age": "10歳",
+      "height": "100cm",
+      "imageCv": "",
       "birthday": "",
-      "role": "攻め",
+      "role": "受け",
       "summary": "",
       "notes": "",
-      "mainPrompt": "boy,40 years old,light brown skin,masculer,very tall,short hair,yellow hair,black roots hair,black Thick eyebrows,tareme,sannpaku,black eyes,fangs,Stubble,",
-      "outfitPrompt": "Silver necklace,Aloha shirt,shorts,",
-      "bodyPrompt": "",
+      "mainPrompt": "1 boy,Shota,petite and chubby,with short hair,(short bangs:1.5)(short eyebrows:1.5),(tareme:1.8),long eyelashes,black eyes,dark brown short hair,half-closed eyes,fangs、(fluffy Raccoon ears:1.5)(fluffy Raccoon tail:1.5),bandaid on nose,",
+      "outfitPrompt": "Hoodies,shorts,sneakers,",
+      "bodyPrompt": "inverted nipples,small penis,",
       "intro": "",
       "plotUrls": {
-        "zeta": "",
+        "zeta": "https://zeta-ai.io/ja/plots/f9fe6e51-0c60-4d94-9fc5-ccdddd42e6d9/profile?share_id=8f3xapw6k",
         "chacha": "",
         "moox": ""
       },
       "tags": [
-        "うちよそ",
-        "おじさん",
-        "無精ひげ"
+        "代理",
+        "プロット",
+        "獣人",
+        "ショタ"
       ],
       "images": [
-        "images/cmwcnclq2-mwcnclq30.webp"
+        "images/cmwcits3x-mwcits3x0.webp"
       ]
     },
     {

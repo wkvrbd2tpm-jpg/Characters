@@ -726,3 +726,9 @@ footer { border-top: 3px double var(--gold-line); }
 .plot-rich-card.zeta .plot-rich-svc { color: #6c4bd8; }
 .plot-rich-card.chacha .plot-rich-svc { color: #e56b8c; }
 .plot-rich-card.moox .plot-rich-svc { color: #2f8f83; }
+
+/* ===== タイトル調整：太字ドット・ページ間位置揃え ===== */
+.hero h1 { font-weight: 700; }
+.hero-sub { padding: 68px 20px 46px; }
+.hero-sub .hero-nav { position: absolute; top: 14px; left: 18px; margin: 0; z-index: 3; }
+.hero-sub h1 { max-width: 100%; }

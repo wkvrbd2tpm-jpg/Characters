@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261112x">
+<link rel="stylesheet" href="style.css?v=20261112y">
 </head>
 <body class="admin">
 <div class="wrap">
@@ -35,7 +35,13 @@
   <section class="panel" id="list-panel" hidden>
     <h2>② 登録済みのキャラクター</h2>
     <div class="field"><input type="search" id="list-q" placeholder="名前で探す" aria-label="キャラクターを名前で探す"></div>
-    <p class="note">タップで編集できます。並び替えは、カードを長押ししてから動かしてください。終わったら「並び順を保存する」を押してください。</p>
+    <div class="group-filter" role="group" aria-label="表示するグループ">
+      <button class="gbtn" type="button" data-group="all" aria-pressed="true">すべて</button>
+      <button class="gbtn" type="button" data-group="index" aria-pressed="false">図鑑のキャラ</button>
+      <button class="gbtn" type="button" data-group="mine" aria-pressed="false">自プロットのキャラ</button>
+    </div>
+    <p class="note">タップで編集できます。並び替えは、カードを長押ししてから動かしてください（グループ表示中は、そのグループの中だけで並び替わります）。終わったら「並び順を保存する」を押してください。</p>
+    <p class="jump-nav">ページ内を移動: <button class="btn ghost" type="button" data-jump="#form-panel">キャラ編集</button> <button class="btn ghost" type="button" data-jump="#plots-panel">推しプロット紹介</button> <button class="btn ghost" type="button" data-jump="#site-panel">サイト設定</button></p>
     <div class="list" id="list"></div>
     <div class="actions"><button class="btn" id="order-save" type="button" hidden>並び順を保存する</button></div>
     <div class="status" id="order-status" role="status"></div>
@@ -61,12 +67,6 @@
       </div>
       <div class="field"><label for="f-summary">ひとこと紹介</label><input type="text" id="f-summary"></div>
       <div class="field"><label for="f-notes">性格・設定など</label><textarea id="f-notes"></textarea></div>
-      <div id="prompt-fields" hidden>
-        <p class="note">プロンプト関連の項目は「代理」か「うちよそ」タグを付けたキャラクターだけに表示されます。</p>
-        <div class="field"><label for="f-main-prompt">メインプロンプト</label><textarea id="f-main-prompt"></textarea></div>
-        <div class="field"><label for="f-outfit-prompt">服装プロンプト</label><textarea id="f-outfit-prompt"></textarea></div>
-        <div class="field"><label for="f-body-prompt">身体的特徴プロンプト</label><textarea id="f-body-prompt"></textarea><p class="note">公開ページではモザイクがかかり、タップすると内容が見える形で表示されます。</p></div>
-      </div>
       <div class="field" id="intro-field" hidden><label for="f-intro">プロット紹介（「プロット」タグを付けたキャラクター用）</label><textarea id="f-intro" placeholder="プロット付きキャラクターの紹介文を書けます"></textarea></div>
       <div class="field plot-url-field" id="plot-url-field" hidden>
         <span class="lbl plot-url-title">プロットURLとタイトル（公開ページにサムネ付きで表示されます。タイトルは手打ち優先で、空なら自動表示です）</span>
@@ -79,6 +79,12 @@
       </div>
       <div class="field" id="index-flag-field" hidden>
         <label class="checkline"><input type="checkbox" id="f-show-index"> キャラクター図鑑にも表示する（通常、プロットタグのみのキャラは図鑑に出ず、プロット紹介ページの「自プロット」に表示されます）</label>
+      </div>
+      <div id="prompt-fields" hidden>
+        <p class="note">プロンプト関連の項目は「代理」か「うちよそ」タグを付けたキャラクターだけに表示されます。</p>
+        <div class="field"><label for="f-main-prompt">メインプロンプト</label><textarea id="f-main-prompt"></textarea></div>
+        <div class="field"><label for="f-outfit-prompt">服装プロンプト</label><textarea id="f-outfit-prompt"></textarea></div>
+        <div class="field"><label for="f-body-prompt">身体的特徴プロンプト</label><textarea id="f-body-prompt"></textarea><p class="note">公開ページではモザイクがかかり、タップすると内容が見える形で表示されます。</p></div>
       </div>
       <div class="field"><label for="f-tags">タグ(カンマ区切り)</label><input type="text" id="f-tags" placeholder="メガネ, 無精ひげ">
         <div class="chips tag-suggest" id="tag-suggest" aria-label="よく使うタグ"></div>
@@ -138,6 +144,6 @@
     </details>
   </section>
 </div>
-<script src="admin.js?v=20261112k"></script>
+<script src="admin.js?v=20261112l"></script>
 </body>
 </html>

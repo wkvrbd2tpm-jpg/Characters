@@ -121,7 +121,7 @@
   async function fetchData() {
     const f = await gh(DATA_PATH);
     const d = JSON.parse(b64ToText(f.content));
-    d.site = d.site || {}; d.characters = d.characters || [];
+    d.site = d.site || {}; d.characters = d.characters || []; d.plots = d.plots || [];
     return { data: d, sha: f.sha };
   }
   async function putData(next, message) {
@@ -188,9 +188,9 @@
       store.set(c);
       setStatus("#conn-status", "接続しました。");
       $("#conn").open = false;
-      ["#list-panel", "#form-panel", "#site-panel"].forEach((s) => ($(s).hidden = false));
+      ["#list-panel", "#form-panel", "#site-panel", "#plots-panel"].forEach((s) => ($(s).hidden = false));
       $("#s-title").value = data.site.title || ""; $("#s-lead").value = data.site.lead || "";
-      renderList(); resetForm();
+      renderList(); resetForm(); renderPlots(); resetPlotForm();
     } catch (e) {
       $("#conn").open = true;
       setStatus("#conn-status", explain(e), true);
@@ -431,6 +431,106 @@
       setStatus("#s-status", "保存しました。反映まで1〜2分かかります。");
     } catch (e) { setStatus("#s-status", explain(e), true); }
   });
+
+  /* ---------- 推しプロット ---------- */
+  let editingPlotId = null;
+  let plotThumb = "";
+  let plotThumbRemoved = false;
+
+  function renderPlots() {
+    const box = $("#plots-list");
+    const plots = data.plots || [];
+    if (!plots.length) { box.replaceChildren(el("p", { class: "note" }, "まだプロットが登録されていません。")); return; }
+    box.replaceChildren(...plots.map((p) =>
+      el("div", { class: "prow" },
+        p.thumb ? el("img", { src: p.thumb, alt: "", loading: "lazy" }) : el("div", { class: "pthumb-empty" }, "自動表示"),
+        el("div", { class: "ptitle" }, p.title || "（タイトルなし）"),
+        el("button", { class: "btn ghost", type: "button", onclick: () => editPlot(p.id) }, "編集"),
+        el("button", { class: "btn danger", type: "button", onclick: () => removePlot(p.id) }, "削除")
+      )
+    ));
+  }
+
+  function renderPlotThumb() {
+    const box = $("#p-cur-thumb");
+    if (!plotThumb) { box.replaceChildren(el("span", { class: "note" }, "なし（自動表示になります）")); return; }
+    if (plotThumbRemoved) { box.replaceChildren(el("span", { class: "note" }, "保存すると削除されます")); return; }
+    const cb = el("input", { type: "checkbox", checked: "" });
+    cb.checked = true;
+    cb.addEventListener("change", () => { plotThumbRemoved = !cb.checked; renderPlotThumb(); });
+    box.replaceChildren(el("figure", {}, el("img", { src: plotThumb, alt: "" }), el("label", {}, cb, " 残す")));
+  }
+
+  function resetPlotForm() {
+    editingPlotId = null; plotThumb = ""; plotThumbRemoved = false;
+    $("#plot-form").reset();
+    $("#plot-form-title").textContent = "プロットを追加";
+    renderPlotThumb(); setStatus("#p-status", "");
+  }
+
+  function editPlot(id) {
+    const p = (data.plots || []).find((x) => x.id === id); if (!p) return;
+    editingPlotId = id; plotThumb = p.thumb || ""; plotThumbRemoved = false;
+    $("#p-title").value = p.title || "";
+    $("#p-url").value = p.url || "";
+    $("#p-service").value = p.service || "";
+    $("#p-comment").value = p.comment || "";
+    $("#p-file").value = "";
+    $("#plot-form-title").textContent = "「" + (p.title || "") + "」を編集";
+    renderPlotThumb(); setStatus("#p-status", "");
+    $("#plots-panel").scrollIntoView({ behavior: "smooth" });
+  }
+
+  async function removePlot(id) {
+    const p = (data.plots || []).find((x) => x.id === id); if (!p) return;
+    if (!confirm(`「${p.title}」を削除します。元に戻せません。よろしいですか?`)) return;
+    try {
+      const next = structuredClone(data);
+      next.plots = (next.plots || []).filter((x) => x.id !== id);
+      await putData(next, "プロットを削除: " + p.title);
+      if (p.thumb) await deleteFile(p.thumb);
+      renderPlots(); if (editingPlotId === id) resetPlotForm();
+    } catch (e) { alert(explain(e)); }
+  }
+
+  $("#plot-form").addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const btn = $("#p-save"); btn.disabled = true;
+    try {
+      const id = editingPlotId || "p" + Date.now().toString(36);
+      let thumb = plotThumbRemoved ? "" : plotThumb;
+      let oldThumb = "";
+      const file = $("#p-file").files[0];
+      if (file) {
+        setStatus("#p-status", "サムネ画像をアップロード中…");
+        const path = `images/plot-${id}-${Date.now().toString(36)}.webp`;
+        await putImage(path, await toWebp(file, 1000));
+        oldThumb = thumb; thumb = path;
+      } else if (plotThumbRemoved) {
+        oldThumb = plotThumb;
+      }
+      const entry = {
+        id,
+        title: $("#p-title").value.trim(),
+        url: $("#p-url").value.trim(),
+        service: $("#p-service").value,
+        comment: $("#p-comment").value.trim(),
+        thumb,
+      };
+      const next = structuredClone(data);
+      next.plots = next.plots || [];
+      const idx = next.plots.findIndex((x) => x.id === id);
+      if (idx >= 0) next.plots[idx] = entry; else next.plots.push(entry);
+      setStatus("#p-status", "保存中…");
+      await putData(next, (idx >= 0 ? "プロットを更新: " : "プロットを追加: ") + entry.title);
+      if (oldThumb && oldThumb !== thumb) await deleteFile(oldThumb);
+      renderPlots(); resetPlotForm();
+      setStatus("#p-status", "保存しました。サイトに反映されるまで1〜2分かかります。");
+    } catch (e) {
+      setStatus("#p-status", explain(e), true);
+    } finally { btn.disabled = false; }
+  });
+  $("#p-new").addEventListener("click", resetPlotForm);
 
   prefill();
 })();

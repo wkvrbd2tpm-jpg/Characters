@@ -399,6 +399,12 @@
   q.addEventListener("input", () => { page = 0; render(); });
   window.addEventListener("hashchange", openFromHash);
   window.addEventListener("resize", () => { fullGridH = 0; render(); fitTitle(); });
+
+  const toTopBtn = $("#to-top");
+  if (toTopBtn) {
+    addEventListener("scroll", () => { toTopBtn.classList.toggle("show", scrollY > 400); }, { passive: true });
+    toTopBtn.addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
+  }
   setTimeout(hideLoader, 5000);
   load();
 })();

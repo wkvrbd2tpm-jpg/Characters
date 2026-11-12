@@ -590,3 +590,98 @@ footer { border-top: 3px double var(--gold-line); }
   .loader-runner { animation: none; }
   .loader-bar-fill { transition: none; }
 }
+
+/* ===== 推しプロット紹介ページ ===== */
+.hero-sub { padding: 40px 0 26px; }
+.back-line { margin: 0 0 10px; text-align: left; }
+.back-link { color: var(--gold); font-weight: 700; font-size: .9rem; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+.hero-nav { margin: 20px 0 0; }
+.plots-link {
+  display: inline-block;
+  padding: 10px 26px;
+  border: 1.5px solid var(--gold);
+  border-radius: 999px;
+  color: color-mix(in srgb, var(--gold) 82%, var(--ink));
+  background: color-mix(in srgb, var(--gold) 8%, transparent);
+  font-family: var(--serif);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-decoration: none;
+  transition: background .2s ease, color .2s ease;
+}
+.plots-link:hover { background: var(--gold); color: #fff; }
+.plot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+  gap: 18px;
+  padding: 26px 0 10px;
+}
+.plot-card {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--gold-line, var(--line));
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.plot-card:hover { transform: translateY(-3px); }
+.plot-thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--gold) 26%, var(--bg)), color-mix(in srgb, var(--accent) 20%, var(--bg)));
+  overflow: hidden;
+}
+.plot-thumb-fallback {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-weight: 800; font-size: 1.5rem; letter-spacing: .14em;
+  color: color-mix(in srgb, var(--gold) 75%, var(--ink));
+}
+.plot-thumb img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.plot-badge {
+  position: absolute; left: 10px; bottom: 10px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  color: #fff; font-size: .78rem; font-weight: 700; letter-spacing: .06em;
+  box-shadow: 0 2px 6px rgba(30, 20, 10, .25);
+}
+.plot-badge.zeta { background: #6c4bd8; }
+.plot-badge.chacha { background: #e56b8c; }
+.plot-badge.moox { background: #2f8f83; }
+.plot-badge.other { background: #8a7a5c; }
+.plot-meta { padding: 14px 16px 16px; }
+.plot-meta h3 {
+  margin: 0 0 6px;
+  font-family: var(--serif); font-size: 1.06rem; line-height: 1.5;
+}
+.plot-comment { margin: 0 0 10px; color: var(--muted); font-size: .9rem; line-height: 1.7; }
+.plot-open { color: var(--gold); font-weight: 700; font-size: .88rem; letter-spacing: .06em; }
+
+/* 管理画面：推しプロット一覧 */
+.prow {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px dotted var(--line);
+}
+.prow img { width: 76px; height: 50px; object-fit: cover; border-radius: 8px; flex: none; }
+.pthumb-empty {
+  width: 76px; height: 50px; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px dashed var(--line); border-radius: 8px;
+  color: var(--muted); font-size: .78rem;
+}
+.prow .ptitle { flex: 1; font-weight: 700; line-height: 1.5; }
+.field select {
+  width: 100%;
+  font: inherit; font-size: 16px;
+  padding: 10px;
+  border: 1px solid var(--line); border-radius: 10px;
+  background: var(--surface); color: var(--ink);
+}

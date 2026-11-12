@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261112y">
+<link rel="stylesheet" href="style.css?v=20261112z3">
 </head>
 <body class="admin">
 <div class="wrap">
@@ -110,7 +110,10 @@
     <h3 id="plot-form-title">プロットを追加</h3>
     <form id="plot-form">
       <div class="field"><label for="p-title">タイトル（必須）</label><input type="text" id="p-title" required></div>
+      <div class="field"><label for="p-author">作者名（作者ID）</label><input type="text" id="p-author" placeholder="例：@xxxx（手打ち・任意）"></div>
       <div class="field"><label for="p-url">リンクURL（必須）</label><input type="url" id="p-url" inputmode="url" placeholder="https://…" required></div>
+      <div class="field"><label for="p-comment">紹介文・ひとこと</label><textarea id="p-comment"></textarea></div>
+      <details class="fold"><summary>詳細設定（サービス・サムネ画像）</summary>
       <div class="field"><label for="p-service">サービス</label>
         <select id="p-service">
           <option value="">自動（URLから判定）</option>
@@ -120,12 +123,12 @@
           <option value="その他">その他</option>
         </select>
       </div>
-      <div class="field"><label for="p-comment">紹介文・ひとこと</label><textarea id="p-comment"></textarea></div>
       <div class="field">
         <span class="lbl">いまのサムネ画像（チェックを外すと削除されます）</span>
         <div class="imgs" id="p-cur-thumb"></div>
       </div>
       <div class="field"><label for="p-file">サムネ画像をアップロード（任意）</label><input type="file" id="p-file" accept="image/*"></div>
+      </details>
       <div class="actions savebar">
         <button class="btn" type="submit" id="p-save">保存して公開</button>
         <button class="btn ghost" type="button" id="p-new">新規追加に戻す</button>
@@ -144,6 +147,7 @@
     </details>
   </section>
 </div>
-<script src="admin.js?v=20261112l"></script>
+<script src="admin.js?v=20261112n"></script>
+<button id="to-top" type="button" aria-label="一番上に戻る">↑</button>
 </body>
 </html>

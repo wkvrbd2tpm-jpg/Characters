@@ -79,13 +79,10 @@
           titleEl,
           el("div", { class: "plot-rich-svc" }, label + "で開く →")));
       fetchPlotMeta(href).then((meta) => {
-        if (!meta) return;
-        if (meta.title) titleEl.textContent = meta.title;
-        if (meta.image) {
-          const og = el("img", { src: meta.image, alt: "", loading: "lazy" });
-          og.addEventListener("error", () => og.remove());
-          shot.replaceWith(og);
-        }
+        if (!meta || !meta.title) return;
+        const t = meta.title.trim();
+        // サービス名だけの汎用タイトルは採用しない（サムネはスクリーンショット表示を維持）
+        if (t && t.toLowerCase() !== label.toLowerCase() && t.length >= 4) titleEl.textContent = t;
       });
       return card;
     }).filter(Boolean);

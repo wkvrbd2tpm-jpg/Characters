@@ -718,6 +718,41 @@
       "images": [
         "images/cmwcpr45q-mwcpr45q0.webp"
       ]
+    },
+    {
+      "id": "cmwnhry0v",
+      "name": "ちび",
+      "reading": "",
+      "age": "",
+      "height": "",
+      "imageCv": "",
+      "birthday": "",
+      "role": "",
+      "summary": "",
+      "notes": "生意気、すばしっこい",
+      "mainPrompt": "1 boy,2::chibi::very small,infant, very young child,little boy,Shota,perl skin,Fluffy white short hair,Cross bangs, white hamster\nears,white very small tail,-2::human ears::short eyebrows,red round eyes,:<,Angry,thick thighs,",
+      "outfitPrompt": "White ruffled blouse, white shorts, garter belt,white shoes",
+      "bodyPrompt": "small nipples",
+      "intro": "",
+      "plotUrls": {
+        "zeta": "",
+        "chacha": "",
+        "moox": ""
+      },
+      "plotTitles": {
+        "zeta": "",
+        "chacha": "",
+        "moox": ""
+      },
+      "showInIndex": false,
+      "tags": [
+        "代理",
+        "獣人",
+        "ショタ"
+      ],
+      "images": [
+        "images/cmwnhry0v-mwnhry0v0.webp"
+      ]
     }
   ],
   "site": {

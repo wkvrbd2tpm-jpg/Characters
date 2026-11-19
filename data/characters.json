@@ -730,7 +730,7 @@
       "role": "",
       "summary": "",
       "notes": "生意気、すばしっこい",
-      "mainPrompt": "1 boy,2::chibi::very small,infant, very young child,little boy,Shota,perl skin,Fluffy white short hair,Cross bangs, white hamster\nears,white very small tail,-2::human ears::short eyebrows,red round eyes,:<,Angry,thick thighs,",
+      "mainPrompt": "1 boy,2::chibi::very small,infant, very young child,little boy,Shota,perl skin,Fluffy white short hair,short bangs, white hamster\nears,white very small tail,-2::human ears::short eyebrows,red round eyes,:<,Angry,thick thighs,",
       "outfitPrompt": "White ruffled blouse, white shorts, garter belt,white shoes",
       "bodyPrompt": "small nipples",
       "intro": "",
